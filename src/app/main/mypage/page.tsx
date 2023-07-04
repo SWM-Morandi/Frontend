@@ -1,4 +1,5 @@
-import PageLayout from '../../../components/main/mainPageLayout';
+import Header from '../../../components/main/mainHeader';
+import Footer from '../../../components/main/mainFooter';
 import UserInfo from '../../../components/main/mypage/userInfo';
 import RadarChart from '../../../components/main/mypage/radarChart';
 import LineChart from '../../../components/main/mypage/lineChart';
@@ -8,21 +9,21 @@ import TestHistory from '../../../components/main/mypage/testHistory';
 export default function MyPage() {
   return (
     <main>
-      <PageLayout>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <UserInfo />
-          <RadarChart />
-          <LineChart />
-          <HitChart />
-          <TestHistory />
-        </div>
-      </PageLayout>
+      <Header />
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <UserInfo />
+        <RadarChart />
+        <LineChart />
+        <HitChart />
+        <TestHistory />
+      </div>
+      <Footer />
     </main>
   );
 }
