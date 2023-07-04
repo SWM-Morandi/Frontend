@@ -1,6 +1,7 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
-export default function LandingHeader() {
+export default function MainHeader() {
   return (
     <>
       <header className="text-gray-600 body-font">

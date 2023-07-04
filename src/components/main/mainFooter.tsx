@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export default function LandingHeader() {
+export default function MainHeader() {
   return (
     <>
       <footer className="text-gray-600 body-font">
