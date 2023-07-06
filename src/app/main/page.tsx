@@ -1,3 +1,5 @@
+import React from 'react';
+
 import Header from '../../components/main/mainHeader';
 import Content from '../../components/main/mainContent';
 import Footer from '../../components/main/mainFooter';
@@ -54,3 +56,5 @@ export default function Main() {
     </main>
   );
 }
+
+// 연습

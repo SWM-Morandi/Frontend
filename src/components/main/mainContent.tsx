@@ -9,7 +9,10 @@ export default function MainContent({
 }) {
   return (
     <>
-      <div style={{ display: 'flex', flexDirection: 'row' }}>
+      <div
+        className="ml-[50px] mr-[50px]"
+        style={{ display: 'flex', flexDirection: 'row' }}
+      >
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           {children}
         </div>

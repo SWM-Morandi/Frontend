@@ -3,7 +3,7 @@ import Footer from '../../../components/main/mainFooter';
 import UserInfo from '../../../components/main/mypage/userInfo';
 import RadarChart from '../../../components/main/mypage/radarChart';
 import LineChart from '../../../components/main/mypage/lineChart';
-import HitChart from '../../../components/main/mypage/hitChart';
+import HeatChart from '../../../components/main/mypage/heatChart';
 import TestHistory from '../../../components/main/mypage/testHistory';
 
 export default function MyPage() {
@@ -18,9 +18,13 @@ export default function MyPage() {
         }}
       >
         <UserInfo />
+        <div className="mt-[40px]" />
         <RadarChart />
+        <div className="mt-[40px]" />
         <LineChart />
-        <HitChart />
+        <div className="mt-[40px]" />
+        <HeatChart />
+        <div className="mt-[40px]" />
         <TestHistory />
       </div>
       <Footer />
