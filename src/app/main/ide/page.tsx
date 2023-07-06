@@ -50,7 +50,7 @@ export default function IDE() {
             theme={userTheme}
             language={userLang}
             defaultLanguage="cpp"
-            defaultValue="# Enter your code here"
+            defaultValue={defaultValue}
             onChange={(value) => {
               if (typeof value === 'string') {
                 setUserCode(value);
@@ -81,3 +81,13 @@ export default function IDE() {
     </>
   );
 }
+
+const defaultValue = `#include <iostream>
+using namespace std;
+
+int main() {
+  cout << "Hello World!";
+  
+  return 0;
+}
+`;
