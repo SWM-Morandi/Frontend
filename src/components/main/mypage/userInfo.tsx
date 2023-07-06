@@ -1,6 +1,6 @@
-import GithubIcon from '/public/icons/github';
-import LinkedinIcon from '/public/icons/email';
-import EmailIcon from '/public/icons/linkedin';
+import GithubIcon from '../../../assets/icons/github';
+import LinkedinIcon from '../../../assets/icons/email';
+import EmailIcon from '../../../assets/icons/linkedin';
 
 export default function UserInfo() {
   return (
@@ -17,13 +17,13 @@ export default function UserInfo() {
           margin: '10px 10px',
         }}
       >
-        <div className="flex flex-col justify-center w-[30%]">
+        <div className="flex flex-col justify-center w-[35%]">
           <img
             className="h-[250px] w-[375px]"
             src="https://velog.velcdn.com/images/jinsunkimdev/post/d6d22712-6da8-4d10-8469-91fcf587e28f/react-logo-second.png"
           />
         </div>
-        <div className="flex flex-col justify-center w-[47%]">
+        <div className="flex flex-col justify-center w-[45%]">
           <h1 className="text-3xl">Kim Sang Yeob</h1>
           <div className="flex flex-row">
             <GithubIcon />
@@ -38,7 +38,7 @@ export default function UserInfo() {
             한줄소개 한줄소개 한줄소개 한줄소개
           </div>
         </div>
-        <div className="flex flex-col justify-between w-[23%]">
+        <div className="flex flex-col justify-between w-[20%]">
           <button className="mt-[50px]">친구목록</button>
           <button className="mb-[50px]">프로필수정</button>
         </div>
