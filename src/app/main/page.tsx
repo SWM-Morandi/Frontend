@@ -6,10 +6,15 @@ import Footer from '../../components/main/mainFooter';
 import Card from '../../components/main/mainCard';
 import Link from 'next/link';
 
+import Test from '../../components/main/scrollMenu';
+
 export default function Main() {
   return (
     <main>
       <Header></Header>
+
+      <Test />
+
       <Content>
         <div>최근에 푼 문제</div>
         <div style={{ display: 'flex', flexDirection: 'row' }}>
