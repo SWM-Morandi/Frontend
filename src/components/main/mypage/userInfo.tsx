@@ -1,6 +1,6 @@
 import GithubIcon from '../../../assets/icons/github';
-import LinkedinIcon from '../../../assets/icons/email';
-import EmailIcon from '../../../assets/icons/linkedin';
+import LinkedinIcon from '../../../assets/icons/linkedin';
+import EmailIcon from '../../../assets/icons/email';
 
 export default function UserInfo() {
   return (
