@@ -72,155 +72,51 @@ export default function Example() {
               <table className="min-w-full">
                 <thead className="bg-gray-200 border-b">
                   <tr>
-                    <th
-                      scope="col"
-                      className="text-sm font-medium px-6 py-4 text-left"
-                    >
-                      #
-                    </th>
-                    <th
-                      scope="col"
-                      className="text-sm font-medium px-6 py-4 text-left"
-                    >
-                      Algorithm
-                    </th>
-                    <th
-                      scope="col"
-                      className="text-sm font-medium px-6 py-4 text-left"
-                    >
-                      percent
-                    </th>
-                    <th
-                      scope="col"
-                      className="text-sm font-medium px-6 py-4 text-left"
-                    >
-                      #
-                    </th>
-                    <th
-                      scope="col"
-                      className="text-sm font-medium px-6 py-4 text-left"
-                    >
-                      Algorithm
-                    </th>
-                    <th
-                      scope="col"
-                      className="text-sm font-medium px-6 py-4 text-left"
-                    >
-                      percent
-                    </th>
+                    {[
+                      '#',
+                      'Algorithm',
+                      'percent',
+                      '#',
+                      'Algorithm',
+                      'percent',
+                    ].map((item) => {
+                      return (
+                        <th
+                          scope="col"
+                          className="text-sm font-medium px-6 py-4 text-left"
+                        >
+                          {item}
+                        </th>
+                      );
+                    })}
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-                    {/* 0번 row */}
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      0
-                    </td>
-                    <td className="text-sm px-6 py-4 whitespace-nowrap">
-                      {algorithm_set[0]}
-                    </td>
-                    <td className="text-sm px-6 py-4 whitespace-nowrap">
-                      {persent_set[0]}%
-                    </td>
-                    {/* 6번 row */}
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      6
-                    </td>
-                    <td className="text-sm px-6 py-4 whitespace-nowrap">
-                      {algorithm_set[6]}
-                    </td>
-                    <td className="text-sm px-6 py-4 whitespace-nowrap">
-                      {persent_set[6]}%
-                    </td>
-                  </tr>
-                  <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-                    {/* 1번 row */}
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      1
-                    </td>
-                    <td className="text-sm px-6 py-4 whitespace-nowrap">
-                      {algorithm_set[1]}
-                    </td>
-                    <td className="text-sm px-6 py-4 whitespace-nowrap">
-                      {persent_set[1]}%
-                    </td>
-                    {/* 7번 row */}
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      7
-                    </td>
-                    <td className="text-sm px-6 py-4 whitespace-nowrap">
-                      {algorithm_set[7]}
-                    </td>
-                    <td className="text-sm px-6 py-4 whitespace-nowrap">
-                      {persent_set[7]}%
-                    </td>
-                  </tr>
-                  <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-                    {/* 2번 row */}
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      2
-                    </td>
-                    <td className="text-sm px-6 py-4 whitespace-nowrap">
-                      {algorithm_set[2]}
-                    </td>
-                    <td className="text-sm px-6 py-4 whitespace-nowrap">
-                      {persent_set[2]}%
-                    </td>
-                    {/* 8번 row */}
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      8
-                    </td>
-                    <td className="text-sm px-6 py-4 whitespace-nowrap">
-                      {algorithm_set[8]}
-                    </td>
-                    <td className="text-sm px-6 py-4 whitespace-nowrap">
-                      {persent_set[8]}%
-                    </td>
-                  </tr>
-                  <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-                    {/* 3번 row */}
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      3
-                    </td>
-                    <td className="text-sm px-6 py-4 whitespace-nowrap">
-                      {algorithm_set[3]}
-                    </td>
-                    <td className="text-sm px-6 py-4 whitespace-nowrap">
-                      {persent_set[3]}%
-                    </td>
-                    {/* 9번 row */}
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      9
-                    </td>
-                    <td className="text-sm px-6 py-4 whitespace-nowrap">
-                      {algorithm_set[9]}
-                    </td>
-                    <td className="text-sm px-6 py-4 whitespace-nowrap">
-                      {persent_set[9]}%
-                    </td>
-                  </tr>
-                  <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-                    {/* 4번 row */}
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      4
-                    </td>
-                    <td className="text-sm px-6 py-4 whitespace-nowrap">
-                      {algorithm_set[4]}
-                    </td>
-                    <td className="text-sm px-6 py-4 whitespace-nowrap">
-                      {persent_set[4]}%
-                    </td>
-                    {/* 10번 row */}
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      10
-                    </td>
-                    <td className="text-sm px-6 py-4 whitespace-nowrap">
-                      {algorithm_set[10]}
-                    </td>
-                    <td className="text-sm px-6 py-4 whitespace-nowrap">
-                      {persent_set[10]}%
-                    </td>
-                  </tr>
+                  {Array(5)
+                    .fill(0)
+                    .map((_, idx) => (
+                      <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                          {idx}
+                        </td>
+                        <td className="text-sm px-6 py-4 whitespace-nowrap">
+                          {algorithm_set[idx]}
+                        </td>
+                        <td className="text-sm px-6 py-4 whitespace-nowrap">
+                          {persent_set[idx]}%
+                        </td>
+                        {/* 6번 row */}
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                          {idx + 6}
+                        </td>
+                        <td className="text-sm px-6 py-4 whitespace-nowrap">
+                          {algorithm_set[idx + 6]}
+                        </td>
+                        <td className="text-sm px-6 py-4 whitespace-nowrap">
+                          {persent_set[idx + 6]}%
+                        </td>
+                      </tr>
+                    ))}
                   <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
                     {/* 5번 row */}
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
@@ -242,3 +138,28 @@ export default function Example() {
     </>
   );
 }
+
+/*
+<tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+
+  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+    0
+  </td>
+  <td className="text-sm px-6 py-4 whitespace-nowrap">
+    {algorithm_set[0]}
+  </td>
+  <td className="text-sm px-6 py-4 whitespace-nowrap">
+    {persent_set[0]}%
+  </td>
+
+  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+    6
+  </td>
+  <td className="text-sm px-6 py-4 whitespace-nowrap">
+    {algorithm_set[6]}
+  </td>
+  <td className="text-sm px-6 py-4 whitespace-nowrap">
+    {persent_set[6]}%
+  </td>
+</tr>
+*/
