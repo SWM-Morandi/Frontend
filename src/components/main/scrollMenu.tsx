@@ -115,7 +115,7 @@ export function AlgorithmCardScroll() {
           .fill(0)
           .map((_, idx) => {
             return (
-              <Link href="/main/coding-test/before" key={idx}>
+              <Link href="/main/problem-set" key={idx}>
                 <AlgorithmCard />
               </Link>
             );
