@@ -5,15 +5,7 @@ import NaverIcon from '../../assets/icons/naver';
 
 export default function MainCard() {
   return (
-    <div
-      style={{
-        width: '250px',
-        height: '300px',
-        backgroundColor: 'gray',
-        borderRadius: '20px',
-        margin: '10px 10px',
-      }}
-    >
+    <div className="h-[300px] w-[250px] border border-black rounded-xl shadow m-[10px]">
       <div className="flex flex-col justify-center items-center p-[20px]">
         <h1 className="text-[30px] mt-[50px] mb-[50px]">그리디</h1>
         <div className="mt-[30px]" />
