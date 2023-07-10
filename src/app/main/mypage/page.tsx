@@ -10,13 +10,7 @@ export default function MyPage() {
   return (
     <main>
       <Header />
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
+      <div className="flex flex-col items-center">
         <UserInfo />
         <div className="mt-[40px]" />
         <RadarChart />
