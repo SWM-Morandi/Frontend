@@ -1,15 +1,9 @@
 export default function TestHistory() {
   return (
     <>
-      <div
-        style={{
-          width: '1200px',
-          height: '300px',
-          backgroundColor: 'gray',
-          borderRadius: '20px',
-          margin: '10px 10px',
-        }}
-      ></div>
+      <div className="flex flex-row items-center justify-center border border-black rounded-xl shadow-xl w-[1100px] h-[200px] text-[30px]">
+        test history 입력 개발 예정
+      </div>
     </>
   );
 }
