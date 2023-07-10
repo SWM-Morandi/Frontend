@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Editor from '@monaco-editor/react';
 import Axios from 'axios';
 
-import ProblemInfo from '../../../components/main/ide/problemInfo';
+import ProblemInfo from '../../../components/ide/problemInfo';
 
 export default function IDE() {
   const [userCode, setUserCode] = useState('');

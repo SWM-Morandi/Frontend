@@ -1,10 +1,10 @@
 import Header from '../../../components/main/mainHeader';
 import Footer from '../../../components/main/mainFooter';
-import UserInfo from '../../../components/main/mypage/userInfo';
-import RadarChart from '../../../components/main/mypage/radarChart';
-import LineChart from '../../../components/main/mypage/lineChart';
-import HeatChart from '../../../components/main/mypage/heatChart';
-import TestHistory from '../../../components/main/mypage/testHistory';
+import UserInfo from '../../../components/mypage/userInfo';
+import RadarChart from '../../../components/mypage/radarChart';
+import LineChart from '../../../components/mypage/lineChart';
+import HeatChart from '../../../components/mypage/heatChart';
+import TestHistory from '../../../components/mypage/testHistory';
 
 export default function MyPage() {
   return (
