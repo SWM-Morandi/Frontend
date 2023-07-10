@@ -3,7 +3,7 @@ import React from 'react';
 import Header from '../../components/main/mainHeader';
 import Content from '../../components/main/mainContent';
 import Footer from '../../components/main/mainFooter';
-import Card from '../../components/main/codingTestCard';
+import CodingTestCard from '../../components/main/codingTestCard';
 import Link from 'next/link';
 
 import {
@@ -21,9 +21,23 @@ export default function Main() {
         <div className="text-[30px]">최근에 푼 문제</div>
         <div className="flex flex-row ">
           <Link href="/main/coding-test/before">
-            <Card />
+            <CodingTestCard
+              componey={`네이버`}
+              problemCount={4}
+              time={2}
+              startLevel="S3"
+              endLevel="G3"
+            />
           </Link>
-          <Card />
+          <Link href="/main/coding-test/before">
+            <CodingTestCard
+              componey={`네이버`}
+              problemCount={4}
+              time={2}
+              startLevel="S3"
+              endLevel="G3"
+            />
+          </Link>
         </div>
       </div>
 
