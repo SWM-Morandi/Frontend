@@ -25,30 +25,9 @@ export default function Example() {
             datasets: [
               {
                 data: [86, 114, 106, 106, 107, 111, 133],
-                label: 'Applied',
+                label: '김상엽',
                 borderColor: '#3e95cd',
                 backgroundColor: '#7bb6dd',
-                fill: false,
-              },
-              {
-                data: [70, 90, 44, 60, 83, 90, 100],
-                label: 'Accepted',
-                borderColor: '#3cba9f',
-                backgroundColor: '#71d1bd',
-                fill: false,
-              },
-              {
-                data: [10, 21, 60, 44, 17, 21, 17],
-                label: 'Pending',
-                borderColor: '#ffa500',
-                backgroundColor: '#ffc04d',
-                fill: false,
-              },
-              {
-                data: [6, 3, 2, 2, 7, 0, 16],
-                label: 'Rejected',
-                borderColor: '#c45850',
-                backgroundColor: '#d78f89',
                 fill: false,
               },
             ],
@@ -61,9 +40,14 @@ export default function Example() {
   return (
     <>
       {/* line chart */}
-      <div className="w-[1100px] flex mx-auto my-auto">
-        <div className="border border-gray-400 pt-0 rounded-xl  w-full h-fit my-auto  shadow-xl">
-          <canvas id="line-chart" ref={chartRef}></canvas>
+      <div className="flex flex-row justify-center w-[1100px] border border-gray-400 pt-0 rounded-xl shadow-xl">
+        <div className="py-4">
+          <canvas
+            id="line-chart"
+            width="1000"
+            height="300"
+            ref={chartRef}
+          ></canvas>
         </div>
       </div>
     </>
