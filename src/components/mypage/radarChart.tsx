@@ -79,11 +79,12 @@ export default function Example() {
                       '#',
                       'Algorithm',
                       'percent',
-                    ].map((item) => {
+                    ].map((item, idx) => {
                       return (
                         <th
                           scope="col"
                           className="text-sm font-medium px-6 py-4 text-left"
+                          key={idx}
                         >
                           {item}
                         </th>
@@ -95,7 +96,10 @@ export default function Example() {
                   {Array(5)
                     .fill(0)
                     .map((_, idx) => (
-                      <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+                      <tr
+                        className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100"
+                        key={idx}
+                      >
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                           {idx}
                         </td>
@@ -105,7 +109,6 @@ export default function Example() {
                         <td className="text-sm px-6 py-4 whitespace-nowrap">
                           {persent_set[idx]}%
                         </td>
-                        {/* 6번 row */}
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                           {idx + 6}
                         </td>
@@ -118,7 +121,6 @@ export default function Example() {
                       </tr>
                     ))}
                   <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-                    {/* 5번 row */}
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       5
                     </td>
