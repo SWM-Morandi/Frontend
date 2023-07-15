@@ -17,6 +17,9 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
 
+    - name: check
+      run: netstat -ntulp 
+
     - name: Archive code coverage results
       uses: actions/upload-artifact@v3
       with:
