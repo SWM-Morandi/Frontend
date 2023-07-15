@@ -24,7 +24,7 @@ jobs:
     - name: build and release to DockerHub
       env:
         NAME: yeobi # 계정 명
-        REPO: actiontest # 레포 이름
+        REPO: actiontest #  레포 이름
       run: |
         docker build -t $REPO .
         docker tag $REPO:latest $NAME/$REPO:latest
