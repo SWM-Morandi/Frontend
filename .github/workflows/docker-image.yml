@@ -40,4 +40,4 @@ jobs:
         # 아래 내용을 실행하여 Docker 이미지를 내려받고 실행
         script: |
           docker pull yeobi/actiontest:latest
-          docker run -d -p 3000:80 yeobi/actiontest:latest
+          docker run -d -p 80:3000 yeobi/actiontest:latest
