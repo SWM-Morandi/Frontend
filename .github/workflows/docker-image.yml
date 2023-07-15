@@ -14,17 +14,18 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name
-
-    - name: save
-      run: docker save -o image.tar my-image-name
-
-    - name: check
-      run: docker images
-
-    - name: Archive code coverage results
-      uses: actions/upload-artifact@v3
+ 
+    - name: Login to DockerHub
+      uses: docker/login-action@v1
       with:
-        name: code-coverage-report
-        path: ./image.tar
+        username: ${{secrets.DOCKERHUB_USERNAME}}
+        password: ${{secrets.DOCKERHUB_TOKEN}}
+
+    - name: build and release to DockerHub
+      env:
+        NAME: yeobi # 계정 명
+        REPO: actiontest # 레포 이름
+      run: |
+        docker build -t $REPO .
+        docker tag $REPO:latest $NAME/$REPO:latest
+        docker push $NAME/$REPO:latest
