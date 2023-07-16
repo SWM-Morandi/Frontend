@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Header from '../../components/main/mainHeader';
-import Content from '../../components/main/mainContent';
 import Footer from '../../components/main/mainFooter';
 import CodingTestCard from '../../components/main/codingTestCard';
 import Link from 'next/link';
