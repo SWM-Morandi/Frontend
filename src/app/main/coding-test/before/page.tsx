@@ -24,7 +24,7 @@ export default function CodingTestBeforePage() {
           <div className="ml-[0.5rem]">나가기</div>
         </Link>
 
-        <div className="flex flex-col justify-center items-center mt-[9rem] h-[40rem] w-[42rem] bg-white text-black rounded-2xl">
+        <div className="flex flex-col justify-center items-center mt-[5rem] h-[40rem] w-[42rem] bg-white text-black rounded-2xl">
           <Image
             src={NaverIcon}
             alt="네이버로고"
