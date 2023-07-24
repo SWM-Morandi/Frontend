@@ -1,4 +1,3 @@
-import LoginBox from '../components/landing/loginBox';
 import Header from '../components/landing/header';
 import Footer from '../components/landing/footer';
 

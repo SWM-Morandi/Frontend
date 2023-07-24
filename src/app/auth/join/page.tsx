@@ -1,4 +1,4 @@
-import JoinBox from '../../../components/landing/joinBox';
+import JoinBox from '../../../components/auth/joinBox';
 import Header from '../../../components/landing/header';
 import Footer from '../../../components/landing/footer';
 

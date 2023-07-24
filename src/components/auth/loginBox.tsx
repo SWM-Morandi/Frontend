@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { signIn, signOut } from 'next-auth/react';
 
 export default function LoginBox() {
   return (
@@ -8,20 +11,13 @@ export default function LoginBox() {
           <h1 className="text-[2rem] mb-[20px]">모랜디</h1>
           <h6 className="text-[1.2rem] mb-[30px]">모두의 랜덤 디펜스</h6>
           <Link href="/main">
-            <button className="h-[3rem] w-[26rem] bg-[#06C45A] rounded-lg drop-shadow-md mb-[20px]">
-              네이버 계정으로 계속하기
-            </button>
-          </Link>
-          <Link href="/main">
-            <button className="h-[3rem] w-[26rem] bg-[#FAE209] rounded-lg drop-shadow-md mb-[20px]">
+            <button className="h-[3rem] w-[26rem] bg-[#FBFBFB] rounded-lg drop-shadow-md mb-[20px]">
               구글 계정으로 계속하기
             </button>
           </Link>
-          <Link href="/main">
-            <button className="h-[3rem] w-[26rem] bg-[#FBFBFB] rounded-lg drop-shadow-md mb-[20px]">
-              깃허브 계정으로 계속하기
-            </button>
-          </Link>
+          <button className="h-[3rem] w-[26rem] bg-[#FBFBFB] rounded-lg drop-shadow-md mb-[20px]">
+            로그아웃
+          </button>
         </div>
       </div>
     </>

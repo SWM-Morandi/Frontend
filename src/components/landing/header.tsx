@@ -24,7 +24,7 @@ export default function LandingHeader() {
             <span className="ml-3 text-xl">모랜디</span>
           </Link>
           <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-            <Link href="/auth/login" className="mr-5 hover:text-gray-900">
+            <Link href="/auth/signin" className="mr-5 hover:text-gray-900">
               로그인
             </Link>
             <Link href="/auth/join" className="mr-5 hover:text-gray-900">
