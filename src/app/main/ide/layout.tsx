@@ -1,5 +1,3 @@
-import Header from '../../../components/ide/header';
-
 export default function RootLayout({
   children,
 }: {

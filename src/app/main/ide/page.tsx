@@ -5,8 +5,6 @@ import Editor, { loader } from '@monaco-editor/react';
 import Axios from 'axios';
 import Link from 'next/link';
 
-import ProblemInfo from '../../../components/ide/problemInfo';
-
 export default function IDE() {
   const [userCode, setUserCode] = useState('');
   const [userLang, setUserLang] = useState('cpp');
