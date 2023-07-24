@@ -5,10 +5,10 @@ import NaverIcon from '@/assets/icons/naver_logo.png';
 export default function CodingTestBeforePage() {
   return (
     <>
-      <div className="flex flex-col items-center h-screen bg-[#191F28] text-white">
+      <div className="flex flex-col items-center h-screen w-screen bg-[#191F28] text-white">
         <Link
           href="/main"
-          className="flex flex-row items-start w-[100vw] mt-[2vh] ml-[5vw]"
+          className="flex flex-row items-start w-screen pt-[2rem] pl-[2rem]"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
