@@ -58,7 +58,7 @@ function Table() {
                   <tbody className="bg-white divide-y divide-gray-200 ">
                     {/*dark:divide-gray-700 dark:bg-gray-900*/}
                     {data.map((item, index) => (
-                      <tr>
+                      <tr key={index}>
                         {item.status === 'Paid' ? (
                           <td className="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
                             <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-emerald-500 bg-emerald-100/60">
@@ -72,9 +72,9 @@ function Table() {
                                 <path
                                   d="M10 3L4.5 8.5L2 6"
                                   stroke="currentColor"
-                                  stroke-width="1.5"
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
+                                  strokeWidth="1.5"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
                                 />
                               </svg>
                               <h2 className="text-sm font-normal">
@@ -95,9 +95,9 @@ function Table() {
                                 <path
                                   d="M9 3L3 9M3 3L9 9"
                                   stroke="currentColor"
-                                  stroke-width="1.5"
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
+                                  strokeWidth="1.5"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
                                 />
                               </svg>
 
@@ -133,13 +133,13 @@ function Table() {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               stroke="currentColor"
               className="w-5 h-5 rtl:-scale-x-100"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
               />
             </svg>
@@ -202,13 +202,13 @@ function Table() {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               stroke="currentColor"
               className="w-5 h-5 rtl:-scale-x-100"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
               />
             </svg>

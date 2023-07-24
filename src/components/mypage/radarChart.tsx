@@ -24,7 +24,7 @@ export default function Example() {
     if (chartRef && chartRef.current) {
       const ctx = chartRef.current.getContext('2d');
       if (ctx) {
-        var myChart = new Chart(ctx, {
+        const myChart = new Chart(ctx, {
           type: 'radar',
           data: {
             labels: algorithm_set,
