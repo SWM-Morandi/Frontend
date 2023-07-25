@@ -30,6 +30,7 @@
     "react-calendar-heatmap": "^1.9.0",
     "react-dom": "18.2.0",
     "react-horizontal-scrolling-menu": "^4.1.0",
+    "react-lottie-player": "^1.5.4",
     "styled-components": "^6.0.2",
     "tailwindcss": "3.3.2",
     "typescript": "5.1.5"
