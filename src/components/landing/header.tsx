@@ -23,7 +23,7 @@ export default function LandingHeader() {
             <Link href="/auth/signin" className="mr-5 hover:text-gray-900">
               로그인
             </Link>
-            <Link href="/auth/join" className="mr-5 hover:text-gray-900">
+            <Link href="/auth/signup" className="mr-5 hover:text-gray-900">
               회원가입
             </Link>
           </nav>
