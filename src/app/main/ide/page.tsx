@@ -270,7 +270,7 @@ export default function IDE() {
         </div>
 
         <div className="flex flex-row mx-[2rem]">
-          <div className="flex flex-col w-[40vw] h-[90vh] mr-[1rem] bg-[#2E3642] rounded-2xl overflow-auto hover:overflow-scroll">
+          <div className="flex flex-col w-[40vw] h-[90vh] mr-[1rem] bg-[#2E3642] rounded-2xl overflow-auto">
             <div className="p-[1.5rem]">
               <div className="text-[20px] mb-[1rem]">
                 문제 명 패턴에 따른 별 출력
