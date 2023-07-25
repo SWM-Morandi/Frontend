@@ -75,7 +75,7 @@ export default function CodingTestBeforePage() {
           <div className="text-[30px] my-[1rem]">시험 결과</div>
           <ResultBox />
           <Link
-            href="/main"
+            href="/dashboard"
             className="flex justify-center items-center mt-[3rem] mb-[1rem] h-[3rem] w-[30rem] bg-[#F04452] rounded-2xl text-white cursor-pointer"
           >
             종료하기

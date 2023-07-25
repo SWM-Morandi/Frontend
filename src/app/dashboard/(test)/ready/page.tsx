@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import NaverIcon from '@/assets/icons/naver_logo.png';
+import NaverIcon from '@/assets/logos/naver_logo.png';
 
 export default function CodingTestBeforePage() {
   return (
     <>
       <div className="flex flex-col items-center h-screen w-screen bg-[#191F28] text-white">
         <Link
-          href="/main"
+          href="/dashboard"
           className="flex flex-row items-start w-screen pt-[2rem] pl-[2rem]"
         >
           <svg
@@ -28,8 +28,8 @@ export default function CodingTestBeforePage() {
           <Image
             src={NaverIcon}
             alt="네이버로고"
-            width={200}
-            className="mt-[5rem]"
+            width={350}
+            className="mt-[2rem]"
           />
           <div className="h-[5rem]" />
           <div className="w-[80%]">
@@ -61,7 +61,7 @@ export default function CodingTestBeforePage() {
             <div>61%</div>
           </div>
           <Link
-            href="/main/ide"
+            href="/dashboard/ide"
             className="flex flex-row justify-center items-center bg-[#FD5477] text-white h-[3.5rem] w-[80%] mt-[4rem] rounded-2xl"
           >
             <div className="text-[18px]">입장하기</div>
