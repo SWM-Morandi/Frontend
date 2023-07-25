@@ -50,14 +50,13 @@ export default function Main() {
           <CodingTestCardScroll />
         </div>
 
-        <div className="px-[3rem]">
+        <div className="px-[3rem] mb-[6rem]">
           <div className="text-[1.5rem] font-bold mb-[1rem]">
             알고리즘 분류별 공부하기
           </div>
           <AlgorithmCardScroll />
         </div>
       </div>
-
       <Footer />
     </main>
   );
