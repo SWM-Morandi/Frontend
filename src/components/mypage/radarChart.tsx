@@ -140,28 +140,3 @@ export default function Example() {
     </>
   );
 }
-
-/*
-<tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
-
-  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-    0
-  </td>
-  <td className="text-sm px-6 py-4 whitespace-nowrap">
-    {algorithm_set[0]}
-  </td>
-  <td className="text-sm px-6 py-4 whitespace-nowrap">
-    {persent_set[0]}%
-  </td>
-
-  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-    6
-  </td>
-  <td className="text-sm px-6 py-4 whitespace-nowrap">
-    {algorithm_set[6]}
-  </td>
-  <td className="text-sm px-6 py-4 whitespace-nowrap">
-    {persent_set[6]}%
-  </td>
-</tr>
-*/
