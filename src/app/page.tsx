@@ -1,10 +1,12 @@
-import Header from '../components/landing/header';
-import Footer from '../components/landing/footer';
-import LandingIcon from './landingIcon';
+import Header from '@/components/landing/header';
+import Footer from '@/components/landing/footer';
+import LandingIcon from '@/assets/landing/landingIcon';
+import BackgroundYellowCircle from '@/assets/landing/backgroundYellowCircle';
+import BackgroundRedCircle from '@/assets/landing/backgroundRedCircle';
 
 export default function Page() {
   return (
-    <main>
+    <main className="relative overflow-hidden">
       <Header />
       <div className="flex flex-col justify-center items-center text-white bg-black py-[4rem]">
         <div className="text-[3.5rem] font-black mb-[2rem]">
@@ -17,6 +19,8 @@ export default function Page() {
         <LandingIcon />
       </div>
       <Footer />
+      <BackgroundYellowCircle />
+      <BackgroundRedCircle />
     </main>
   );
 }

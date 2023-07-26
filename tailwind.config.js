@@ -12,7 +12,11 @@ module.exports = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      animation: {
+        'spin-slow': 'spin 5s linear infinite',
+        'spin-very-slow': 'spin 10s linear infinite',
+      },
     },
   },
   plugins: [],
-}
+};
