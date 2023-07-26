@@ -3,7 +3,7 @@ import Link from 'next/link';
 export default function LandingHeader() {
   return (
     <>
-      <header className="text-white body-font bg-black">
+      <header className="relative text-white body-font z-20">
         <div className=" mx-[3rem] flex flex-wrap p-5 flex-col md:flex-row items-center">
           <Link
             href="/"
