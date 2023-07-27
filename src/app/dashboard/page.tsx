@@ -1,20 +1,21 @@
 import React from 'react';
 
-import Header from '../../components/dashboard/mainHeader';
-import Footer from '../../components/dashboard/mainFooter';
-import CodingTestCard from '../../components/dashboard/codingTestCard';
+import Header from '@/components/dashboard/mainHeader';
+import Footer from '@/components/dashboard/mainFooter';
+import CodingTestCard from '@/components/dashboard/codingTestCard';
 import Link from 'next/link';
 
 import {
   CodingTestCardScroll,
   AlgorithmCardScroll,
-} from '../../components/dashboard/scrollMenu';
+} from '@/components/dashboard/scrollMenu';
 
 export default function Main() {
   return (
     <main>
       <Header></Header>
       <div className="ml-[1rem] my-[3rem]">
+        {/* 최근 1주일간 응시한 코딩테스트 카드 스크롤 */}
         <div className="flex flex-col px-[3rem]">
           <div className="text-[1.5rem] font-bold">최근에 푼 문제</div>
           <div className="flex flex-row ">
@@ -38,18 +39,22 @@ export default function Main() {
             </Link>
           </div>
         </div>
-        <div className="px-[50px]">
+
+        {/* 사용자 분석 후 추천 코딩테스트 카드 스크롤 */}
+        <div className="px-[3rem]">
           <div className="text-[1.5rem] font-bold">
             사용자에게 추천하는 코딩테스트
           </div>
           <CodingTestCardScroll />
         </div>
 
+        {/* 기업별 코딩테스트 카드 스크롤 */}
         <div className="px-[3rem] font-bold">
           <div className="text-[1.5rem]">기업별 코딩테스트</div>
           <CodingTestCardScroll />
         </div>
 
+        {/* 알고리즘 학습 문제 셋 */}
         <div className="px-[3rem] mb-[6rem]">
           <div className="text-[1.5rem] font-bold mb-[1rem]">
             알고리즘 분류별 공부하기

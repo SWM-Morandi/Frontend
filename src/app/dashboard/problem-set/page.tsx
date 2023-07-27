@@ -1,6 +1,8 @@
 import Header from '../../../components/dashboard/mainHeader';
 import Footer from '../../../components/dashboard/mainFooter';
 
+// 리팩토링 시급.. 이 부분은 일단 1차 MVP 넣을지말지 조금 더 고민해보기
+
 function Table() {
   const data = [
     { status: 'Paid', title: '문제 제목', tier: 'G3', correctRate: '59%' },
