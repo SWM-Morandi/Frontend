@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import Image, { StaticImageData } from 'next/image';
 
 import NaverLogo from '@/assets/logos/naver_logo.png';
@@ -32,15 +31,6 @@ export default function MainCard({
     startLevel: startLevel,
     endLevel: endLevel,
   };
-
-  // const data = {
-  //   componey: '네이버',
-  //   problemCount: 4,
-  //   time: 2,
-  //   startLevel: 'S3',
-  //   endLevel: 'G3',
-  // };
-
   const logo: { [k: string]: StaticImageData } = {
     네이버: NaverLogo,
     카카오: KakaoLogo,
@@ -52,7 +42,6 @@ export default function MainCard({
   };
 
   const companyLogo = logo[companyName];
-  console.log(data);
 
   return (
     <div className="w-[20rem] my-[1rem] mr-[3rem]">

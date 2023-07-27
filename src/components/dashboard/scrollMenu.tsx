@@ -240,7 +240,7 @@ export function AlgorithmCardScroll() {
       >
         {data.map((item, idx) => {
           return (
-            <Link href="/dashboard/problem-set" key={idx}>
+            <Link href="/dashboard/problem-set" key={idx + 100}>
               <AlgorithmCard
                 algorithmTheme={item.algorithmTheme}
                 problemCount={item.problemCount}
