@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Header from '@/components/dashboard/mainHeader';
-import Footer from '@/components/dashboard/mainFooter';
+import Header from '@/components/dashboard/header';
+import Footer from '@/components/dashboard/footer';
 import CodingTestCard from '@/components/dashboard/codingTestCard';
 import Link from 'next/link';
 

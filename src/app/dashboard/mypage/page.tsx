@@ -1,5 +1,5 @@
-import Header from '@/components/dashboard/mainHeader';
-import Footer from '@/components/dashboard/mainFooter';
+import Header from '@/components/dashboard/header';
+import Footer from '@/components/dashboard/footer';
 import UserInfo from '@/components/mypage/userInfo';
 import RadarChart from '@/components/mypage/radarChart';
 import LineChart from '@/components/mypage/lineChart';

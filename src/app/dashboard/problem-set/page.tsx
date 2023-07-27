@@ -1,5 +1,5 @@
-import Header from '../../../components/dashboard/mainHeader';
-import Footer from '../../../components/dashboard/mainFooter';
+import Header from '../../../components/dashboard/header';
+import Footer from '../../../components/dashboard/footer';
 
 // 리팩토링 시급.. 이 부분은 일단 1차 MVP 넣을지말지 조금 더 고민해보기
 
