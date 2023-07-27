@@ -11,7 +11,7 @@ export default function CodintTestInfo() {
           <div>2시간</div>
         </div>
         <div className="flex flex-col justify-center items-center">
-          <div className="text-gray-400">난의도</div>
+          <div className="text-gray-400">난이도</div>
           <div>S3 ~ G3</div>
         </div>
       </div>

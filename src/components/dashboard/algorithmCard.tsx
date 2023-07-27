@@ -37,7 +37,7 @@ export default function MainCard({
         </div>
 
         <div className="flex flex-col items-center">
-          <h2 className="text-gray-400">난의도</h2>
+          <h2 className="text-gray-400">난이도</h2>
           <div className="font-bold text-[1.2rem]">
             {startLevel} ~ {endLevel}
           </div>
