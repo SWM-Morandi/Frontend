@@ -14,6 +14,7 @@
   },
   "ignorePatterns": ["node_modules/"], // eslint 미적용될 폴더나 파일 명시
   "extends": [
+    "next",
     "next/core-web-vitals",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
