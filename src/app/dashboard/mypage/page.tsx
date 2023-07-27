@@ -12,14 +12,14 @@ export default function MyPage() {
       <Header />
       <div className="flex flex-col items-center">
         <UserInfo />
-        <div className="mt-[40px]" />
         <RadarChart />
-        <div className="mt-[40px]" />
+        <div className="mt-[3rem]" />
         <LineChart />
-        <div className="mt-[40px]" />
+        <div className="mt-[6rem]" />
         <HeatChart />
-        <div className="mt-[40px]" />
+        <div className="mt-[5rem]" />
         <TestHistory />
+        <div className="mt-[6rem]" />
       </div>
       <Footer />
     </main>
