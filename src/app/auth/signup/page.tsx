@@ -4,7 +4,7 @@ import SignUpBox from '@/components/auth/signUpBox';
 
 export default function SingUp() {
   return (
-    <main>
+    <>
       <div className="flex flex-col justify-center items-center h-[80vh]">
         <div className="text-[5rem] font-black">모랜디</div>
         <div className="text-[1.5rem] font-bold">모두의 랜덤 디펜스</div>
@@ -17,6 +17,6 @@ export default function SingUp() {
         </Link>
       </div>
       <Footer />
-    </main>
+    </>
   );
 }
