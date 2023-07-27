@@ -3,8 +3,6 @@ import Image from 'next/image';
 import Header from '@/components/landing/header';
 import Footer from '@/components/landing/footer';
 import LandingIcon from '@/assets/landing/landingIcon';
-// import BackgroundYellowCircle from '@/assets/landing/backgroundYellowCircle';
-// import BackgroundRedCircle from '@/assets/landing/backgroundRedCircle';
 import BackgroundRedCircle from '@/assets/landing/backgroundRedCircle.png';
 import BackgroundYellowCircle from '@/assets/landing/backgroundYellowCircle.png';
 
