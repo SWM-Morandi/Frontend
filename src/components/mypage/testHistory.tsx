@@ -1,3 +1,5 @@
+import Gap from '@/utils/gap';
+
 function ArrowIcon() {
   return (
     <svg
@@ -60,9 +62,13 @@ export default function TestHistory() {
   return (
     <>
       <div className="flex flex-col items-center w-[70rem] p-[3rem] rounded-xl shadow-md">
-        <div className="flex flex-row justify-start text-[2rem] font-bold w-[63rem] mb-[1.5rem]">
+        {/* 테스트 기록 컴포넌트 이름 */}
+        <div className="flex flex-row justify-start text-[2rem] font-bold w-[63rem]">
           <div>테스트 기록</div>
         </div>
+        <Gap hSize="1.5rem" />
+
+        {/* 테스트 기록 정보 */}
         <div className="grid grid-cols-2 gap-10">
           <HistoryComp
             company="네이버"
