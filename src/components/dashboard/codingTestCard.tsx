@@ -44,25 +44,25 @@ export default function MainCard({
   const companyLogo = logo[companyName];
 
   return (
-    <div className="w-[20rem] my-[1rem] mr-[3rem]">
-      <div className="flex flex-col justify-center items-center h-[19rem] p-[20px]">
+    <div className="w-[23rem] my-[1rem] mr-[3rem]">
+      <div className="flex flex-col justify-center items-center h-[15rem] p-[20px] shadow-md rounded-xl">
         <Image
           src={companyLogo}
           alt={companyName}
           width={250}
           className="my-[1rem]"
         />
-        <div className="flex flex-row w-[100%] my-[3rem] justify-between">
+        <div className="flex flex-row w-[100%] my-[2rem] py-[1rem] px-[2rem] justify-between bg-gray-200 rounded-xl">
           <div className="flex flex-col items-center">
             <h2 className="text-gray-400">문제 수</h2>
             <div className="text-[20px] font-bold">{data.problemCount}</div>
           </div>
-          <div className="ml-[20px]" />
+          <div className="ml-[1rem]" />
           <div className="flex flex-col items-center">
             <h2 className="text-gray-400">시험 시간</h2>
             <div className="text-[20px] font-bold">{data.time}시간</div>
           </div>
-          <div className="ml-[20px]" />
+          <div className="ml-[1rem]" />
           <div className="flex flex-col  items-center">
             <h2 className="text-gray-400">난의도</h2>
             <div className="text-[20px] font-bold">
