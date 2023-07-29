@@ -73,7 +73,7 @@ export default function HeatChart() {
   };
 
   return (
-    <div className="flex flex-row justify-center">
+    <div className="flex flex-row justify-center w-[70rem] p-[3rem] rounded-xl shadow-md">
       <CalendarHeatmap
         values={values}
         startDate={startData}

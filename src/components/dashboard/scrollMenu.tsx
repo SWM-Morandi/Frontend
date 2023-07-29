@@ -134,8 +134,8 @@ export function CodingTestCardScroll() {
 
   return (
     <ScrollMenu
-      LeftArrow={LeftArrowTest('17rem')}
-      RightArrow={RightArrowTest('17rem')}
+      LeftArrow={LeftArrowTest('16rem')}
+      RightArrow={RightArrowTest('16rem')}
     >
       {data.map((item, idx) => {
         return (

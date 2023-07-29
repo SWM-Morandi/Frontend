@@ -63,7 +63,7 @@ export default function LineChart() {
   return (
     <>
       {/* line chart */}
-      <div className="flex flex-col justify-center">
+      <div className="flex flex-col justify-center w-[70rem] p-[3rem] rounded-xl shadow-md">
         <div className="flex flex-row items-center ml-[0.2rem] mb-[1rem]">
           <div className="text-gray-500 mr-[0.6rem]">현재 레이팅</div>
           <div className="text-[1.3rem] font-bold">1743</div>

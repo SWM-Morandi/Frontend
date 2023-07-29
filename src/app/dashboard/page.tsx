@@ -40,6 +40,7 @@ export default function Main() {
           </div>
         </div>
 
+        <div className="mt-[3rem]" />
         {/* 사용자 분석 후 추천 코딩테스트 카드 스크롤 */}
         <div className="px-[3rem]">
           <div className="text-[1.5rem] font-bold">
@@ -48,12 +49,14 @@ export default function Main() {
           <CodingTestCardScroll />
         </div>
 
+        <div className="mt-[3rem]" />
         {/* 기업별 코딩테스트 카드 스크롤 */}
         <div className="px-[3rem] font-bold">
           <div className="text-[1.5rem]">기업별 코딩테스트</div>
           <CodingTestCardScroll />
         </div>
 
+        <div className="mt-[3rem]" />
         {/* 알고리즘 학습 문제 셋 */}
         <div className="px-[3rem] mb-[6rem]">
           <div className="text-[1.5rem] font-bold mb-[1rem]">
