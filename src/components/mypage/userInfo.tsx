@@ -187,7 +187,7 @@ function FriendIcon() {
 export default function UserInfo() {
   return (
     <>
-      <div className="flex flex-row justify-center h-[15rem] w-[70rem] m-[1rem]">
+      <div className="flex flex-row justify-center h-[15rem] w-[70rem] m-[1rem] rounded-xl shadow-md">
         <div className="flex flex-col justify-center w-[15rem]">
           <ProfileIcon />
         </div>
@@ -195,11 +195,11 @@ export default function UserInfo() {
           <h1 className="text-[2rem] font-bold">yeobi01</h1>
           <div className="mb-[2rem]">코딩테스트 준비하는 사람 모여라</div>
           <div className="flex flex-row">
-            <div className="flex flex-row items-center">
+            <div className="flex flex-row items-center px-[1rem] py-[0.3rem] bg-gray-100 rounded">
               <ModifyIcon />
               <div className="ml-[0.5rem] text-gray-600">프로필 수정</div>
             </div>
-            <div className="flex flex-row items-center ml-[1.5rem]">
+            <div className="flex flex-row items-center ml-[1.5rem] px-[1rem] py-[0.3rem] border border-gray-300 rounded">
               <FriendIcon />
               <div className="ml-[0.5rem]">친구 목록</div>
             </div>

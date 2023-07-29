@@ -15,11 +15,11 @@ export default function MyPage() {
         <RadarChart />
         <div className="mt-[3rem]" />
         <LineChart />
-        <div className="mt-[6rem]" />
+        <div className="mt-[3rem]" />
         <HeatChart />
-        <div className="mt-[5rem]" />
+        <div className="mt-[3rem]" />
         <TestHistory />
-        <div className="mt-[6rem]" />
+        <div className="mt-[3rem]" />
       </div>
       <Footer />
     </main>

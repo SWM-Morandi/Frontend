@@ -69,11 +69,11 @@ export default function RadarChart() {
   return (
     <>
       {/* Radar chart */}
-      <div className="flex flex-row items-center justify-center">
+      <div className="flex flex-row items-center justify-center w-[70rem] rounded-xl shadow-md">
         <div className="h-[25rem] w-[25rem] mr-[5rem]">
           <Radar data={data} options={options} />
         </div>
-        <div className="flex flex-row">
+        <div className="flex flex-row rounded-xl bg-gray-100 p-[2rem]">
           <div className="flex flex-col justify-center items-center mr-[3.5rem]">
             {datas.algorithms.map(
               (item, idx) =>

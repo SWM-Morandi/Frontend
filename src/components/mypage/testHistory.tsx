@@ -37,13 +37,13 @@ function HistoryComp({
 }) {
   return (
     <>
-      <div className="flex flex-row justify-between items-center w-[25rem]">
+      <div className="flex flex-row justify-between items-center w-[30rem] px-[3rem] py-[1.5rem] bg-gray-100 rounded-xl">
         <div className="flex flex-col">
           <div className="text-[1.5rem] font-bold">{company} 코딩테스트</div>
           <div className="text-gray-500">{date}</div>
         </div>
         <div className="flex flex-row items-center">
-          <div className="flex flex-col items-center mr-[1.5rem]">
+          <div className="flex flex-col items-center mr-[1.5rem] bg-white px-[1rem] py-[0.5rem] rounded-xl">
             <div className="text-[1.3rem] font-bold">{solvedCount}문제</div>
             <div className="text-gray-500">총 {problemCount}문제</div>
           </div>
@@ -59,8 +59,8 @@ export default function TestHistory() {
 
   return (
     <>
-      <div className="flex flex-col items-center">
-        <div className="flex flex-row justify-start text-[2rem] font-bold w-[55rem] mb-[1.5rem]">
+      <div className="flex flex-col items-center w-[70rem] p-[3rem] rounded-xl shadow-md">
+        <div className="flex flex-row justify-start text-[2rem] font-bold w-[63rem] mb-[1.5rem]">
           <div>테스트 기록</div>
         </div>
         <div className="grid grid-cols-2 gap-10">
