@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export default function LandingHeader() {
+export default function Header() {
   return (
     <>
       <header className="relative text-white body-font z-20">

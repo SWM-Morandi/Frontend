@@ -1,6 +1,5 @@
 'use client';
 
-import { data } from 'autoprefixer';
 import {
   Chart as ChartJS,
   RadialLinearScale,
@@ -11,6 +10,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Radar } from 'react-chartjs-2';
+import Gap from '@/utils/gap';
 
 ChartJS.register(
   RadialLinearScale,
@@ -68,37 +68,49 @@ export default function RadarChart() {
 
   return (
     <>
-      {/* Radar chart */}
       <div className="flex flex-row items-center justify-center w-[70rem] rounded-xl shadow-md">
-        <div className="h-[25rem] w-[25rem] mr-[5rem]">
+        {/* 레이더 차트 */}
+        <div className="h-[25rem] w-[25rem]">
           <Radar data={data} options={options} />
         </div>
+        <Gap wSize="5rem" />
+
+        {/* 레이더 차트 앞쪽 5개 표로 변환  */}
         <div className="flex flex-row rounded-xl bg-gray-100 p-[2rem]">
-          <div className="flex flex-col justify-center items-center mr-[3.5rem]">
+          <div className="flex flex-col justify-center items-center">
             {datas.algorithms.map(
               (item, idx) =>
                 idx < 5 && (
-                  <div
-                    className="flex flex-row justify-between w-[15rem] my-[0.5rem] text-[1.4rem]"
-                    key={idx}
-                  >
-                    <div className="text-gray-500">{item}</div>
-                    <div>{datas.persents[idx]}%</div>
-                  </div>
+                  <>
+                    <div
+                      className="flex flex-row justify-between w-[15rem] text-[1.4rem]"
+                      key={idx}
+                    >
+                      <div className="text-gray-500">{item}</div>
+                      <div>{datas.persents[idx]}%</div>
+                    </div>
+                    <Gap hSize="1rem" />
+                  </>
                 ),
             )}
           </div>
+          <Gap wSize="3.5rem" />
+
+          {/* 레이더 차트 뒷쪽 5개 표로 변환  */}
           <div className="flex flex-col justify-center items-center">
             {datas.algorithms.map(
               (item, idx) =>
                 idx >= 5 && (
-                  <div
-                    className="flex flex-row justify-between w-[15rem] my-[0.5rem] text-[1.4rem]"
-                    key={idx}
-                  >
-                    <div className="text-gray-500">{item}</div>
-                    <div>{datas.persents[idx]}%</div>
-                  </div>
+                  <>
+                    <div
+                      className="flex flex-row justify-between w-[15rem] text-[1.4rem]"
+                      key={idx}
+                    >
+                      <div className="text-gray-500">{item}</div>
+                      <div>{datas.persents[idx]}%</div>
+                    </div>
+                    <Gap hSize="1rem" />
+                  </>
                 ),
             )}
           </div>

@@ -9,6 +9,8 @@ import Link from 'next/link';
 import CodingTestCard from './codingTestCard';
 import AlgorithmCard from './algorithmCard';
 
+import Gap from '@/utils/gap';
+
 /***
  * 왼쪽 화살표 컴포넌트 고차함수
  */

@@ -184,34 +184,57 @@ function FriendIcon() {
   );
 }
 
+import Gap from '@/utils/gap';
+import Text from '@/utils/text';
+
 export default function UserInfo() {
+  // 사용자 정보 받아오는 코드 작성하기
+
   return (
     <>
-      <div className="flex flex-row justify-center h-[15rem] w-[70rem] m-[1rem] rounded-xl shadow-md">
+      <div className="flex flex-row justify-center h-[15rem] w-[70rem] rounded-xl shadow-md">
         <div className="flex flex-col justify-center w-[15rem]">
           <ProfileIcon />
         </div>
         <div className="flex flex-col justify-center w-[30rem]">
-          <h1 className="text-[2rem] font-bold">yeobi01</h1>
-          <div className="mb-[2rem]">코딩테스트 준비하는 사람 모여라</div>
+          {/* 사용자 닉네임 */}
+          <Text size="2rem" bold="bold">
+            yeobi01
+          </Text>
+
+          {/* 사용자 한줄 소개/ */}
+          <div>코딩테스트 준비하는 사람 모여라</div>
+          <Gap hSize="2rem" />
+
           <div className="flex flex-row">
+            {/* 프로필 수정 버튼 */}
             <div className="flex flex-row items-center px-[1rem] py-[0.3rem] bg-gray-100 rounded">
               <ModifyIcon />
-              <div className="ml-[0.5rem] text-gray-600">프로필 수정</div>
+              <Gap wSize="0.5rem" />
+              <div className="text-gray-600">프로필 수정</div>
             </div>
-            <div className="flex flex-row items-center ml-[1.5rem] px-[1rem] py-[0.3rem] border border-gray-300 rounded">
+            <Gap wSize="1.5rem" />
+
+            {/* 친구 목록 버튼 */}
+            <div className="flex flex-row items-center px-[1rem] py-[0.3rem] border border-gray-300 rounded">
               <FriendIcon />
-              <div className="ml-[0.5rem]">친구 목록</div>
+              <Gap wSize="0.5rem" />
+              <div>친구 목록</div>
             </div>
           </div>
         </div>
+
+        {/* 사용자 정보 아이콘들 */}
         <div className="flex flex-row w-[20rem] justify-end items-center">
           <EmailIcon />
-          <div className="ml-[1rem]" />
+          <Gap wSize="1rem" />
+
           <GithubIcon />
-          <div className="ml-[1rem]" />
+          <Gap wSize="1rem" />
+
           <LinkedinIcon />
-          <div className="ml-[1rem]" />
+          <Gap wSize="1rem" />
+
           <TistoryIcon />
         </div>
       </div>

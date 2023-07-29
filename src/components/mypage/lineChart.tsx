@@ -11,6 +11,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
+import Gap from '@/utils/gap';
 
 ChartJS.register(
   CategoryScale,
@@ -62,12 +63,17 @@ export default function LineChart() {
 
   return (
     <>
-      {/* line chart */}
       <div className="flex flex-col justify-center w-[70rem] p-[3rem] rounded-xl shadow-md">
-        <div className="flex flex-row items-center ml-[0.2rem] mb-[1rem]">
-          <div className="text-gray-500 mr-[0.6rem]">현재 레이팅</div>
+        {/* 사용자 레이팅 값 */}
+        <div className="flex flex-row items-center">
+          <div className="text-gray-500">현재 레이팅</div>
+          <Gap wSize="1rem" />
+
           <div className="text-[1.3rem] font-bold">1743</div>
         </div>
+        <Gap hSize="1rem" />
+
+        {/* 라인차트 */}
         <div className="h-[15rem] w-[65rem]">
           <Line options={options} data={data} />
         </div>
