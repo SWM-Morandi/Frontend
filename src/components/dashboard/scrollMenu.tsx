@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
 import 'react-horizontal-scrolling-menu/dist/styles.css';
 import './scroll.css';
@@ -8,8 +8,11 @@ import Link from 'next/link';
 
 import CodingTestCard from './codingTestCard';
 import AlgorithmCard from './algorithmCard';
+import LevelTestCard from './levelTestCard';
 
 import Gap from '@/utils/gap';
+
+import Axios from 'axios';
 
 /***
  * 왼쪽 화살표 컴포넌트 고차함수
@@ -31,7 +34,7 @@ function LeftArrowTest(height: string) {
           justifyContent: 'center',
           userSelect: 'none',
           position: 'absolute',
-          left: '4rem',
+          left: '3rem',
           height: `${height}`,
           width: `50px`,
           zIndex: '999',
@@ -81,58 +84,39 @@ function RightArrowTest(height: string) {
 /***
  * 코딩테스트 카드 스크롤 컴포넌트
  */
+
 export function CodingTestCardScroll() {
-  const data = [
-    {
-      companyName: '네이버',
-      problemCount: 4,
-      time: 2,
-      startLevel: 'S3',
-      endLevel: 'G3',
-    },
-    {
-      companyName: '카카오',
-      problemCount: 4,
-      time: 2,
-      startLevel: 'S2',
-      endLevel: 'G2',
-    },
-    {
-      companyName: '라인',
-      problemCount: 4,
-      time: 2,
-      startLevel: 'S1',
-      endLevel: 'G4',
-    },
-    {
-      companyName: '쿠팡',
-      problemCount: 4,
-      time: 2,
-      startLevel: 'G5',
-      endLevel: 'P5',
-    },
-    {
-      companyName: '배달의민족',
-      problemCount: 4,
-      time: 2,
-      startLevel: 'S2',
-      endLevel: 'G1',
-    },
-    {
-      companyName: '토스',
-      problemCount: 4,
-      time: 2,
-      startLevel: 'S1',
-      endLevel: 'G2',
-    },
-    {
-      companyName: '당근마켓',
-      problemCount: 4,
-      time: 2,
-      startLevel: 'S4',
-      endLevel: 'G2',
-    },
-  ];
+  const [data, setData] = useState<
+    Array<{
+      companyName: string;
+      problemCount: number;
+      time: number;
+      startLevel: string;
+      endLevel: string;
+    }>
+  >([]);
+
+  useEffect(() => {
+    Axios.get('http://localhost:8080/test-types/company', {
+      withCredentials: true,
+    })
+      .then((res) => {
+        console.log('성공');
+        const newData = res.data.map((item: any) => ({
+          companyName: item.testTypename,
+          problemCount: item.problemCount,
+          time: item.testTime,
+          startLevel: item.startDifficulty,
+          endLevel: item.endDifficulty,
+        }));
+        setData(newData);
+        console.log(newData);
+      })
+      .catch((err) => {
+        console.log('에러');
+        console.log(err);
+      });
+  }, []);
 
   return (
     <ScrollMenu
@@ -144,6 +128,64 @@ export function CodingTestCardScroll() {
           <Link href="/dashboard/ready" key={idx}>
             <CodingTestCard
               companyName={item.companyName}
+              problemCount={item.problemCount}
+              time={item.time}
+              startLevel={item.startLevel}
+              endLevel={item.endLevel}
+            />
+          </Link>
+        );
+      })}
+    </ScrollMenu>
+  );
+}
+
+/**
+ * 시험 난이도별 카드 스크롤 컴포넌트
+ */
+export function LevelCardScroll() {
+  const [data, setData] = useState<
+    Array<{
+      testTypename: string;
+      problemCount: number;
+      time: number;
+      startLevel: string;
+      endLevel: string;
+    }>
+  >([]);
+
+  useEffect(() => {
+    Axios.get('http://localhost:8080/test-types/practice', {
+      withCredentials: true,
+    })
+      .then((res) => {
+        console.log('성공');
+        const newData = res.data.map((item: any) => ({
+          testTypename: item.testTypename,
+          problemCount: item.problemCount,
+          time: item.testTime,
+          startLevel: item.startDifficulty,
+          endLevel: item.endDifficulty,
+        }));
+        setData(newData);
+        console.log(newData);
+      })
+      .catch((err) => {
+        console.log('에러');
+        console.log(err);
+      });
+  }, []);
+
+  return (
+    <ScrollMenu
+      LeftArrow={LeftArrowTest('16rem')}
+      RightArrow={RightArrowTest('16rem')}
+    >
+      {data.map((item, idx) => {
+        return (
+          <Link href="/dashboard/ready" key={idx}>
+            <LevelTestCard
+              testTypename={item.testTypename}
               problemCount={item.problemCount}
               time={item.time}
               startLevel={item.startLevel}
@@ -234,6 +276,7 @@ export function AlgorithmCardScroll() {
       endLevel: 'G2',
     },
   ];
+
   return (
     <>
       <ScrollMenu

@@ -7,17 +7,19 @@ import graphLottieJson from '@/assets/lottiefiles/graph.json';
 import stringLottieJson from '@/assets/lottiefiles/string.json';
 import Gap from '@/utils/gap';
 
-export default function MainCard({
-  algorithmTheme,
-  problemCount,
-  startLevel,
-  endLevel,
-}: {
+interface AlgorithmCardProps {
   algorithmTheme: string;
   problemCount: number;
   startLevel: string;
   endLevel: string;
-}) {
+}
+
+export default function AlgorithmCard({
+  algorithmTheme,
+  problemCount,
+  startLevel,
+  endLevel,
+}: AlgorithmCardProps) {
   return (
     <div className="flex flex-col justify-center rounded-xl w-[20rem] mr-[1rem] p-[2rem] bg-gradient-to-r from-[#FFA935] from-0% to-[#FFD553] to-100% ">
       {/* 알고리즘 이름 */}

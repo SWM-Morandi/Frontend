@@ -1,51 +1,32 @@
 'use client';
 
 import React from 'react';
-import Image, { StaticImageData } from 'next/image';
-
-import NaverLogo from '@/assets/logos/naver_logo.png';
-import KakaoLogo from '@/assets/logos/kakao_logo.png';
-import LineLogo from '@/assets/logos/line_logo.png';
-import CoupangLogo from '@/assets/logos/coupang_logo.png';
-import BaeminLogo from '@/assets/logos/baemin_logo.png';
-import CarrotLogo from '@/assets/logos/carrotmarket_logo.png';
-import TossLogo from '@/assets/logos/toss_logo.png';
-
 import Gap from '@/utils/gap';
+import Text from '@/utils/text';
 
 interface CodingTestCardProps {
-  companyName: string;
+  testTypename: string;
   problemCount: number;
   time: number;
   startLevel: string;
   endLevel: string;
 }
 
-const logo: { [k: string]: StaticImageData } = {
-  네이버: NaverLogo,
-  카카오: KakaoLogo,
-  라인: LineLogo,
-  쿠팡: CoupangLogo,
-  배달의민족: BaeminLogo,
-  당근마켓: CarrotLogo,
-  토스: TossLogo,
-};
-
 export default function CodingTestCard({
-  companyName,
+  testTypename,
   problemCount,
   time,
   startLevel,
   endLevel,
 }: CodingTestCardProps) {
-  const companyLogo = logo[companyName];
-
   return (
     <>
       <div className="w-[23rem] my-[1rem] mr-[3rem]">
         <div className="flex flex-col justify-center items-center h-[15rem] p-[20px] shadow-md rounded-xl">
           {/* 코딩테스트 기업 로고 */}
-          <Image src={companyLogo} alt={companyName} width={250} />
+          <Text size="1.5rem" bold="bold">
+            {testTypename}
+          </Text>
           <Gap hSize="3rem" />
 
           {/* 기업 코딩테스트 정보 */}
