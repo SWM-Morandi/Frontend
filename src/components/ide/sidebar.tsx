@@ -1,7 +1,22 @@
+interface ProblemInfoType {
+  problem_title: string;
+  problem_description: string;
+  problem_input: string;
+  problem_output: string;
+  input_sample: Array<string>;
+  output_sample: Array<string>;
+}
+
 export default function SideBar({
   ocSideProblemsBar,
+  problemId,
+  setProblemId,
+  problemInfo,
 }: {
   ocSideProblemsBar: any;
+  problemId: any;
+  setProblemId: any;
+  problemInfo: Array<ProblemInfoType>;
 }) {
   return (
     <>
@@ -20,33 +35,22 @@ export default function SideBar({
             </g>
           </svg>
         </div>
-        {Array(5)
-          .fill(0)
-          .map((_, idx) => (
-            <>
-              <div
-                className="flex flex-row justify-between px-[1.5rem] py-[0.8rem]"
-                key={idx}
-              >
-                <div className="flex flex-row mr-[2rem]">
-                  <div className="mr-[1rem]">{idx + 1}</div>
-                  <div>문제 타이틀을 넣어주세요.</div>
-                </div>
-                {idx % 2 === 0 && (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 507.506 507.506"
-                    width="20"
-                    fill="#F04452"
-                  >
-                    <g>
-                      <path d="M163.865,436.934c-14.406,0.006-28.222-5.72-38.4-15.915L9.369,304.966c-12.492-12.496-12.492-32.752,0-45.248l0,0   c12.496-12.492,32.752-12.492,45.248,0l109.248,109.248L452.889,79.942c12.496-12.492,32.752-12.492,45.248,0l0,0   c12.492,12.496,12.492,32.752,0,45.248L202.265,421.019C192.087,431.214,178.271,436.94,163.865,436.934z" />
-                    </g>
-                  </svg>
-                )}
-              </div>
-            </>
-          ))}
+        {problemInfo.map((_, idx) => (
+          <div
+            className="flex flex-row justify-between px-[1.5rem] py-[0.8rem]"
+            onClick={() => {
+              console.log(idx + 1);
+              setProblemId(idx + 1);
+              ocSideProblemsBar();
+            }}
+            key={idx + 100}
+          >
+            <div className="flex flex-row mr-[2rem]">
+              <div className="mr-[1rem]">{idx + 1}</div>
+              <div>{problemInfo[idx].problem_title}</div>
+            </div>
+          </div>
+        ))}
       </div>
     </>
   );

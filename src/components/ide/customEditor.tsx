@@ -1,26 +1,54 @@
 'use client';
 
-import Axios from 'axios';
+import { axiosInstance } from '@/api/axiosSetting';
 import Editor, { loader } from '@monaco-editor/react';
 import { useState, useEffect } from 'react';
 
+const languages = [
+  { value: 'cpp', label: 'C++' },
+  { value: 'python', label: 'Python' },
+  { value: 'java', label: 'Java' },
+];
+
 export default function CustomEditor() {
+  const [userInput, setUserInput] = useState('');
+  const [userFontSize, setUserFontSize] = useState(14); // 추후에 폰트 사이즈 조절 기능 추가
+  const [loading, setLoading] = useState(false);
+  const [userCode, setUserCode] = useState(defaultValue);
+  const [userLang, setUserLang] = useState('cpp');
+  const [axiosLang, setAxiosLang] = useState('Cpp'); // axios 요청 시 사용할 언어
+  const [userOutput, setUserOutput] = useState('');
+  const [flag, setFlag] = useState(false);
+
+  const options = {
+    fontSize: userFontSize,
+  };
+
   const compile = () => {
     setLoading(true);
     if (userCode === '') {
       return;
     }
-
     console.log(userCode);
-
-    Axios.post('http://localhost:5000/compile', {
-      code: userCode,
-      lang: userLang,
-      input: userInput,
-    }).then((res) => {
-      setUserOutput(res.data.output);
-      setLoading(false);
-    });
+    axiosInstance
+      .post(
+        '/tests/output',
+        {
+          language: axiosLang,
+          code: userCode,
+          input: userInput,
+        },
+        { withCredentials: true },
+      )
+      .then((res) => {
+        console.log(res.data.output);
+        setFlag(true);
+        setUserOutput(res.data.output);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const clearOutput = () => {
@@ -33,29 +61,23 @@ export default function CustomEditor() {
     });
   }, []);
 
-  const [userInput, setUserInput] = useState('');
-  const [userFontSize, setUserFontSize] = useState(14); // 추후에 폰트 사이즈 조절 기능 추가
-  const [loading, setLoading] = useState(false);
-  const [userCode, setUserCode] = useState('');
-  const [userLang, setUserLang] = useState('cpp');
-  const languages = [
-    { value: 'cpp', label: 'C++' },
-    { value: 'python', label: 'Python' },
-    { value: 'java', label: 'Java' },
-  ];
-  const [userOutput, setUserOutput] = useState('');
-
-  const options = {
-    fontSize: userFontSize,
-  };
-
   return (
     <>
       <div className="flex flex-col w-[60vw]">
         <select
           className="w-[5rem] ml-[0.5rem] mb-[0.5rem] bg-gray-900"
           onChange={(e) => {
+            console.log(e.target.value);
             setUserLang(e.target.value);
+            if (e.target.value === 'cpp') {
+              setAxiosLang('Cpp');
+            }
+            if (e.target.value === 'python') {
+              setAxiosLang('Python');
+            }
+            if (e.target.value === 'java') {
+              setAxiosLang('Java');
+            }
           }}
         >
           {languages.map((lang) => (
@@ -81,10 +103,32 @@ export default function CustomEditor() {
         </div>
 
         <div className="flex flex-row justify-between w-[8rem] ml-[0.5rem] mt-[1rem] mb-[0.5rem]">
-          <button>Testcase</button>
-          <button>Result</button>
+          <button
+            onClick={() => {
+              setFlag(false);
+            }}
+          >
+            Testcase
+          </button>
+          <button
+            onClick={() => {
+              setFlag(true);
+            }}
+          >
+            Result
+          </button>
         </div>
-        <div className="h-[24vh] w-[100%] mb-[1rem] bg-[#2E3642] rounded-xl"></div>
+        <div className="h-[24vh] w-[100%] mb-[1rem] bg-[#2E3642] p-[1rem] rounded-xl">
+          {flag ? (
+            <div>{userOutput}</div>
+          ) : (
+            <textarea
+              id="code-inp"
+              onChange={(e) => setUserInput(e.target.value)}
+              className="bg-[#2E3642] w-[100%] h-[100%] text-white focus:outline-0"
+            ></textarea>
+          )}
+        </div>
         <div className="flex flex-row justify-end items-center">
           <button className="h-[2rem] w-[6rem] bg-[#12AC79] rounded-xl">
             Submit

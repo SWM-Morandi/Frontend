@@ -6,13 +6,13 @@ import NaverIcon from '@/assets/icons/naverIcon';
 import GithubIcon from '@/assets/icons/githubIcon';
 import Gap from '@/utils/gap';
 
-import Axios from 'axios';
+import { axiosInstance } from '@/api/axiosSetting';
 import { useRouter } from 'next/navigation';
 
 export default function SingInBox() {
   const router = useRouter();
   const googleSignUp = () => {
-    Axios.get('http://localhost:8080/oauths/google').then((res) => {
+    axiosInstance.get('/oauths/google').then((res) => {
       router.push(res.data);
     });
   };

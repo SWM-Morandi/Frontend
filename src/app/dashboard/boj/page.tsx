@@ -5,7 +5,7 @@ import Header from '@/components/dashboard/header';
 import Footer from '@/components/dashboard/footer';
 import CodingTestCard from '@/components/dashboard/codingTestCard';
 import Link from 'next/link';
-import Axios from 'axios';
+import { axiosInstance } from '@/api/axiosSetting';
 
 import Gap from '@/utils/gap';
 import Text from '@/utils/text';
@@ -17,13 +17,14 @@ export default function Boj() {
   const router = useRouter();
 
   const inputBojId = () => {
-    Axios.post(
-      `http://localhost:8080/members/register-info`,
-      { bojId: bojId },
-      {
-        withCredentials: true,
-      },
-    )
+    axiosInstance
+      .post(
+        `/members/register-info`,
+        { bojId: bojId },
+        {
+          withCredentials: true,
+        },
+      )
       .then((res) => {
         console.log('성공' + res.data);
         router.push('/dashboard');

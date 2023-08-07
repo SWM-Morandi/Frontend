@@ -12,7 +12,7 @@ import LevelTestCard from './levelTestCard';
 
 import Gap from '@/utils/gap';
 
-import Axios from 'axios';
+import { axiosInstance } from '@/api/axiosSetting';
 
 /***
  * 왼쪽 화살표 컴포넌트 고차함수
@@ -97,9 +97,10 @@ export function CodingTestCardScroll() {
   >([]);
 
   useEffect(() => {
-    Axios.get('http://localhost:8080/test-types/company', {
-      withCredentials: true,
-    })
+    axiosInstance
+      .get('/test-types/company', {
+        withCredentials: true,
+      })
       .then((res) => {
         console.log('성공');
         const newData = res.data.map((item: any) => ({
@@ -132,6 +133,7 @@ export function CodingTestCardScroll() {
               time={item.time}
               startLevel={item.startLevel}
               endLevel={item.endLevel}
+              testId={idx + 7}
             />
           </Link>
         );
@@ -155,9 +157,10 @@ export function LevelCardScroll() {
   >([]);
 
   useEffect(() => {
-    Axios.get('http://localhost:8080/test-types/practice', {
-      withCredentials: true,
-    })
+    axiosInstance
+      .get('/test-types/practice', {
+        withCredentials: true,
+      })
       .then((res) => {
         console.log('성공');
         const newData = res.data.map((item: any) => ({
@@ -190,6 +193,7 @@ export function LevelCardScroll() {
               time={item.time}
               startLevel={item.startLevel}
               endLevel={item.endLevel}
+              testId={idx + 1}
             />
           </Link>
         );
