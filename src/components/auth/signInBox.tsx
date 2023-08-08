@@ -11,17 +11,20 @@ import { useRouter } from 'next/navigation';
 
 export default function SingInBox() {
   const router = useRouter();
-  const googleSignUp = () => {
-    axiosInstance.get('/oauths/google').then((res) => {
+  const googleSignIn = async () => {
+    try {
+      const res = await axiosInstance.get('/oauths/google');
       router.push(res.data);
-    });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
     <>
       {/* 구글 로그인 버튼 */}
       <div
-        onClick={googleSignUp}
+        onClick={googleSignIn}
         className="flex flex-row justify-center items-center h-[4rem] w-[27rem] bg-[#F7F7FA] rounded-2xl text-black text-[1.2rem]"
       >
         <GoogleIcon />
@@ -33,7 +36,7 @@ export default function SingInBox() {
 
       {/* 네이버 로그인 버튼 */}
       <div
-        onClick={googleSignUp}
+        onClick={googleSignIn}
         className="flex flex-row justify-center items-center h-[4rem] w-[27rem] bg-[#03C75A] rounded-2xl text-white text-[1.2rem]"
       >
         <NaverIcon />
@@ -45,7 +48,7 @@ export default function SingInBox() {
 
       {/* 깃허브 로그인 버튼 */}
       <div
-        onClick={googleSignUp}
+        onClick={googleSignIn}
         className="flex flex-row justify-center items-center h-[4rem] w-[27rem] bg-gray-900 rounded-2xl text-white text-[1.2rem]"
       >
         <GithubIcon />

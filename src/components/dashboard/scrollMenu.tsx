@@ -12,6 +12,8 @@ import LevelTestCard from './levelTestCard';
 
 import Gap from '@/utils/gap';
 
+import { useQuery } from 'react-query';
+
 import { axiosInstance } from '@/api/axiosSetting';
 
 /***
@@ -81,61 +83,58 @@ function RightArrowTest(height: string) {
   };
 }
 
+interface TestType {
+  testTypeId: number;
+  testTypename: string;
+  testTime: number;
+  problemCount: number;
+  startDifficulty: string;
+  endDifficulty: string;
+  averageCorrectAnswerRate: number;
+  numberOfTestTrial: number;
+}
+
 /***
  * 코딩테스트 카드 스크롤 컴포넌트
  */
 
 export function CodingTestCardScroll() {
-  const [data, setData] = useState<
-    Array<{
-      companyName: string;
-      problemCount: number;
-      time: number;
-      startLevel: string;
-      endLevel: string;
-    }>
-  >([]);
-
-  useEffect(() => {
-    axiosInstance
-      .get('/test-types/company', {
+  const testTypeComponyAxios: () => Promise<TestType[]> = async () => {
+    const response = await axiosInstance.get<TestType[]>(
+      `/test-types/company`,
+      {
         withCredentials: true,
-      })
-      .then((res) => {
-        console.log('성공');
-        const newData = res.data.map((item: any) => ({
-          companyName: item.testTypename,
-          problemCount: item.problemCount,
-          time: item.testTime,
-          startLevel: item.startDifficulty,
-          endLevel: item.endDifficulty,
-        }));
-        setData(newData);
-        console.log(newData);
-      })
-      .catch((err) => {
-        console.log('에러');
-        console.log(err);
-      });
-  }, []);
+      },
+    );
+    console.log(response);
+    return response.data;
+  };
+
+  const { isLoading, error, data } = useQuery<TestType[]>(
+    'testTypeCompony',
+    testTypeComponyAxios,
+  );
+
+  if (isLoading) return <div>로딩중...</div>;
+
+  if (error) return <div>에러가 발생했습니다</div>;
 
   return (
     <ScrollMenu
       LeftArrow={LeftArrowTest('16rem')}
       RightArrow={RightArrowTest('16rem')}
     >
-      {data.map((item, idx) => {
+      {data!.map((item, idx) => {
         return (
-          <Link href="/dashboard/ready" key={idx}>
-            <CodingTestCard
-              companyName={item.companyName}
-              problemCount={item.problemCount}
-              time={item.time}
-              startLevel={item.startLevel}
-              endLevel={item.endLevel}
-              testId={idx + 7}
-            />
-          </Link>
+          <CodingTestCard
+            testTypeId={item.testTypeId}
+            testTypename={item.testTypename}
+            testTime={item.testTime}
+            problemCount={item.problemCount}
+            startDifficulty={item.startDifficulty}
+            endDifficulty={item.endDifficulty}
+            key={idx}
+          />
         );
       })}
     </ScrollMenu>
@@ -146,56 +145,42 @@ export function CodingTestCardScroll() {
  * 시험 난이도별 카드 스크롤 컴포넌트
  */
 export function LevelCardScroll() {
-  const [data, setData] = useState<
-    Array<{
-      testTypename: string;
-      problemCount: number;
-      time: number;
-      startLevel: string;
-      endLevel: string;
-    }>
-  >([]);
-
-  useEffect(() => {
-    axiosInstance
-      .get('/test-types/practice', {
+  const testTypePracticeAxios: () => Promise<TestType[]> = async () => {
+    const response = await axiosInstance.get<TestType[]>(
+      `/test-types/practice`,
+      {
         withCredentials: true,
-      })
-      .then((res) => {
-        console.log('성공');
-        const newData = res.data.map((item: any) => ({
-          testTypename: item.testTypename,
-          problemCount: item.problemCount,
-          time: item.testTime,
-          startLevel: item.startDifficulty,
-          endLevel: item.endDifficulty,
-        }));
-        setData(newData);
-        console.log(newData);
-      })
-      .catch((err) => {
-        console.log('에러');
-        console.log(err);
-      });
-  }, []);
+      },
+    );
+    console.log(response);
+    return response.data;
+  };
+
+  const { isLoading, error, data } = useQuery<TestType[]>(
+    'testTypePractice',
+    testTypePracticeAxios,
+  );
+
+  if (isLoading) return <div>로딩중...</div>;
+
+  if (error) return <div>에러가 발생했습니다</div>;
 
   return (
     <ScrollMenu
       LeftArrow={LeftArrowTest('16rem')}
       RightArrow={RightArrowTest('16rem')}
     >
-      {data.map((item, idx) => {
+      {data!.map((item, idx) => {
         return (
-          <Link href="/dashboard/ready" key={idx}>
-            <LevelTestCard
-              testTypename={item.testTypename}
-              problemCount={item.problemCount}
-              time={item.time}
-              startLevel={item.startLevel}
-              endLevel={item.endLevel}
-              testId={idx + 1}
-            />
-          </Link>
+          <LevelTestCard
+            testTypeId={item.testTypeId}
+            testTypename={item.testTypename}
+            testTime={item.testTime}
+            problemCount={item.problemCount}
+            startDifficulty={item.startDifficulty}
+            endDifficulty={item.endDifficulty}
+            key={idx}
+          />
         );
       })}
     </ScrollMenu>
@@ -204,6 +189,7 @@ export function LevelCardScroll() {
 
 /***
  * 알고리즘 카드 스크롤 컴포넌트
+ * 수정 씹쌉필요
  */
 export function AlgorithmCardScroll() {
   const data = [

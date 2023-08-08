@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image, { StaticImageData } from 'next/image';
 
+import SamsungLogo from '@/assets/logos/samsung_logo.png';
 import NaverLogo from '@/assets/logos/naver_logo.png';
 import KakaoLogo from '@/assets/logos/kakao_logo.png';
 import LineLogo from '@/assets/logos/line_logo.png';
@@ -15,42 +16,40 @@ import TossLogo from '@/assets/logos/toss_logo.png';
 import Gap from '@/utils/gap';
 
 interface CodingTestCardProps {
-  companyName: string;
+  testTypeId: number;
+  testTypename: string;
+  testTime: number;
   problemCount: number;
-  time: number;
-  startLevel: string;
-  endLevel: string;
-  testId: number;
+  startDifficulty: string;
+  endDifficulty: string;
 }
 
 const logo: { [k: string]: StaticImageData } = {
-  네이버: NaverLogo,
-  카카오: KakaoLogo,
-  라인: LineLogo,
-  쿠팡: CoupangLogo,
-  배달의민족: BaeminLogo,
-  당근마켓: CarrotLogo,
-  토스: TossLogo,
+  7: SamsungLogo,
+  8: NaverLogo,
+  9: KakaoLogo,
+  10: LineLogo,
+  11: CoupangLogo,
+  12: BaeminLogo,
 };
 
 export default function CodingTestCard({
-  companyName,
+  testTypeId,
+  testTypename,
+  testTime,
   problemCount,
-  time,
-  startLevel,
-  endLevel,
-  testId,
+  startDifficulty,
+  endDifficulty,
 }: CodingTestCardProps) {
-  const companyLogo = logo[companyName];
+  const companyLogo = logo[testTypeId];
 
   return (
     <>
-      {' '}
-      <Link href={`/dashboard/ready/${testId}`}>
+      <Link href={`/dashboard/ready/${testTypeId}`}>
         <div className="w-[23rem] my-[1rem] mr-[3rem]">
           <div className="flex flex-col justify-center items-center h-[15rem] p-[20px] shadow-md rounded-xl">
             {/* 코딩테스트 기업 로고 */}
-            <Image src={companyLogo} alt={companyName} width={250} />
+            <Image src={companyLogo} alt={testTypename} width={250} />
             <Gap hSize="3rem" />
 
             {/* 기업 코딩테스트 정보 */}
@@ -65,7 +64,7 @@ export default function CodingTestCard({
               {/* 시험 시간 */}
               <div className="flex flex-col items-center">
                 <h2 className="text-gray-400">시험 시간</h2>
-                <div className="text-[20px] font-bold">{time}분</div>
+                <div className="text-[20px] font-bold">{testTime}분</div>
               </div>
               <Gap wSize="1rem" />
 
@@ -73,7 +72,7 @@ export default function CodingTestCard({
               <div className="flex flex-col items-center">
                 <h2 className="text-gray-400">난이도</h2>
                 <div className="text-[20px] font-bold">
-                  {startLevel} ~ {endLevel}
+                  {startDifficulty} ~ {endDifficulty}
                 </div>
               </div>
             </div>

@@ -2,9 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { axiosInstance } from '@/api/axiosSetting';
+import { useQuery } from 'react-query';
 
 import Link from 'next/link';
 import Image, { StaticImageData } from 'next/image';
+import SamsungLogo from '@/assets/logos/samsung_logo.png';
 import NaverLogo from '@/assets/logos/naver_logo.png';
 import KakaoLogo from '@/assets/logos/kakao_logo.png';
 import LineLogo from '@/assets/logos/line_logo.png';
@@ -12,6 +14,11 @@ import CoupangLogo from '@/assets/logos/coupang_logo.png';
 import BaeminLogo from '@/assets/logos/baemin_logo.png';
 import CarrotLogo from '@/assets/logos/carrotmarket_logo.png';
 import TossLogo from '@/assets/logos/toss_logo.png';
+
+import Lottie from 'react-lottie-player';
+
+import CodingTestPractice from '@/assets/lottiefiles/codingTestPractice.json';
+
 import CodingTestInfo from '@/components/codingtest/testInfo';
 import Gap from '@/utils/gap';
 
@@ -39,55 +46,48 @@ function Header() {
   );
 }
 
+interface TestType {
+  testTypeId: number;
+  testTypename: string;
+  testTime: number;
+  problemCount: number;
+  startDifficulty: string;
+  endDifficulty: string;
+  averageCorrectAnswerRate: number;
+  numberOfTestTrial: number;
+}
+
+const logo: { [k: string]: StaticImageData } = {
+  7: SamsungLogo,
+  8: NaverLogo,
+  9: KakaoLogo,
+  10: LineLogo,
+  11: CoupangLogo,
+  12: BaeminLogo,
+};
+
 export default function CodingTestBeforePage({
   params,
 }: {
   params: { testId: string };
 }) {
-  const logo: { [k: string]: [StaticImageData, string] } = {
-    8: [NaverLogo, '네이버'],
-    7: [KakaoLogo, '카카오'],
-    9: [LineLogo, '라인'],
-    // 4: [CoupangLogo, '쿠팡'],
-    // 5: [BaeminLogo, '배달의 민족'],
-    // 6: [CarrotLogo, '당근마켓'],
-    // 7: [TossLogo, '토스'],
-  };
-
   const companyLogo = logo[params.testId];
 
-  const [data, setData] = useState<{
-    testTypename: string;
-    testTime: number;
-    problemCount: number;
-    startDifficulty: string;
-    endDifficulty: string;
-    averageCorrectAnswerRate: number;
-    numberOfTestTrial: number;
-  }>({
-    testTypename: '',
-    testTime: 0,
-    problemCount: 0,
-    startDifficulty: '',
-    endDifficulty: '',
-    averageCorrectAnswerRate: 0,
-    numberOfTestTrial: 0,
-  });
+  const testTypeAxios: () => Promise<TestType> = async () => {
+    const res = await axiosInstance.get(`/test-types/${params.testId}`, {
+      withCredentials: true,
+    });
+    return res.data;
+  };
 
-  useEffect(() => {
-    axiosInstance
-      .get(`/test-types/${params.testId}`, {
-        withCredentials: true,
-      })
-      .then((res) => {
-        console.log('성공');
-        setData(res.data);
-      })
-      .catch((err) => {
-        console.log('에러');
-        console.log(err);
-      });
-  }, []);
+  const { isLoading, error, data } = useQuery<TestType>(
+    'testType',
+    testTypeAxios,
+  );
+
+  if (isLoading) return <div>로딩중...</div>;
+
+  if (error) return <div>에러가 발생했습니다.</div>;
 
   return (
     <>
@@ -100,31 +100,36 @@ export default function CodingTestBeforePage({
           {/* 코딩테스트 회사 로고 */}
           {companyLogo ? (
             <Image
-              src={companyLogo[0]}
-              alt={companyLogo[1] + ' 로고'}
+              src={companyLogo}
+              alt={data?.testTypename + ' 로고'}
               width={350}
               className="mt-[2rem]"
             />
           ) : (
-            <></>
+            <Lottie
+              loop
+              animationData={CodingTestPractice}
+              play
+              className="w-[20rem]"
+            />
           )}
-          <Gap hSize="5rem" />
+          <Gap hSize="3rem" />
 
           {/* 코딩테스트 회사 이름 */}
           <div className="w-[80%]">
             <h1 className="text-[1.8rem] font-bold">
-              {data.testTypename} 코딩테스트
+              {data?.testTypename} 코딩테스트
             </h1>
           </div>
           <Gap hSize="1.5rem" />
 
           {/* 코딩테스트 정보*/}
           <CodingTestInfo
-            testTime={data.testTime}
-            problemCount={data.problemCount}
-            startDifficulty={data.startDifficulty}
-            endDifficulty={data.endDifficulty}
-            averageCorrectAnswerRate={data.averageCorrectAnswerRate}
+            testTime={data!.testTime}
+            problemCount={data!.problemCount}
+            startDifficulty={data!.startDifficulty}
+            endDifficulty={data!.endDifficulty}
+            averageCorrectAnswerRate={data!.averageCorrectAnswerRate}
           />
           <Gap hSize="2rem" />
 

@@ -18,36 +18,7 @@ export default function Main() {
   return (
     <main>
       <Header></Header>
-      <Gap hSize="3rem" />
-      {/* 최근 1주일간 응시한 코딩테스트 카드 스크롤 */}
-      {/* <div className="flex flex-col px-[3rem]">
-        <Text size="1.5rem" bold="bold">
-          최근에 푼 문제
-        </Text>
-        <Gap hSize="1rem" />
-        <div className="flex flex-row ">
-          <Link href="/dashboard/ready">
-            <CodingTestCard
-              companyName={`네이버`}
-              problemCount={4}
-              time={2}
-              startLevel="S3"
-              endLevel="G3"
-            />
-          </Link>
-          <Link href="/dashboard/ready">
-            <CodingTestCard
-              companyName={`당근마켓`}
-              problemCount={4}
-              time={2}
-              startLevel="S3"
-              endLevel="G3"
-            />
-          </Link>
-        </div>
-      </div>
-      <Gap hSize="3rem" /> */}
-
+      <Gap hSize="2rem" />
       {/* 기업별 코딩테스트 카드 스크롤 */}
       <div className="px-[3rem]">
         <Text size="2rem" bold="bold">
@@ -69,15 +40,14 @@ export default function Main() {
       <Gap hSize="3rem" />
 
       {/* 알고리즘 학습 문제 셋 */}
-      <div className="px-[3rem]">
+      {/* <div className="px-[3rem]">
         <Text size="2rem" bold="bold">
           알고리즘 분류별 공부하기
         </Text>
         <Gap hSize="1rem" />
         <AlgorithmCardScroll />
-      </div>
-      <Gap hSize="6rem" />
-
+      </div> */}
+      <Gap hSize="4rem" />
       <Footer />
     </main>
   );

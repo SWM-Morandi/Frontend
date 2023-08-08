@@ -6,25 +6,25 @@ import Gap from '@/utils/gap';
 import Text from '@/utils/text';
 
 interface CodingTestCardProps {
+  testTypeId: number;
   testTypename: string;
+  testTime: number;
   problemCount: number;
-  time: number;
-  startLevel: string;
-  endLevel: string;
-  testId: number;
+  startDifficulty: string;
+  endDifficulty: string;
 }
 
 export default function CodingTestCard({
+  testTypeId,
   testTypename,
+  testTime,
   problemCount,
-  time,
-  startLevel,
-  endLevel,
-  testId,
+  startDifficulty,
+  endDifficulty,
 }: CodingTestCardProps) {
   return (
     <>
-      <Link href={`/dashboard/ready/${testId}`}>
+      <Link href={`/dashboard/ready/${testTypeId}`}>
         <div className="w-[23rem] my-[1rem] mr-[3rem]">
           <div className="flex flex-col justify-center items-center h-[15rem] p-[20px] shadow-md rounded-xl">
             {/* 코딩테스트 기업 로고 */}
@@ -45,7 +45,7 @@ export default function CodingTestCard({
               {/* 시험 시간 */}
               <div className="flex flex-col items-center">
                 <h2 className="text-gray-400">시험 시간</h2>
-                <div className="text-[20px] font-bold">{time}분</div>
+                <div className="text-[20px] font-bold">{testTime}분</div>
               </div>
               <Gap wSize="1rem" />
 
@@ -53,7 +53,7 @@ export default function CodingTestCard({
               <div className="flex flex-col items-center">
                 <h2 className="text-gray-400">난이도</h2>
                 <div className="text-[20px] font-bold">
-                  {startLevel} ~ {endLevel}
+                  {startDifficulty} ~ {endDifficulty}
                 </div>
               </div>
             </div>

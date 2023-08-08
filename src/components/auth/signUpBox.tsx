@@ -11,10 +11,13 @@ import { useRouter } from 'next/navigation';
 
 export default function SignUpBox() {
   const router = useRouter();
-  const googleSignUp = () => {
-    axiosInstance.get('/oauths/google').then((res) => {
+  const googleSignUp = async () => {
+    try {
+      const res = await axiosInstance.get('/oauths/google');
       router.push(res.data);
-    });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

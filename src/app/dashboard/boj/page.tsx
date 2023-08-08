@@ -16,22 +16,19 @@ export default function Boj() {
   const [bojId, setBojId] = useState('');
   const router = useRouter();
 
-  const inputBojId = () => {
-    axiosInstance
-      .post(
+  const inputBojId = async () => {
+    try {
+      await axiosInstance.post(
         `/members/register-info`,
         { bojId: bojId },
         {
           withCredentials: true,
         },
-      )
-      .then((res) => {
-        console.log('성공' + res.data);
-        router.push('/dashboard');
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      );
+      router.push('/dashboard');
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
