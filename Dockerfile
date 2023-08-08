@@ -3,17 +3,17 @@ FROM node:18-alpine
 WORKDIR /app
 
 COPY package.json .
-COPY package-lock.json .
+COPY yarn.lock .
 
 RUN npm install
 
 COPY . .
 
-RUN npm run build
+RUN yarn build
 
 EXPOSE 3000
 
-CMD ["npm", "run", "start"]
+CMD ["yarn", "start"]
 
 
 # default.conf을 /etc/nginx/conf.d/ 경로에 있는 default.conf에 복사한다.
