@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Axios from 'axios';
+import { axiosInstance } from '@/api/axiosSetting';
 
 import Link from 'next/link';
 import Image, { StaticImageData } from 'next/image';
@@ -75,9 +75,10 @@ export default function CodingTestBeforePage({
   });
 
   useEffect(() => {
-    Axios.get(`http://localhost:8080/test-types/${params.testId}`, {
-      withCredentials: true,
-    })
+    axiosInstance
+      .get(`/test-types/${params.testId}`, {
+        withCredentials: true,
+      })
       .then((res) => {
         console.log('성공');
         setData(res.data);
