@@ -12,7 +12,7 @@ export default function TestResultBox({
   testResults: TestResult[];
   bojId: string;
 }) {
-  let totalSolved: number = 0;
+  let totalSolved = 0;
   return (
     <>
       <section className="container px-4">
