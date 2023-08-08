@@ -78,6 +78,7 @@ export default function IDE() {
         setTestProblems(responses);
         setIsLoading(false);
       },
+      staleTime: 987654321,
     },
   );
 
