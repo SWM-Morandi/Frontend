@@ -16,7 +16,8 @@ import Loading from '@/assets/lottiefiles/loading.json';
 
 interface TestDataType {
   testId: number;
-  bojProblems: number[];
+  bojProblemIds: number[];
+  remainingTime: number;
 }
 
 interface BojProblemInfoType {
@@ -35,6 +36,14 @@ export default function IDE() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [testProblems, setTestProblems] = useState<BojProblemInfoType[]>([]);
   const [problemId, setProblemId] = useState(1);
+  const [time, setTime] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime((prev) => prev - 1);
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   const testDataAxios: () => Promise<TestDataType> = async () => {
     const response = await axiosInstance.post<TestDataType>(
@@ -42,13 +51,14 @@ export default function IDE() {
       { testTypeId: testId },
       { withCredentials: true },
     );
+    setTime(response.data.remainingTime);
     return response.data;
   };
 
   const testProblemsAxios: (
     data: TestDataType,
   ) => Promise<BojProblemInfoType>[] = (data) =>
-    data.bojProblems.map(async (bojProblem: number, idx: number) => {
+    data.bojProblemIds.map(async (bojProblem: number, idx: number) => {
       const response = await Axios.get<BojProblemInfoType>(
         `https://t4wkqz0tz2.execute-api.ap-northeast-2.amazonaws.com/prod/problems/${bojProblem}`,
       );
@@ -74,14 +84,6 @@ export default function IDE() {
     },
   );
 
-  const [time, setTime] = useState(7200); // 남은 시간 (단위: 초)
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTime((prev) => prev - 1);
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
-
   return (
     <>
       <div className="bg-gray-900 text-white h-[100vh]">
@@ -96,6 +98,7 @@ export default function IDE() {
               setProblemId={setProblemId}
               problemInfo={testProblems}
               time={time}
+              exitInfo={{ testId: testData!.testId, testTypeId: testId! }}
             />
             <div className="flex flex-row px-[2rem]">
               <ProblemInfo
@@ -103,7 +106,7 @@ export default function IDE() {
                 problemInfo={testProblems[problemId - 1]}
               />
               <CustomEditor
-                problemBojId={testData?.bojProblems[problemId - 1]}
+                problemBojId={testData?.bojProblemIds[problemId - 1]}
               />
             </div>
           </div>

@@ -1,4 +1,18 @@
-export default function TestResultBox() {
+interface TestResult {
+  bojProblemId: number;
+  testProblemId: number;
+  executionTime: number;
+  isSolved: boolean;
+}
+
+export default function TestResultBox({
+  testResults,
+  bojId,
+}: {
+  testResults: TestResult[];
+  bojId: string;
+}) {
+  let totalSolved: number = 0;
   return (
     <>
       <section className="container px-4">
@@ -15,44 +29,48 @@ export default function TestResultBox() {
                       >
                         닉네임
                       </th>
-                      {['A', 'B', 'C', 'D', 'C'].map((item, index) => (
+                      {testResults.map((item, index) => (
                         <>
                           <th
                             scope="col"
-                            className="px-4 py-3.5 text-sm font-normal w-[10%]"
+                            className="px-4 py-3.5 text-sm font-normal"
                             key={index}
                           >
-                            {item}
+                            {item.testProblemId}. {item.bojProblemId}번
                           </th>
                         </>
                       ))}
 
                       <th
                         scope="col"
-                        className="px-4 py-3.5 text-sm font-normal w-[30%]"
+                        className="px-4 py-3.5 text-sm font-normal w-[20%]"
                       >
-                        맞은 문제 수 / 소요시간
+                        맞은 문제 수
                       </th>
                     </tr>
                   </thead>
                   <tbody>
                     {/*dark:divide-gray-700 dark:bg-gray-900*/}
-                    <tr>
-                      <td>yeobi</td>
-                      {Array(5)
-                        .fill(0)
-                        .map((item, index) => (
-                          <>
-                            <td key={index}>
-                              <div className="text-[#12AC79] text-[13px]">
-                                Accept
-                              </div>
-                              <div>0:03</div>
-                            </td>
-                          </>
-                        ))}
-
-                      <td>4 Solve / 184min</td>
+                    <tr className="text-[1.2rem] font-bold">
+                      <td>{bojId}</td>
+                      {testResults.map((item, index) => {
+                        if (item.isSolved) totalSolved++;
+                        return (
+                          <td key={index}>
+                            {item.isSolved ? (
+                              <div className="text-[#12AC79]">Accept</div>
+                            ) : (
+                              <div className="text-[#F04452]">Fail</div>
+                            )}
+                            {item.executionTime ? (
+                              <div>item.executionTime</div>
+                            ) : (
+                              <div></div>
+                            )}
+                          </td>
+                        );
+                      })}
+                      <td>{totalSolved} Solve</td>
                     </tr>
                   </tbody>
                 </table>

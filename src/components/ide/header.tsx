@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import Sidebar from '@/components/ide/sidebar';
+import { useRouter } from 'next/navigation';
 
 interface ProblemInfoType {
   problem_title: string;
@@ -18,12 +19,15 @@ export default function Header({
   setProblemId,
   problemInfo,
   time,
+  exitInfo,
 }: {
   problemId: any;
   setProblemId: any;
   problemInfo: ProblemInfoType[];
   time: number;
+  exitInfo: { testId: number; testTypeId: string };
 }) {
+  const router = useRouter();
   const [sideProblemsBar, setSideProblemsBar] = useState(false);
   const ocSideProblemsBar = () => setSideProblemsBar(!sideProblemsBar);
 
@@ -84,11 +88,19 @@ export default function Header({
             {hour}:{min}:{sec}
           </div>
         </div>
-        <Link href="/dashboard/done">
-          <div className="bg-[#F04452] px-[1rem] py-[0.5rem] rounded-xl">
-            종료하기
-          </div>
-        </Link>
+        <button
+          className="bg-[#F04452] px-[1rem] py-[0.5rem] rounded-xl"
+          onClick={() => {
+            if (confirm('테스트를 종료하시면 다시 시작할 수 없습니다.')) {
+              router.push(
+                `/dashboard/done?testId=${exitInfo.testId}&testTypeId=${exitInfo.testTypeId}`,
+              );
+            } else {
+            }
+          }}
+        >
+          종료하기
+        </button>
       </div>
     </>
   );
