@@ -20,7 +20,7 @@ export default function CustomEditor({
   problemBojId?: number;
 }) {
   const [userInput, setUserInput] = useState('');
-  const [userFontSize, setUserFontSize] = useState(14); // 추후에 폰트 사이즈 조절 기능 추가
+  const [userFontSize, setUserFontSize] = useState(16); // 추후에 폰트 사이즈 조절 기능 추가
   const [isLoading, setIsLoading] = useState(false);
   const [userCode, setUserCode] = useState(defaultValues.cpp);
   const [userLang, setUserLang] = useState('cpp');

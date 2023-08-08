@@ -14,17 +14,9 @@ import Lottie from 'react-lottie-player';
 
 import Loading from '@/assets/lottiefiles/loading.json';
 
-interface BojProblemType {
-  testProblemId: number;
-  problemId: number;
-  level: number;
-  levelToString: string;
-}
-
 interface TestDataType {
-  attemptProblemIds: number[];
-  bojProblems: BojProblemType[];
   testId: number;
+  bojProblems: number[];
 }
 
 interface BojProblemInfoType {
@@ -56,9 +48,9 @@ export default function IDE() {
   const testProblemsAxios: (
     data: TestDataType,
   ) => Promise<BojProblemInfoType>[] = (data) =>
-    data.bojProblems.map(async (bojProblem: BojProblemType, idx: number) => {
+    data.bojProblems.map(async (bojProblem: number, idx: number) => {
       const response = await Axios.get<BojProblemInfoType>(
-        `https://t4wkqz0tz2.execute-api.ap-northeast-2.amazonaws.com/prod/problems/${bojProblem.problemId}`,
+        `https://t4wkqz0tz2.execute-api.ap-northeast-2.amazonaws.com/prod/problems/${bojProblem}`,
       );
       console.log(response);
       return response.data;
@@ -111,7 +103,7 @@ export default function IDE() {
                 problemInfo={testProblems[problemId - 1]}
               />
               <CustomEditor
-                problemBojId={testData?.bojProblems[problemId - 1].problemId}
+                problemBojId={testData?.bojProblems[problemId - 1]}
               />
             </div>
           </div>
