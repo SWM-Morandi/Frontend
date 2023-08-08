@@ -10,6 +10,10 @@ import CustomEditor from '@/components/ide/customEditor';
 
 import { useQuery } from 'react-query';
 
+import Lottie from 'react-lottie-player';
+
+import Loading from '@/assets/lottiefiles/loading.json';
+
 interface BojProblemType {
   testProblemId: number;
   problemId: number;
@@ -89,7 +93,9 @@ export default function IDE() {
     <>
       <div className="bg-gray-900 text-white h-[100vh]">
         {isLoading ? (
-          <div>로딩중</div>
+          <div className="flex w-screen h-screen items-center justify-center">
+            <Lottie loop animationData={Loading} play className="w-[25rem]" />
+          </div>
         ) : (
           <div>
             <Header
