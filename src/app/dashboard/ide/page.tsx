@@ -110,7 +110,9 @@ export default function IDE() {
                 problemId={problemId}
                 problemInfo={testProblems[problemId - 1]}
               />
-              <CustomEditor />
+              <CustomEditor
+                problemBojId={testData?.bojProblems[problemId - 1].problemId}
+              />
             </div>
           </div>
         )}

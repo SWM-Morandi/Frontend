@@ -3,6 +3,7 @@
 import { axiosInstance } from '@/api/axiosSetting';
 import Editor, { loader } from '@monaco-editor/react';
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 const languages = [
   { value: 'cpp', label: 'C++' },
@@ -10,7 +11,11 @@ const languages = [
   { value: 'java', label: 'Java' },
 ];
 
-export default function CustomEditor() {
+export default function CustomEditor({
+  problemBojId,
+}: {
+  problemBojId?: number;
+}) {
   const [userInput, setUserInput] = useState('');
   const [userFontSize, setUserFontSize] = useState(14); // 추후에 폰트 사이즈 조절 기능 추가
   const [loading, setLoading] = useState(false);
@@ -130,9 +135,14 @@ export default function CustomEditor() {
           )}
         </div>
         <div className="flex flex-row justify-end items-center">
-          <button className="h-[2rem] w-[6rem] bg-[#12AC79] rounded-xl">
-            Submit
-          </button>
+          <Link
+            href={`https://www.acmicpc.net/submit/${problemBojId}`}
+            target="_blank"
+          >
+            <button className="h-[2rem] w-[6rem] bg-[#12AC79] rounded-xl">
+              Submit
+            </button>
+          </Link>
           <div className="w-[1rem]" />
           <button
             onClick={compile}
