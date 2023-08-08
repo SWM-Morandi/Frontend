@@ -5,6 +5,9 @@ import Editor, { loader } from '@monaco-editor/react';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
+import Lottie from 'react-lottie-player';
+import Loading from '@/assets/lottiefiles/loading.json';
+
 const languages = [
   { value: 'cpp', label: 'C++' },
   { value: 'python', label: 'Python' },
@@ -18,19 +21,21 @@ export default function CustomEditor({
 }) {
   const [userInput, setUserInput] = useState('');
   const [userFontSize, setUserFontSize] = useState(14); // 추후에 폰트 사이즈 조절 기능 추가
-  const [loading, setLoading] = useState(false);
-  const [userCode, setUserCode] = useState(defaultValue);
+  const [isLoading, setIsLoading] = useState(false);
+  const [userCode, setUserCode] = useState(defaultValues.cpp);
   const [userLang, setUserLang] = useState('cpp');
   const [axiosLang, setAxiosLang] = useState('Cpp'); // axios 요청 시 사용할 언어
-  const [userOutput, setUserOutput] = useState('');
+  const [userOutput, setUserOutput] = useState<string>('');
   const [flag, setFlag] = useState(false);
+  const [defaultValue, setDefualtValue] = useState(defaultValues.cpp);
 
   const options = {
     fontSize: userFontSize,
   };
 
   const compile = () => {
-    setLoading(true);
+    setFlag(true);
+    setIsLoading(true);
     if (userCode === '') {
       return;
     }
@@ -47,9 +52,8 @@ export default function CustomEditor({
       )
       .then((res) => {
         console.log(res.data.output);
-        setFlag(true);
         setUserOutput(res.data.output);
-        setLoading(false);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -76,12 +80,18 @@ export default function CustomEditor({
             setUserLang(e.target.value);
             if (e.target.value === 'cpp') {
               setAxiosLang('Cpp');
+              setDefualtValue(defaultValues.cpp);
+              setUserCode(defaultValues.cpp);
             }
             if (e.target.value === 'python') {
               setAxiosLang('Python');
+              setDefualtValue(defaultValues.python);
+              setUserCode(defaultValues.python);
             }
             if (e.target.value === 'java') {
               setAxiosLang('Java');
+              setDefualtValue(defaultValues.java);
+              setUserCode(defaultValues.java);
             }
           }}
         >
@@ -98,7 +108,8 @@ export default function CustomEditor({
             width="100%"
             theme="myTheme"
             language={userLang}
-            defaultValue={defaultValue}
+            // defaultValue={defaultValue}
+            value={defaultValue}
             onChange={(value) => {
               if (typeof value === 'string') {
                 setUserCode(value);
@@ -107,30 +118,49 @@ export default function CustomEditor({
           />
         </div>
 
-        <div className="flex flex-row justify-between w-[8rem] ml-[0.5rem] mt-[1rem] mb-[0.5rem]">
+        <div className="flex flex-row justify-between w-[6.5rem] ml-[0.5rem] mt-[1rem] mb-[0.5rem]">
           <button
             onClick={() => {
               setFlag(false);
             }}
+            style={{
+              color: flag ? '#FFFFFF' : '#12AC79',
+            }}
           >
-            Testcase
+            Input
           </button>
           <button
             onClick={() => {
               setFlag(true);
             }}
+            style={{
+              color: flag ? '#12AC79' : '#FFFFFF',
+            }}
           >
-            Result
+            Output
           </button>
         </div>
-        <div className="h-[24vh] w-[100%] mb-[1rem] bg-[#2E3642] p-[1rem] rounded-xl">
+        <div className="h-[24vh] w-full mb-[1rem] bg-[#2E3642] p-[1rem] rounded-xl overflow-y-auto overflow-x-hidden">
           {flag ? (
-            <div>{userOutput}</div>
+            isLoading ? (
+              <div className="flex justify-center items-center w-[100%] h-[100%] ">
+                <Lottie
+                  loop
+                  animationData={Loading}
+                  play
+                  className="w-[15rem]"
+                />
+              </div>
+            ) : (
+              <div className="whitespace-pre-wrap w-full break-all ">
+                {userOutput}
+              </div>
+            )
           ) : (
             <textarea
               id="code-inp"
               onChange={(e) => setUserInput(e.target.value)}
-              className="bg-[#2E3642] w-[100%] h-[100%] text-white focus:outline-0"
+              className="bg-[#2E3642] w-full h-[97%] text-white focus:outline-0"
             ></textarea>
           )}
         </div>
@@ -156,15 +186,34 @@ export default function CustomEditor({
   );
 }
 
-const defaultValue = `#include <iostream>
+const defaultValues = {
+  cpp: `#include <bits/stdc++.h>
 using namespace std;
 
 int main() {
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
+
   cout << "Hello World!";
   
   return 0;
 }
-`;
+`,
+  python: `print("Hello World!")
+`,
+  java: `import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Main
+{
+	public static void main (String[] args)
+	{
+		System.out.println("Hello World!");
+	}
+}`,
+};
 
 const theme: any = {
   base: 'vs-dark',
