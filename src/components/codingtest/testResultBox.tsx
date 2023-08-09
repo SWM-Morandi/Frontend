@@ -63,7 +63,7 @@ export default function TestResultBox({
                               <div className="text-[#F04452]">Fail</div>
                             )}
                             {item.executionTime ? (
-                              <div>item.executionTime</div>
+                              <div>{item.executionTime}</div>
                             ) : (
                               <div></div>
                             )}
