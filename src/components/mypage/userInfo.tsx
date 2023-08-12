@@ -1,3 +1,5 @@
+'use client';
+
 function ProfileIcon() {
   return (
     <svg
@@ -184,11 +186,41 @@ function FriendIcon() {
   );
 }
 
+import { axiosInstance } from '@/api/axiosSetting';
 import Gap from '@/utils/gap';
 import Text from '@/utils/text';
+import { useQuery } from 'react-query';
+
+interface UserInfoDataType {
+  bojId: string;
+  introduceInfo: string;
+}
 
 export default function UserInfo() {
   // 사용자 정보 받아오는 코드 작성하기
+  const userInfoDataAxios: () => Promise<UserInfoDataType> = async () => {
+    const response = await axiosInstance.get<UserInfoDataType>(
+      `/members/info`,
+      { withCredentials: true },
+    );
+    return response.data;
+  };
+  const { isLoading, error, data } = useQuery<UserInfoDataType>(
+    'userInfoData',
+    userInfoDataAxios,
+  );
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-row justify-center items-center h-[15rem] w-[70rem] rounded-xl shadow-md">
+        로딩중...
+      </div>
+    );
+  }
+
+  if (error) {
+    return <div>에러 발생</div>;
+  }
 
   return (
     <>
@@ -199,11 +231,11 @@ export default function UserInfo() {
         <div className="flex flex-col justify-center w-[30rem]">
           {/* 사용자 닉네임 */}
           <Text size="2rem" bold="bold">
-            yeobi01
+            {data?.bojId}
           </Text>
 
           {/* 사용자 한줄 소개/ */}
-          <div>코딩테스트 준비하는 사람 모여라</div>
+          <div>{data?.introduceInfo}</div>
           <Gap hSize="2rem" />
 
           <div className="flex flex-row">

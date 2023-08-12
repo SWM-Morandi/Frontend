@@ -11,6 +11,13 @@ import {
 } from 'chart.js';
 import { Radar } from 'react-chartjs-2';
 import Gap from '@/utils/gap';
+import { axiosInstance } from '@/api/axiosSetting';
+import { useQuery } from 'react-query';
+import { useState } from 'react';
+
+import Lottie from 'react-lottie-player';
+
+import Loading from '@/assets/lottiefiles/loading.json';
 
 ChartJS.register(
   RadialLinearScale,
@@ -21,24 +28,70 @@ ChartJS.register(
   Legend,
 );
 
-export default function RadarChart() {
-  const datas = {
-    algorithms: [
-      '구현',
-      '그래프',
-      '그리디',
-      '문자열',
-      '이분 탐색',
-      '자료 구조',
-      '정렬',
-      '최단 경로',
-      'DFS BFS',
-      'DP',
-    ],
-    persents: [86, 53, 72, 29, 39, 74, 86, 53, 72, 55],
-  };
+const options = {
+  plugins: { legend: { display: false } },
+  maintainAspectRatio: false,
+  scales: {
+    r: {
+      angleLines: {
+        display: false,
+      },
+      suggestedMin: 0,
+      suggestedMax: 100,
+    },
+  },
+};
 
-  const data = {
+interface RadarChartDataType {
+  algorithmName: string;
+  solvedRate: number;
+}
+
+interface RadarChartProps {
+  algorithms: string[];
+  persents: number[];
+}
+
+export default function RadarChart() {
+  const [datas, setDatas] = useState<RadarChartProps>({
+    algorithms: [],
+    persents: [],
+  });
+
+  const radarChartDataAxios: () => Promise<RadarChartDataType[]> = async () => {
+    const response = await axiosInstance.get<RadarChartDataType[]>(
+      `/members/record-graph`,
+      { withCredentials: true },
+    );
+    return response.data;
+  };
+  const { isLoading, error, data } = useQuery<RadarChartDataType[]>(
+    'radarChartData',
+    radarChartDataAxios,
+    {
+      onSuccess: (items) => {
+        items.map((item) => {
+          datas.algorithms.push(item.algorithmName);
+          datas.persents.push(item.solvedRate);
+        });
+      },
+      staleTime: 987654321,
+    },
+  );
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-row items-center justify-center w-[70rem] h-[25rem] rounded-xl shadow-md">
+        <div>로딩중 ...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return <div>Error...</div>;
+  }
+
+  const inputData = {
     labels: datas.algorithms,
     datasets: [
       {
@@ -52,70 +105,54 @@ export default function RadarChart() {
     ],
   };
 
-  const options = {
-    plugins: { legend: { display: false } },
-    maintainAspectRatio: false,
-    scales: {
-      r: {
-        angleLines: {
-          display: false,
-        },
-        suggestedMin: 0,
-        suggestedMax: 100,
-      },
-    },
-  };
-
   return (
-    <>
-      <div className="flex flex-row items-center justify-center w-[70rem] rounded-xl shadow-md">
-        {/* 레이더 차트 */}
-        <div className="h-[25rem] w-[25rem]">
-          <Radar data={data} options={options} />
+    <div className="flex flex-row items-center justify-center w-[70rem] rounded-xl shadow-md">
+      {/* 레이더 차트 */}
+      <div className="h-[25rem] w-[25rem]">
+        <Radar data={inputData} options={options} />
+      </div>
+      <Gap wSize="5rem" />
+
+      {/* 레이더 차트 앞쪽 5개 표로 변환  */}
+      <div className="flex flex-row rounded-xl bg-gray-100 p-[2rem]">
+        <div className="flex flex-col justify-center items-center">
+          {datas.algorithms.map(
+            (item, idx) =>
+              idx < 5 && (
+                <>
+                  <div
+                    className="flex flex-row justify-between w-[15rem] text-[1.4rem]"
+                    key={idx}
+                  >
+                    <div className="text-gray-500">{item}</div>
+                    <div>{datas.persents[idx]}%</div>
+                  </div>
+                  <Gap hSize="1rem" />
+                </>
+              ),
+          )}
         </div>
-        <Gap wSize="5rem" />
+        <Gap wSize="3.5rem" />
 
-        {/* 레이더 차트 앞쪽 5개 표로 변환  */}
-        <div className="flex flex-row rounded-xl bg-gray-100 p-[2rem]">
-          <div className="flex flex-col justify-center items-center">
-            {datas.algorithms.map(
-              (item, idx) =>
-                idx < 5 && (
-                  <>
-                    <div
-                      className="flex flex-row justify-between w-[15rem] text-[1.4rem]"
-                      key={idx}
-                    >
-                      <div className="text-gray-500">{item}</div>
-                      <div>{datas.persents[idx]}%</div>
-                    </div>
-                    <Gap hSize="1rem" />
-                  </>
-                ),
-            )}
-          </div>
-          <Gap wSize="3.5rem" />
-
-          {/* 레이더 차트 뒷쪽 5개 표로 변환  */}
-          <div className="flex flex-col justify-center items-center">
-            {datas.algorithms.map(
-              (item, idx) =>
-                idx >= 5 && (
-                  <>
-                    <div
-                      className="flex flex-row justify-between w-[15rem] text-[1.4rem]"
-                      key={idx}
-                    >
-                      <div className="text-gray-500">{item}</div>
-                      <div>{datas.persents[idx]}%</div>
-                    </div>
-                    <Gap hSize="1rem" />
-                  </>
-                ),
-            )}
-          </div>
+        {/* 레이더 차트 뒷쪽 5개 표로 변환  */}
+        <div className="flex flex-col justify-center items-center">
+          {datas.algorithms.map(
+            (item, idx) =>
+              idx >= 5 && (
+                <>
+                  <div
+                    className="flex flex-row justify-between w-[15rem] text-[1.4rem]"
+                    key={idx}
+                  >
+                    <div className="text-gray-500">{item}</div>
+                    <div>{datas.persents[idx]}%</div>
+                  </div>
+                  <Gap hSize="1rem" />
+                </>
+              ),
+          )}
         </div>
       </div>
-    </>
+    </div>
   );
 }
