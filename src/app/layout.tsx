@@ -17,6 +17,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <QueryCientLayout>{children}</QueryCientLayout>
+        <script
+          async
+          src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"
+        ></script>
       </body>
     </html>
   );
