@@ -1,8 +1,8 @@
 export default function LandingIcon() {
   return (
     <svg
-      width="509"
-      height="418"
+      width="814.4"
+      height="668.8"
       viewBox="0 0 509 418"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

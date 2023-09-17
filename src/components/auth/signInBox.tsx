@@ -25,7 +25,7 @@ export default function SingInBox() {
       {/* 구글 로그인 버튼 */}
       <div
         onClick={googleSignIn}
-        className="flex flex-row justify-center items-center h-[4rem] w-[27rem] bg-[#F7F7FA] rounded-2xl text-black text-[1.2rem]"
+        className="flex flex-row justify-center items-center h-[4rem] w-[27rem] bg-[#F7F7FA] rounded-2xl text-black text-[1.2rem] cursor-pointer"
       >
         <GoogleIcon />
         <Gap wSize="0.5rem" />
@@ -37,7 +37,7 @@ export default function SingInBox() {
       {/* 네이버 로그인 버튼 */}
       <div
         onClick={googleSignIn}
-        className="flex flex-row justify-center items-center h-[4rem] w-[27rem] bg-[#03C75A] rounded-2xl text-white text-[1.2rem]"
+        className="flex flex-row justify-center items-center h-[4rem] w-[27rem] bg-[#03C75A] rounded-2xl text-white text-[1.2rem] cursor-pointer"
       >
         <NaverIcon />
         <Gap wSize="0.5rem" />
@@ -49,7 +49,7 @@ export default function SingInBox() {
       {/* 깃허브 로그인 버튼 */}
       <div
         onClick={googleSignIn}
-        className="flex flex-row justify-center items-center h-[4rem] w-[27rem] bg-gray-900 rounded-2xl text-white text-[1.2rem]"
+        className="flex flex-row justify-center items-center h-[4rem] w-[27rem] bg-gray-900 rounded-2xl text-white text-[1.2rem] cursor-pointer"
       >
         <GithubIcon />
         <Gap wSize="0.5rem" />
