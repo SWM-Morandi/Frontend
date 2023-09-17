@@ -10,7 +10,7 @@ export async function middleware(request: NextRequest) {
     }
 
     let flag = false;
-    await fetch(new URL('https://api.morandi.co.kr:8080/members/check'), {
+    await fetch(new URL('https://api.morandi.co.kr/members/check'), {
       method: 'GET',
       headers: new Headers(request.headers),
     })
