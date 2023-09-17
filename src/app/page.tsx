@@ -13,7 +13,7 @@ export default function Page() {
     <main className="relative overflow-hidden bg-black">
       <Header />
 
-      <div className="flex flex-col justify-center items-center text-white py-[4rem]">
+      <div className="relative z-20 flex flex-col justify-center items-center text-white py-[4rem]">
         <h1 className="text-[4.5rem] font-black leading-tighter tracking-tighter">
           IT 기업 코딩테스트 합격을 위한
         </h1>
@@ -39,21 +39,23 @@ export default function Page() {
             더 알아보기
           </div>
         </div>
+
         <LandingIcon />
       </div>
+
       <Footer />
-      {/* <Image
+      <Image
         src={BackgroundYellowCircle}
         alt="사진"
         width="1000"
-        className="absolute -top-[15rem] right-0 animate-spin-very-slow"
+        className="absolute top-[10rem] right-0 animate-spin-very-slow"
       />
       <Image
         src={BackgroundRedCircle}
         alt="사진"
         width="750"
         className="absolute top-[10rem] left-[7rem] animate-spin-slow"
-      /> */}
+      />
     </main>
   );
 }

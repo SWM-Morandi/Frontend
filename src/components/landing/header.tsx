@@ -3,8 +3,8 @@ import Link from 'next/link';
 export default function Header() {
   return (
     <>
-      <header className="relative text-white body-font z-20">
-        <div className="mx-[18rem] flex flex-wrap p-5 flex-col md:flex-row items-center">
+      <header className="relative flex justify-center text-white body-font z-20">
+        <div className="w-[65%] flex flex-wrap p-5 flex-col md:flex-row items-center">
           <Link
             href="/"
             className="flex title-font font-medium items-center mb-4 md:mb-0"
