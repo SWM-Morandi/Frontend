@@ -25,7 +25,7 @@ export async function middleware(request: NextRequest) {
       });
 
     if (!flag) {
-      return NextResponse.rewrite(new URL('/dashboard/boj', request.url));
+      return NextResponse.redirect(new URL('/dashboard/boj', request.url));
     }
   }
 
