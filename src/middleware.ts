@@ -17,7 +17,6 @@ export async function middleware(request: NextRequest) {
       .then((res) => {
         if (res.status === 200) {
           flag = true;
-          console.log('success');
         }
       })
       .catch((err) => {
@@ -25,7 +24,7 @@ export async function middleware(request: NextRequest) {
       });
 
     if (!flag) {
-      return NextResponse.redirect(new URL('/dashboard/boj', request.url));
+      return NextResponse.rewrite(new URL('/dashboard/boj', request.url));
     }
   }
 
