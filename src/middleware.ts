@@ -10,11 +10,12 @@ export async function middleware(request: NextRequest) {
     }
 
     let flag = false;
-    await fetch(new URL('https://api.morandi.co.kr/members/check'), {
+    await fetch('http://10.0.102.86:8080/members/check', {
       method: 'GET',
       headers: new Headers(request.headers),
     })
       .then((res) => {
+        console.log(res);
         if (res.status === 200) {
           flag = true;
         }
