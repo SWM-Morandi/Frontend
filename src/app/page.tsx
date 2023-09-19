@@ -8,6 +8,8 @@ import BackgroundYellowCircle from '@/assets/landing/backgroundYellowCircle.png'
 
 import Gap from '@/utils/gap';
 
+import Scroll from '@/components/landing/scroll';
+
 export default function Page() {
   return (
     <main className="relative overflow-hidden bg-black">
@@ -42,7 +44,19 @@ export default function Page() {
 
         <LandingIcon />
       </div>
-
+      <div className="flex flex-col justify-center items-center py-[6rem] bg-gray-100">
+        <div className="text-[1.7rem] font-semibold">2023.07.01 기준</div>
+        <div className="text-[3.5rem] text-gray-900 font-black">
+          모의 코딩테스트 기업
+        </div>
+        <div className="text-[4.6rem] text-[#F11C76] font-black">6 개</div>
+        <Gap hSize="1rem" />
+        <div className="text-[1.5rem] text-gray-600 font-semibold">
+          직접 '모의 코딩테스트'를 경험해보세요.
+        </div>
+        <Gap hSize="5rem" />
+        <Scroll />
+      </div>
       <Footer />
       <Image
         src={BackgroundYellowCircle}

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@monaco-editor/react": "^4.5.1",
+    "@motionone/utils": "^10.15.1",
     "@types/node": "20.3.2",
     "@types/react": "18.2.14",
     "@types/react-calendar-heatmap": "^1.6.3",
@@ -21,6 +22,7 @@
     "cal-heatmap": "^4.2.3",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.7",
+    "framer-motion": "^10.16.4",
     "next": "13.4.7",
     "next-auth": "^4.22.3",
     "postcss": "8.4.24",
