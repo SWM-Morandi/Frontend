@@ -1,6 +1,5 @@
 'use client';
 
-import './styles.css';
 import { useRef } from 'react';
 import {
   motion,
