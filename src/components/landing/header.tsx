@@ -4,10 +4,10 @@ export default function Header() {
   return (
     <>
       <header className="relative flex justify-center text-white body-font z-20">
-        <div className="w-[65%] flex flex-wrap p-5 flex-col md:flex-row items-center">
+        <div className="w-[100%] md:w-[65%] flex flex-wrap p-5 flex-row items-center justify-between">
           <Link
             href="/"
-            className="flex title-font font-medium items-center mb-4 md:mb-0"
+            className="flex title-font font-medium justify-center items-center"
           >
             <span className="ml-3 text-[2rem] font-black">모랜디</span>
           </Link>

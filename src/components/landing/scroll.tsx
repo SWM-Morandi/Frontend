@@ -88,23 +88,47 @@ function ParallaxText({ children, baseVelocity = 100 }: ParallaxProps) {
 
 export default function App() {
   return (
-    <section className="w-9/12 overflow-hidden">
+    <section className="w-9/12 overflow-hidden mt-[3rem] md:mt-[5rem]">
       <ParallaxText baseVelocity={-2}>
-        <div className="flex flex-row w-[1210px]">
-          <Image src={NaverIcon} width={370} alt="네이버 아이콘" />
+        <div className="flex flex-row w-[700px] md:w-[1210px]">
+          <Image
+            src={NaverIcon}
+            className="w-[200px] md:w-[370px]"
+            alt="네이버 아이콘"
+          />
           <div className="w-[50px]" />
-          <Image src={BaeminIcon} width={370} alt="배민 아이콘" />
+          <Image
+            src={BaeminIcon}
+            className="w-[200px] md:w-[370px]"
+            alt="배민 아이콘"
+          />
           <div className="w-[50px]" />
-          <Image src={CoupangIcon} width={370} alt="쿠팡 아이콘" />
+          <Image
+            src={CoupangIcon}
+            className="w-[200px] md:w-[370px]"
+            alt="쿠팡 아이콘"
+          />
         </div>
       </ParallaxText>
       <ParallaxText baseVelocity={2}>
-        <div className="flex flex-row w-[1145px]">
-          <Image src={SamsungIcon} width={370} alt="삼성 아이콘" />
+        <div className="flex flex-row w-[635px] md:w-[1145px]">
+          <Image
+            src={SamsungIcon}
+            className="w-[200px] md:w-[370px]"
+            alt="삼성 아이콘"
+          />
           <div className="w-[25px]" />
-          <Image src={KakaoIcon} width={370} alt="카카오 아이콘" />
+          <Image
+            src={KakaoIcon}
+            className="w-[200px] md:w-[370px]"
+            alt="카카오 아이콘"
+          />
           <div className="w-[10px]" />
-          <Image src={LineIcon} width={370} alt="라인 아이콘" />
+          <Image
+            src={LineIcon}
+            className="w-[200px] md:w-[370px]"
+            alt="라인 아이콘"
+          />
         </div>
       </ParallaxText>
     </section>
