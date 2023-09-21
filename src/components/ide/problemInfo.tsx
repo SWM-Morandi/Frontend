@@ -38,7 +38,6 @@ export default function ProblemInfo({
         isCopied[index] = false;
         setIsCopied([...isCopied]);
       }, 1000);
-      alert(text);
     } catch (error) {
       alert('클립보드 복사에 실패하였습니다.');
     }
