@@ -20,7 +20,7 @@ export default function Page() {
         <h1 className="text-[1.8rem] md:text-[4.5rem] font-black leading-tighter tracking-tighter">
           IT 기업 코딩테스트 합격을 위한
         </h1>
-        <span className="text-[3.5rem] mb:text-[4.5rem] font-black bg-clip-text text-transparent bg-gradient-to-r from-[#FFD459] to-[#FF5F84] mb-[1rem] ">
+        <span className="text-[3.5rem] md:text-[5rem] font-black bg-clip-text text-transparent bg-gradient-to-r from-[#FFD459] to-[#FF5F84] mb-[1rem] md:leading-[0.9]">
           최고의 솔루션
         </span>
         <div className="flex flex-col items-center text-[1rem] md:text-[1.2rem] text-gray-300 mb-[2rem]">
