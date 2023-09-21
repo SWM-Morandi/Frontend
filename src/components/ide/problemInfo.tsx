@@ -1,5 +1,11 @@
 'use client';
 
+import { useState } from 'react';
+
+import Gap from '@/utils/gap';
+import CopyIcon from '@/assets/icons/copyIcon';
+import CheckIcon from '@/assets/icons/checkIcon';
+
 interface ProblemInfoType {
   problem_title: string;
   problem_description: string;
@@ -20,6 +26,33 @@ export default function ProblemInfo({
     problemInfo.input_sample.map((input, idx) => {
       return { input: input, output: problemInfo.output_sample[idx] };
     });
+
+  const [isCopied, setIsCopied] = useState(Array(samples.length).fill(false));
+
+  const handleCopyClipBoard = (index: number, text: string) => {
+    try {
+      navigator.clipboard.writeText(text);
+      isCopied[index] = true;
+      setIsCopied([...isCopied]);
+      setTimeout(() => {
+        isCopied[index] = false;
+        setIsCopied([...isCopied]);
+      }, 1000);
+      alert(text);
+    } catch (error) {
+      alert('클립보드 복사에 실패하였습니다.');
+    }
+  };
+
+  async function f() {
+    const promise = new Promise((resolve, reject) => {
+      setTimeout(() => resolve('완료!'), 1000);
+    });
+
+    const result = await promise; // 프라미스가 이행될 때까지 기다림 (*)
+
+    alert(result); // "완료!"
+  }
 
   return (
     <>
@@ -73,7 +106,17 @@ export default function ProblemInfo({
                   key={idx + 300}
                 >
                   <div className="w-[48%] h-[100%]">
-                    <div className="mb-[1rem]">예제 입력 {idx + 1}</div>
+                    <div className="flex flex-row">
+                      <div className="mb-[1rem]">예제 입력 {idx + 1}</div>
+                      <Gap wSize="0.7rem" />
+                      {isCopied[idx] ? (
+                        <CheckIcon />
+                      ) : (
+                        <CopyIcon
+                          onClick={() => handleCopyClipBoard(idx, sample.input)}
+                        />
+                      )}
+                    </div>
                     <div className="bg-gray-900 w-[100%] p-[1rem] mb-[1rem] rounded-xl">
                       {sample.input.split('\n').map((line, idx) => (
                         <div className="mb-[0.2rem]" key={idx + 400}>
@@ -83,7 +126,9 @@ export default function ProblemInfo({
                     </div>
                   </div>
                   <div className="w-[48%] h-[100%]">
-                    <div className="mb-[1rem]">예제 출력 {idx + 1}</div>
+                    <div className="mb-[1rem]" onClick={f}>
+                      예제 출력 {idx + 1}
+                    </div>
                     <div className="bg-gray-900 w-[100%] p-[1rem] mb-[1rem] rounded-xl">
                       {sample.output.split('\n').map((line, idx) => (
                         <div className="mb-[0.2rem]" key={idx + 500}>
