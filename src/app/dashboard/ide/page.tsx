@@ -36,14 +36,26 @@ export default function IDE() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [testProblems, setTestProblems] = useState<BojProblemInfoType[]>([]);
   const [problemId, setProblemId] = useState(1);
-  const [time, setTime] = useState(0);
+  const [time, setTime] = useState(-1);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setTime((prev) => prev - 1);
     }, 1000);
-    return () => clearInterval(timer);
-  }, []);
+
+    const clearTimer = () => {
+      clearInterval(timer);
+    };
+
+    if (time === 0) {
+      clearTimer();
+      alert(
+        '테스트 시간이 종료되었습니다. 종료하고 결과를 확인해주세요.\n시간 상관없이 더 풀고 싶으시다면, 더 푸셔도 괜찮습니다!',
+      );
+    }
+
+    return clearTimer;
+  }, [time]);
 
   const testDataAxios: () => Promise<TestDataType> = async () => {
     const response = await axiosInstance.post<TestDataType>(
