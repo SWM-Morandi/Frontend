@@ -39,7 +39,7 @@ export default function CodintTestInfo({
       {/* 코딩테스트 출제 유형 정보 */}
       <div className="flex flex-row justify-between w-[80%]">
         <div className="text-[#8B95A1]">문제 출제 유형</div>
-        <div>문제 출제 유형: 그리디, 다이나믹 프로그래밍, DFS와 BFS</div>
+        <div>그리디, 다이나믹 프로그래밍, DFS와 BFS</div>
       </div>
       <Gap hSize="0.4rem" />
 
