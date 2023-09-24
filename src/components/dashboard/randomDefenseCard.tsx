@@ -38,17 +38,17 @@ export default function RandomDefenseCard({
     <>
       <Link href={`/dashboard/ready/${testTypeId}`}>
         <div className="w-[23rem] my-[1rem] mr-[3rem]">
-          <div className="flex flex-col justify-center items-center h-[15rem] p-[20px] shadow-md rounded-xl">
-            <div className="w-[20rem] font-bold">{testTypename}</div>
+          <div className="flex flex-col justify-center items-center p-[20px] shadow-md rounded-xl">
+            <div className="text-[1.7rem] w-[19rem] font-bold">
+              {testTypename}
+            </div>
+            <Gap hSize="1rem" />
 
             {/* 코딩테스트 기업 로고 */}
-            <Lottie
-              loop
-              animationData={logo[testTypeId]}
-              play
-              className="w-[20rem]"
-            />
-            <Gap hSize="3rem" />
+            <div className="flex justify-center items-center h-[10rem]">
+              <Lottie loop animationData={logo[testTypeId]} play />
+            </div>
+            <Gap hSize="2rem" />
 
             {/* 기업 코딩테스트 정보 */}
             <div className="flex flex-row w-[100%] py-[1rem] px-[2rem] justify-between bg-gray-200 rounded-xl">

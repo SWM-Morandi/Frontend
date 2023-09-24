@@ -23,9 +23,8 @@ export default function Main() {
       {/* 기업별 코딩테스트 카드 스크롤 */}
       <div className="px-[3rem]">
         <Text size="2rem" bold="bold">
-          랜덤 디펜스
+          백준 랜덤 디펜스
         </Text>
-        <Gap hSize="1rem" />
         <RandomDefenseScroll />
       </div>
       <Gap hSize="3rem" />

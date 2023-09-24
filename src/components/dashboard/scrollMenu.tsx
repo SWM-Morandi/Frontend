@@ -211,8 +211,8 @@ export function RandomDefenseScroll() {
 
   return (
     <ScrollMenu
-      LeftArrow={LeftArrowTest('16rem')}
-      RightArrow={RightArrowTest('16rem')}
+      LeftArrow={LeftArrowTest('25.5rem')}
+      RightArrow={RightArrowTest('25.5rem')}
     >
       {data!.map((item, idx) => {
         return (
