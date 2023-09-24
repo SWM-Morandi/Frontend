@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Axios from 'axios';
 
 import {
+  RandomDefenseScroll,
   CodingTestCardScroll,
   AlgorithmCardScroll,
   LevelCardScroll,
@@ -22,13 +23,21 @@ export default function Main() {
       {/* 기업별 코딩테스트 카드 스크롤 */}
       <div className="px-[3rem]">
         <Text size="2rem" bold="bold">
+          랜덤 디펜스
+        </Text>
+        <Gap hSize="1rem" />
+        <RandomDefenseScroll />
+      </div>
+      <Gap hSize="3rem" />
+      {/* 기업별 코딩테스트 카드 스크롤 */}
+      <div className="px-[3rem]">
+        <Text size="2rem" bold="bold">
           기업별 코딩테스트
         </Text>
         <Gap hSize="1rem" />
         <CodingTestCardScroll />
       </div>
       <Gap hSize="3rem" />
-
       {/* 사용자 분석 후 추천 코딩테스트 카드 스크롤 */}
       <div className="px-[3rem]">
         <Text size="2rem" bold="bold">
@@ -38,7 +47,6 @@ export default function Main() {
         <LevelCardScroll />
       </div>
       <Gap hSize="3rem" />
-
       {/* 알고리즘 학습 문제 셋 */}
       {/* <div className="px-[3rem]">
         <Text size="2rem" bold="bold">

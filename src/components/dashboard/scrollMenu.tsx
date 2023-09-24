@@ -9,6 +9,7 @@ import Link from 'next/link';
 import CodingTestCard from './codingTestCard';
 import AlgorithmCard from './algorithmCard';
 import LevelTestCard from './levelTestCard';
+import RandomDefenseCard from './randomDefenseCard';
 
 import Gap from '@/utils/gap';
 
@@ -173,6 +174,49 @@ export function LevelCardScroll() {
       {data!.map((item, idx) => {
         return (
           <LevelTestCard
+            testTypeId={item.testTypeId}
+            testTypename={item.testTypename}
+            testTime={item.testTime}
+            problemCount={item.problemCount}
+            startDifficulty={item.startDifficulty}
+            endDifficulty={item.endDifficulty}
+            key={idx}
+          />
+        );
+      })}
+    </ScrollMenu>
+  );
+}
+
+export function RandomDefenseScroll() {
+  const testTypePracticeAxios: () => Promise<TestType[]> = async () => {
+    const response = await axiosInstance.get<TestType[]>(
+      `/test-types/random-defense`,
+      {
+        withCredentials: true,
+      },
+    );
+    console.log(response);
+    return response.data;
+  };
+
+  const { isLoading, error, data } = useQuery<TestType[]>(
+    'testTypeRandomDefense',
+    testTypePracticeAxios,
+  );
+
+  if (isLoading) return <div>로딩중...</div>;
+
+  if (error) return <div>에러가 발생했습니다</div>;
+
+  return (
+    <ScrollMenu
+      LeftArrow={LeftArrowTest('16rem')}
+      RightArrow={RightArrowTest('16rem')}
+    >
+      {data!.map((item, idx) => {
+        return (
+          <RandomDefenseCard
             testTypeId={item.testTypeId}
             testTypename={item.testTypename}
             testTime={item.testTime}
