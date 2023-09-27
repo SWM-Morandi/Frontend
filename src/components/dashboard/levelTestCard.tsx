@@ -5,6 +5,12 @@ import Link from 'next/link';
 import Gap from '@/utils/gap';
 import Text from '@/utils/text';
 
+import CodingtestBeginner from '@/assets/lottiefiles/codingtest-beginner.json';
+import CodingtestMiddle from '@/assets/lottiefiles/codingtest-middle.json';
+import CodingtestAdvanced from '@/assets/lottiefiles/codingtest-advanced.json';
+
+import Lottie from 'react-lottie-player';
+
 interface CodingTestCardProps {
   testTypeId: number;
   testTypename: string;
@@ -13,6 +19,15 @@ interface CodingTestCardProps {
   startDifficulty: string;
   endDifficulty: string;
 }
+
+const logo: { [k: string]: any } = {
+  1: CodingtestBeginner,
+  2: CodingtestMiddle,
+  3: CodingtestAdvanced,
+  4: CodingtestBeginner,
+  5: CodingtestMiddle,
+  6: CodingtestAdvanced,
+};
 
 export default function CodingTestCard({
   testTypeId,
@@ -26,12 +41,18 @@ export default function CodingTestCard({
     <>
       <Link href={`/dashboard/ready/${testTypeId}`}>
         <div className="w-[23rem] my-[1rem] mr-[3rem]">
-          <div className="flex flex-col justify-center items-center h-[15rem] p-[20px] shadow-md rounded-xl">
+          <div className="flex flex-col justify-center items-center h-[26rem] p-[20px] shadow-md rounded-xl">
             {/* 코딩테스트 기업 로고 */}
             <Text size="1.5rem" bold="bold">
               {testTypename}
             </Text>
             <Gap hSize="3rem" />
+
+            {/* 코딩테스트 기업 로고 */}
+            <div className="flex justify-center items-center h-[13rem]">
+              <Lottie loop animationData={logo[testTypeId]} play />
+            </div>
+            <Gap hSize="2rem" />
 
             {/* 기업 코딩테스트 정보 */}
             <div className="flex flex-row w-[100%] py-[1rem] px-[2rem] justify-between bg-gray-200 rounded-xl">
