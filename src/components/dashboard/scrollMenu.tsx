@@ -168,8 +168,8 @@ export function LevelCardScroll() {
 
   return (
     <ScrollMenu
-      LeftArrow={LeftArrowTest('16rem')}
-      RightArrow={RightArrowTest('16rem')}
+      LeftArrow={LeftArrowTest('27rem')}
+      RightArrow={RightArrowTest('27rem')}
     >
       {data!.map((item, idx) => {
         return (
