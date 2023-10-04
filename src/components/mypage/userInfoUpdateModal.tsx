@@ -163,8 +163,27 @@ export default function UserInfoUpdateModal({
   const [bojId, setBojId] = useState(initialBojId);
   const [oneLineIntro, setOneLineIntro] = useState(initialOneLineIntro);
 
+  const onValidInput = () => {
+    if (!bojId?.trim() || !oneLineIntro?.trim()) {
+      alert('빈칸을 모두 채워주세요!');
+      return true;
+    }
+    if (bojId.length > 15) {
+      alert('백준 아이디는 15자 이하로 입력해주세요!');
+      return true;
+    }
+    if (oneLineIntro.length > 30) {
+      alert('한줄소개는 30자 이하로 입력해주세요!');
+      return true;
+    }
+    return false;
+  };
+
   const userInfoUpdateAxios = async () => {
     try {
+      if (onValidInput()) {
+        return;
+      }
       await axiosInstance.post(
         `/members/edit`,
         { bojId: bojId, introduceInfo: oneLineIntro },
