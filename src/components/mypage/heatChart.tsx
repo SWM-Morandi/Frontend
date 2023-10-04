@@ -3,6 +3,9 @@
 import CalendarHeatmap from 'react-calendar-heatmap';
 import ReactTooltip from 'react-tooltip';
 import './heatChart.css';
+import { useState } from 'react';
+import { useQuery } from 'react-query';
+import { axiosInstance } from '@/api/axiosSetting';
 
 function shiftDate(date: Date, numDays: number) {
   const newDate = new Date(date);
@@ -23,6 +26,16 @@ function generateRandomValues(count: number, date = new Date()) {
         count: getRandomInt(0, 10),
       };
     });
+}
+
+interface HeatChartDataType {
+  solvedCount: number;
+  testDate: Date;
+}
+
+interface HeatChartProps {
+  date: Date;
+  count: number;
 }
 
 export default function HeatChart() {
@@ -46,6 +59,52 @@ export default function HeatChart() {
   ];
 
   const values = generateRandomValues(dayCount);
+
+  const [datas, setDatas] = useState<HeatChartProps[]>(
+    Array(250)
+      .fill(0)
+      .map((_, index) => {
+        return {
+          date: shiftDate(new Date(), -index),
+          count: 0,
+        };
+      }),
+  );
+
+  const heatChartDataAxios: () => Promise<HeatChartDataType[]> = async () => {
+    const response = await axiosInstance.get<HeatChartDataType[]>(
+      `/tests/heatmaps`,
+      { withCredentials: true },
+    );
+    return response.data;
+  };
+
+  const { isLoading, error, data } = useQuery<HeatChartDataType[]>(
+    'heatChartData',
+    heatChartDataAxios,
+    {
+      onSuccess: async (items) => {
+        items.map((item) => {
+          const diffDate = new Date().getDate() - item.testDate.getDate(); // 이 계산이 굉장히 불안한..
+          datas[diffDate].count = item.solvedCount;
+          // datas.push({ count: item.solvedCount, date: item.testDate });
+        });
+      },
+      staleTime: 987654321,
+    },
+  );
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-row items-center justify-center w-[70rem] h-[25rem] rounded-xl shadow-md">
+        <div>로딩중 ...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return <div>Error...</div>;
+  }
 
   function getTooltipDataAttrs(value: { date: Date; count: number }) {
     if (!value || !value.date) {
@@ -75,7 +134,7 @@ export default function HeatChart() {
   return (
     <div className="flex flex-row justify-center w-[70rem] p-[3rem] rounded-xl shadow-md">
       <CalendarHeatmap
-        values={values}
+        values={datas}
         startDate={startData}
         endDate={endData}
         gutterSize={1.5}
