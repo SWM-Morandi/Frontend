@@ -12,6 +12,10 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import Gap from '@/utils/gap';
+import { axiosInstance } from '@/api/axiosSetting';
+import { useQuery } from 'react-query';
+import { useState } from 'react';
+import CurrentRating from './currentRating';
 
 ChartJS.register(
   CategoryScale,
@@ -22,6 +26,12 @@ ChartJS.register(
   Tooltip,
   Legend,
 );
+
+interface LineChartDataType {
+  testDate: Date;
+  testRating: number;
+  testTypeName: string;
+}
 
 export default function LineChart() {
   const options: any = {
@@ -47,8 +57,8 @@ export default function LineChart() {
       },
     },
   };
-
-  const data = {
+  /*
+  const datas = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
     datasets: [
       {
@@ -59,7 +69,54 @@ export default function LineChart() {
         backgroundColor: 'rgba(255, 213, 83, 0.2)',
       },
     ],
+  };*/
+
+  const [datas, setDatas] = useState<any>({
+    labels: [],
+    datasets: [
+      {
+        label: 'line chart',
+        fill: true,
+        data: [],
+        borderColor: 'rgb(255, 213, 83)',
+        backgroundColor: 'rgba(255, 213, 83, 0.2)',
+      },
+    ],
+  });
+
+  const lineChartDataAxios: () => Promise<LineChartDataType[]> = async () => {
+    const response = await axiosInstance.get<LineChartDataType[]>(
+      `/tests/rating-graph`,
+      { withCredentials: true },
+    );
+    return response.data;
   };
+
+  const { isLoading, error, data } = useQuery<LineChartDataType[]>(
+    'lineChartData',
+    lineChartDataAxios,
+    {
+      onSuccess: async (items) => {
+        items.map((item) => {
+          datas.labels.push(item.testDate);
+          datas.datasets.data.push(item.testRating);
+        });
+      },
+      staleTime: 987654321,
+    },
+  );
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-row items-center justify-center w-[70rem] h-[25rem] rounded-xl shadow-md">
+        <div>로딩중 ...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return <div>Error...</div>;
+  }
 
   return (
     <>
@@ -69,13 +126,13 @@ export default function LineChart() {
           <div className="text-gray-500">현재 레이팅</div>
           <Gap wSize="1rem" />
 
-          <div className="text-[1.3rem] font-bold">1743</div>
+          <CurrentRating />
         </div>
         <Gap hSize="1rem" />
 
         {/* 라인차트 */}
         <div className="h-[15rem] w-[65rem]">
-          <Line options={options} data={data} />
+          <Line options={options} data={datas} />
         </div>
       </div>
     </>
