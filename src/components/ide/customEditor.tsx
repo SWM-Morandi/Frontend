@@ -97,7 +97,7 @@ export default function CustomEditor({
     // );
     // console.log(await sampleCompile(problemInfo.input_sample[0]));
 
-    problemInfo.input_sample.map(async (input, idx) => {
+    await problemInfo.input_sample.map(async (input, idx) => {
       const temp = await sampleCompile(input);
       samplesCompileOutput = samplesCompileOutput.concat(
         idx + 1 + '번 출력 결과\n' + temp + '\n\n',
