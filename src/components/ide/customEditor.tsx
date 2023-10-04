@@ -92,17 +92,15 @@ export default function CustomEditor({
     setFlag(true);
     setIsLoading(true);
     let samplesCompileOutput: string = '';
-    // console.log(
-    //   '안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요',
-    // );
-    // console.log(await sampleCompile(problemInfo.input_sample[0]));
 
-    await problemInfo.input_sample.map(async (input, idx) => {
+    for (let idx = 0; idx < problemInfo.input_sample.length; idx++) {
+      const input = problemInfo.input_sample[idx];
       const temp = await sampleCompile(input);
       samplesCompileOutput = samplesCompileOutput.concat(
         idx + 1 + '번 출력 결과\n' + temp + '\n\n',
       );
-    });
+    }
+
     setUserOutput(samplesCompileOutput);
     setIsLoading(false);
   };
