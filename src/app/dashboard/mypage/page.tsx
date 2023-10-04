@@ -9,7 +9,7 @@ import Gap from '@/utils/gap';
 
 export default function MyPage() {
   return (
-    <>
+    <div className="relative">
       <Header />
       <div className="flex flex-col items-center">
         <Gap hSize="3rem" />
@@ -35,6 +35,6 @@ export default function MyPage() {
         <Gap hSize="5rem" />
       </div>
       <Footer />
-    </>
+    </div>
   );
 }

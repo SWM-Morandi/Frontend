@@ -190,6 +190,9 @@ import { axiosInstance } from '@/api/axiosSetting';
 import Gap from '@/utils/gap';
 import Text from '@/utils/text';
 import { useQuery } from 'react-query';
+import { useState } from 'react';
+
+import UserInfoUpdateModal from './userInfoUpdateModal';
 
 interface UserInfoDataType {
   bojId: string;
@@ -197,6 +200,9 @@ interface UserInfoDataType {
 }
 
 export default function UserInfo() {
+  const [userInfoUpdateModalFlag, setUserInfoUpdateModalFlag] =
+    useState<boolean>(false);
+
   // 사용자 정보 받아오는 코드 작성하기
   const userInfoDataAxios: () => Promise<UserInfoDataType> = async () => {
     const response = await axiosInstance.get<UserInfoDataType>(
@@ -205,7 +211,7 @@ export default function UserInfo() {
     );
     return response.data;
   };
-  const { isLoading, error, data } = useQuery<UserInfoDataType>(
+  const { isLoading, error, data, refetch } = useQuery<UserInfoDataType>(
     'userInfoData',
     userInfoDataAxios,
   );
@@ -224,6 +230,12 @@ export default function UserInfo() {
 
   return (
     <>
+      {userInfoUpdateModalFlag ? (
+        <UserInfoUpdateModal
+          setUserInfoUpdateModalFlag={setUserInfoUpdateModalFlag}
+          refetch={refetch}
+        />
+      ) : null}
       <div className="flex flex-row justify-center h-[15rem] w-[70rem] rounded-xl shadow-md">
         <div className="flex flex-col justify-center w-[15rem]">
           <ProfileIcon />
@@ -240,7 +252,13 @@ export default function UserInfo() {
 
           <div className="flex flex-row">
             {/* 프로필 수정 버튼 */}
-            <div className="flex flex-row items-center px-[1rem] py-[0.3rem] bg-gray-100 rounded">
+            <div
+              className="flex flex-row items-center px-[1rem] py-[0.3rem] bg-gray-100 rounded cursor-pointer"
+              onClick={() => {
+                setUserInfoUpdateModalFlag(true);
+                console.log('1324');
+              }}
+            >
               <ModifyIcon />
               <Gap wSize="0.5rem" />
               <div className="text-gray-600">프로필 수정</div>
