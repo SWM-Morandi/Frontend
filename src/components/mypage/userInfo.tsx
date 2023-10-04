@@ -234,6 +234,8 @@ export default function UserInfo() {
         <UserInfoUpdateModal
           setUserInfoUpdateModalFlag={setUserInfoUpdateModalFlag}
           refetch={refetch}
+          initialBojId={data?.bojId}
+          initialOneLineIntro={data?.introduceInfo}
         />
       ) : null}
       <div className="flex flex-row justify-center h-[15rem] w-[70rem] rounded-xl shadow-md">

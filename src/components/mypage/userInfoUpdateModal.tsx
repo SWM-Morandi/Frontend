@@ -150,14 +150,18 @@ import { axiosInstance } from '@/api/axiosSetting';
 interface UserInfoUpdateModalProps {
   setUserInfoUpdateModalFlag: (flag: boolean) => void;
   refetch: () => void;
+  initialBojId: string | undefined;
+  initialOneLineIntro: string | undefined;
 }
 
 export default function UserInfoUpdateModal({
   setUserInfoUpdateModalFlag,
   refetch,
+  initialBojId,
+  initialOneLineIntro,
 }: UserInfoUpdateModalProps) {
-  const [bojId, setBojId] = useState('');
-  const [oneLineIntro, setOneLineIntro] = useState('');
+  const [bojId, setBojId] = useState(initialBojId);
+  const [oneLineIntro, setOneLineIntro] = useState(initialOneLineIntro);
 
   const userInfoUpdateAxios = async () => {
     try {
@@ -200,6 +204,7 @@ export default function UserInfoUpdateModal({
             onChange={(e) => {
               setBojId(e.target.value);
             }}
+            value={bojId}
           ></input>
         </div>
         <Gap hSize="0.5rem" />
@@ -210,6 +215,7 @@ export default function UserInfoUpdateModal({
             onChange={(e) => {
               setOneLineIntro(e.target.value);
             }}
+            value={oneLineIntro}
           ></input>
         </div>
         <Gap hSize="1.5rem" />
