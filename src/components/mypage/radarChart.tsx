@@ -60,7 +60,7 @@ export default function RadarChart() {
 
   const radarChartDataAxios: () => Promise<RadarChartDataType[]> = async () => {
     const response = await axiosInstance.get<RadarChartDataType[]>(
-      `/members/record-graph`,
+      `/tests/graphs`,
       { withCredentials: true },
     );
     return response.data;
