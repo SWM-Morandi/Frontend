@@ -14,10 +14,21 @@ const languages = [
   { value: 'java', label: 'Java' },
 ];
 
+interface ProblemInfoType {
+  problem_title: string;
+  problem_description: string;
+  problem_input: string;
+  problem_output: string;
+  input_sample: Array<string>;
+  output_sample: Array<string>;
+}
+
 export default function CustomEditor({
   problemBojId,
+  problemInfo,
 }: {
   problemBojId?: number;
+  problemInfo: ProblemInfoType;
 }) {
   const [userInput, setUserInput] = useState('');
   const [userFontSize, setUserFontSize] = useState(16); // 추후에 폰트 사이즈 조절 기능 추가
@@ -58,6 +69,43 @@ export default function CustomEditor({
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const sampleCompile = async (input: string) => {
+    if (userCode === '') {
+      return;
+    }
+    console.log(userCode);
+    const output = await axiosInstance.post(
+      '/tests/output',
+      {
+        language: axiosLang,
+        code: userCode,
+        input: input,
+      },
+      { withCredentials: true },
+    );
+    return output.data.output;
+  };
+
+  const samplesCompile = async () => {
+    setFlag(true);
+    setIsLoading(true);
+    let samplesCompileOutput: string = '';
+    // console.log(
+    //   '안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요',
+    // );
+    // console.log(await sampleCompile(problemInfo.input_sample[0]));
+    await Promise.all(
+      problemInfo.input_sample.map(async (input, idx) => {
+        const temp = await sampleCompile(input);
+        samplesCompileOutput = samplesCompileOutput.concat(
+          idx + 1 + '번 출력 결과\n' + temp + '\n\n',
+        );
+      }),
+    );
+    setUserOutput(samplesCompileOutput);
+    setIsLoading(false);
   };
 
   const clearOutput = () => {
@@ -179,6 +227,13 @@ export default function CustomEditor({
             className="h-[2rem] w-[6rem] border-2 border-white rounded-xl"
           >
             Run
+          </button>
+          <div className="w-[1rem]" />
+          <button
+            onClick={samplesCompile}
+            className="h-[2rem] w-[6rem] border-2 border-white rounded-xl"
+          >
+            예제 컴파일
           </button>
         </div>
       </div>

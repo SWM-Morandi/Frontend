@@ -79,7 +79,7 @@ export default function IDE() {
     });
 
   const { error, data: testData } = useQuery<TestDataType>(
-    'problems',
+    'testProblems',
     testDataAxios,
     {
       onError: (err) => {
@@ -119,6 +119,7 @@ export default function IDE() {
               />
               <CustomEditor
                 problemBojId={testData?.bojProblemIds[problemId - 1]}
+                problemInfo={testProblems[problemId - 1]}
               />
             </div>
           </div>
