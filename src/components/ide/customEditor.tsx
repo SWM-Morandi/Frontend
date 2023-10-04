@@ -96,14 +96,13 @@ export default function CustomEditor({
     //   '안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요',
     // );
     // console.log(await sampleCompile(problemInfo.input_sample[0]));
-    await Promise.all(
-      problemInfo.input_sample.map(async (input, idx) => {
-        const temp = await sampleCompile(input);
-        samplesCompileOutput = samplesCompileOutput.concat(
-          idx + 1 + '번 출력 결과\n' + temp + '\n\n',
-        );
-      }),
-    );
+
+    problemInfo.input_sample.map(async (input, idx) => {
+      const temp = await sampleCompile(input);
+      samplesCompileOutput = samplesCompileOutput.concat(
+        idx + 1 + '번 출력 결과\n' + temp + '\n\n',
+      );
+    });
     setUserOutput(samplesCompileOutput);
     setIsLoading(false);
   };
