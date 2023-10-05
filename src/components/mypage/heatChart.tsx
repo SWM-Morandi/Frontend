@@ -6,6 +6,7 @@ import './heatChart.css';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { axiosInstance } from '@/api/axiosSetting';
+import dayjs from 'dayjs';
 
 function shiftDate(date: Date, numDays: number) {
   const newDate = new Date(date);
@@ -30,7 +31,7 @@ function generateRandomValues(count: number, date = new Date()) {
 
 interface HeatChartDataType {
   solvedCount: number;
-  testDate: Date;
+  testDate: number[];
 }
 
 interface HeatChartProps {
@@ -79,15 +80,31 @@ export default function HeatChart() {
     return response.data;
   };
 
+  // "solvedCount": 0,
+  //   "testDate": "2023-10-05"
   const { isLoading, error, data } = useQuery<HeatChartDataType[]>(
     'heatChartData',
     heatChartDataAxios,
     {
-      onSuccess: async (items) => {
+      onSuccess: (items) => {
+        const today = dayjs();
+        const updatedDatas = [...datas];
+
         items.map((item) => {
-          const diffDate = new Date().getDate() - item.testDate.getDate(); // 이 계산이 굉장히 불안한..
-          datas[diffDate].count = item.solvedCount;
-          // datas.push({ count: item.solvedCount, date: item.testDate });
+          const itemDate = dayjs(
+            item.testDate[0] + '-' + item.testDate[1] + '-' + item.testDate[2],
+          );
+          const diffDate = today.diff(itemDate, 'day');
+          console.log(diffDate);
+
+          if (diffDate >= 0 && diffDate < updatedDatas.length) {
+            updatedDatas[diffDate] = {
+              date: updatedDatas[diffDate].date,
+              count: item.solvedCount,
+            };
+          }
+
+          setDatas(updatedDatas);
         });
       },
       staleTime: 987654321,

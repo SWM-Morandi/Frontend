@@ -96,11 +96,23 @@ export default function LineChart() {
     'lineChartData',
     lineChartDataAxios,
     {
-      onSuccess: async (items) => {
+      onSuccess: (items) => {
+        const newLabels: Date[] = [];
+        const newData: number[] = [];
         items.map((item) => {
-          datas.labels.push(item.testDate);
-          datas.datasets.data.push(item.testRating);
+          newLabels.push(item.testDate);
+          newData.push(item.testRating);
         });
+        setDatas((prevData: any) => ({
+          ...prevData,
+          labels: [...prevData.labels, ...newLabels],
+          datasets: [
+            {
+              ...prevData.datasets[0],
+              data: [...prevData.datasets[0].data, ...newData],
+            },
+          ],
+        }));
       },
       staleTime: 987654321,
     },
