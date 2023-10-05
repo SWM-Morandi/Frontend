@@ -43,8 +43,18 @@ const options = {
 };
 
 interface RadarChartDataType {
-  algorithmName: string;
-  solvedRate: number;
+  solvedRates: {
+    그래프: number;
+    '이분 탐색': number;
+    '자료 구조': number;
+    그리디: number;
+    'DFS와 BFS': number;
+    문자열: number;
+    DP: number;
+    구현: number;
+    정렬: number;
+    '최단 경로': number;
+  };
 }
 
 interface RadarChartProps {
@@ -54,26 +64,50 @@ interface RadarChartProps {
 
 export default function RadarChart() {
   const [datas, setDatas] = useState<RadarChartProps>({
-    algorithms: [],
+    algorithms: [
+      '그래프',
+      '이분 탐색',
+      '자료 구조',
+      '그리디',
+      'DFS와 BFS',
+      '문자열',
+      'DP',
+      '구현',
+      '정렬',
+      '최단 경로',
+    ],
     persents: [],
   });
 
-  const radarChartDataAxios: () => Promise<RadarChartDataType[]> = async () => {
-    const response = await axiosInstance.get<RadarChartDataType[]>(
+  const radarChartDataAxios: () => Promise<RadarChartDataType> = async () => {
+    const response = await axiosInstance.get<RadarChartDataType>(
       `/tests/graphs`,
       { withCredentials: true },
     );
     return response.data;
   };
-  const { isLoading, error, data } = useQuery<RadarChartDataType[]>(
+  const { isLoading, error, data } = useQuery<RadarChartDataType>(
     'radarChartData',
     radarChartDataAxios,
     {
       onSuccess: (items) => {
-        items.map((item) => {
-          datas.algorithms.push(item.algorithmName);
-          datas.persents.push(item.solvedRate);
-        });
+        const newPersents: number[] = [];
+        newPersents.push(items.solvedRates['그래프']);
+        newPersents.push(items.solvedRates['이분 탐색']);
+        newPersents.push(items.solvedRates['자료 구조']);
+        newPersents.push(items.solvedRates['그리디']);
+        newPersents.push(items.solvedRates['DFS와 BFS']);
+        newPersents.push(items.solvedRates['문자열']);
+        newPersents.push(items.solvedRates['DP']);
+        newPersents.push(items.solvedRates['구현']);
+        newPersents.push(items.solvedRates['정렬']);
+        newPersents.push(items.solvedRates['최단 경로']);
+
+        const updatedDatas = { ...datas, persents: newPersents };
+        setDatas(updatedDatas);
+        // datas.algorithms.map((item) => {
+        //   datas.persents.push(items.solvedRates[item]);
+        // });
       },
       staleTime: 987654321,
     },
