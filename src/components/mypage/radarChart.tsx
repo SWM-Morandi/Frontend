@@ -64,18 +64,7 @@ interface RadarChartProps {
 
 export default function RadarChart() {
   const [datas, setDatas] = useState<RadarChartProps>({
-    algorithms: [
-      '그래프',
-      '이분 탐색',
-      '자료 구조',
-      '그리디',
-      'DFS와 BFS',
-      '문자열',
-      'DP',
-      '구현',
-      '정렬',
-      '최단 경로',
-    ],
+    algorithms: [],
     persents: [],
   });
 
@@ -91,23 +80,13 @@ export default function RadarChart() {
     radarChartDataAxios,
     {
       onSuccess: (items) => {
-        const newPersents: number[] = [];
-        newPersents.push(items.solvedRates['그래프']);
-        newPersents.push(items.solvedRates['이분 탐색']);
-        newPersents.push(items.solvedRates['자료 구조']);
-        newPersents.push(items.solvedRates['그리디']);
-        newPersents.push(items.solvedRates['DFS와 BFS']);
-        newPersents.push(items.solvedRates['문자열']);
-        newPersents.push(items.solvedRates['DP']);
-        newPersents.push(items.solvedRates['구현']);
-        newPersents.push(items.solvedRates['정렬']);
-        newPersents.push(items.solvedRates['최단 경로']);
-
-        const updatedDatas = { ...datas, persents: newPersents };
+        const updatedAlgorithms = Object.keys(items.solvedRates);
+        const updatedPersents = Object.values(items.solvedRates);
+        const updatedDatas = {
+          algorithms: updatedAlgorithms,
+          persents: updatedPersents,
+        };
         setDatas(updatedDatas);
-        // datas.algorithms.map((item) => {
-        //   datas.persents.push(items.solvedRates[item]);
-        // });
       },
       staleTime: 987654321,
     },
