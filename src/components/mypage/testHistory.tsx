@@ -1,4 +1,4 @@
-import Gap from '@/utils/gap';
+'use client';
 
 function ArrowIcon() {
   return (
@@ -26,16 +26,21 @@ function ArrowIcon() {
   );
 }
 
+import Gap from '@/utils/gap';
+import { axiosInstance } from '@/api/axiosSetting';
+import { useState } from 'react';
+import { useQuery } from 'react-query';
+
 function HistoryComp({
   company,
   date,
   solvedCount,
   problemCount,
 }: {
-  company: string;
-  date: string;
-  solvedCount: number;
-  problemCount: number;
+  company: string | undefined;
+  date: string | undefined;
+  solvedCount: number | undefined;
+  problemCount: number | undefined;
 }) {
   return (
     <>
@@ -56,8 +61,53 @@ function HistoryComp({
   );
 }
 
+interface AttemptProblemDtoType {
+  testProblemId: number;
+  bojProblemId: number;
+  isSolved: boolean;
+  executionTime: number | null;
+}
+
+interface TestHistoryInfoType {
+  testId: number;
+  testDate: string;
+  testTime: number;
+  problemCount: number;
+  startDifficulty: string;
+  endDifficulty: string;
+  testTypename: string;
+  testRating: number;
+  originRating: number;
+  attemptProblemDto: AttemptProblemDtoType[];
+}
+
 export default function TestHistory() {
-  const date = new Date();
+  const testHistoryInfoAxios: () => Promise<
+    TestHistoryInfoType[]
+  > = async () => {
+    const response = await axiosInstance.get<TestHistoryInfoType[]>(
+      `/test-types/latest`,
+      { withCredentials: true },
+    );
+    return response.data;
+  };
+
+  const { isLoading, error, data } = useQuery<TestHistoryInfoType[]>(
+    'testHistoryInfoData',
+    testHistoryInfoAxios,
+  );
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-row justify-center items-center h-[15rem] w-[70rem] rounded-xl shadow-md">
+        로딩중...
+      </div>
+    );
+  }
+
+  if (error) {
+    return <div>에러 발생</div>;
+  }
 
   return (
     <>
@@ -70,30 +120,18 @@ export default function TestHistory() {
 
         {/* 테스트 기록 정보 */}
         <div className="grid grid-cols-2 gap-10">
-          <HistoryComp
-            company="네이버"
-            date="2023.06.30"
-            solvedCount={15}
-            problemCount={22}
-          />
-          <HistoryComp
-            company="삼성"
-            date="2023.06.20"
-            solvedCount={15}
-            problemCount={22}
-          />
-          <HistoryComp
-            company="카카오"
-            date="2023.06.10"
-            solvedCount={15}
-            problemCount={22}
-          />
-          <HistoryComp
-            company="쿠팡"
-            date="2023.05.28"
-            solvedCount={15}
-            problemCount={22}
-          />
+          {Array.isArray(data) ? (
+            data.map((item) => (
+              <HistoryComp
+                company={item.testTypename}
+                date={item.testDate}
+                solvedCount={1}
+                problemCount={item.problemCount}
+              />
+            ))
+          ) : (
+            <div>에러 발생</div>
+          )}
         </div>
       </div>
     </>
