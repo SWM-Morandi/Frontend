@@ -46,7 +46,7 @@ function HistoryComp({
     <>
       <div className="flex flex-row justify-between items-center w-[30rem] px-[3rem] py-[1.5rem] bg-gray-100 rounded-xl">
         <div className="flex flex-col">
-          <div className="text-[1.5rem] font-bold">{company} 코딩테스트</div>
+          <div className="text-[1.5rem] font-bold">{company}</div>
           <div className="text-gray-500">{date}</div>
         </div>
         <div className="flex flex-row items-center">
