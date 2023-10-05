@@ -73,6 +73,7 @@ interface TestHistoryInfoType {
   testDate: string;
   testTime: number;
   problemCount: number;
+  acceptCount: number;
   startDifficulty: string;
   endDifficulty: string;
   testTypename: string;
@@ -125,7 +126,7 @@ export default function TestHistory() {
               <HistoryComp
                 company={item.testTypename}
                 date={item.testDate}
-                solvedCount={1}
+                solvedCount={item.acceptCount}
                 problemCount={item.problemCount}
               />
             ))
