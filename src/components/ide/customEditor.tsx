@@ -188,8 +188,8 @@ export default function CustomEditor({
           >
             Output
           </button>
-          <Gap wSize="70%" />
-          <div>실행시간 : {executeTime}s</div>
+          {/* <Gap wSize="70%" />
+          <div>실행시간 : {executeTime}s</div> */}
         </div>
         <div className="h-[24vh] w-full mb-[1rem] bg-[#2E3642] p-[1rem] rounded-xl overflow-y-auto overflow-x-hidden">
           {flag ? (

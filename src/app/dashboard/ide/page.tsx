@@ -110,6 +110,7 @@ export default function IDE() {
               setProblemId={setProblemId}
               problemInfo={testProblems}
               time={time}
+              testId={Number(testId)}
               exitInfo={{ testId: testData!.testId, testTypeId: testId! }}
             />
             <div className="flex flex-row px-[2rem]">

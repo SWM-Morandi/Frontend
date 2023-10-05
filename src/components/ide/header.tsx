@@ -14,17 +14,37 @@ interface ProblemInfoType {
   output_sample: Array<string>;
 }
 
+const testName = [
+  '초급 코딩테스트',
+  '중급 코딩테스트',
+  '고급 코딩테스트',
+  '초급 코딩테스트',
+  '중급 코딩테스트',
+  '고급 코딩테스트',
+  '삼성 코딩테스트',
+  '네이버 코딩테스트',
+  '카카오 코딩테스트',
+  '라인 코딩테스트',
+  '쿠팡 코딩테스트',
+  '우아한 형제들 코딩테스트',
+  '랜덤 브론즈 디펜스',
+  '랜덤 실버 디펜스',
+  '랜덤 골드 디펜스',
+];
+
 export default function Header({
   problemId,
   setProblemId,
   problemInfo,
   time,
+  testId,
   exitInfo,
 }: {
   problemId: any;
   setProblemId: any;
   problemInfo: ProblemInfoType[];
   time: number;
+  testId: number;
   exitInfo: { testId: number; testTypeId: string };
 }) {
   const router = useRouter();
@@ -64,7 +84,7 @@ export default function Header({
               d="M2 12.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"
             />
           </svg>
-          <div className="text-[22px] ml-[0.5rem]">모랜디</div>
+          <div className="text-[22px] ml-[0.5rem]">{testName[testId - 1]}</div>
         </div>
         <div className="flex flex-row">
           <svg
