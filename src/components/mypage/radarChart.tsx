@@ -80,6 +80,8 @@ export default function RadarChart() {
     radarChartDataAxios,
     {
       onSuccess: (items) => {
+        console.log('레이더 차트 디버깅');
+        console.log(items);
         const updatedAlgorithms = Object.keys(items.solvedRates);
         const updatedPersents = Object.values(items.solvedRates);
         const updatedDatas = {

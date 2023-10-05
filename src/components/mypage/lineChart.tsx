@@ -97,6 +97,8 @@ export default function LineChart() {
     lineChartDataAxios,
     {
       onSuccess: (items) => {
+        console.log('라인 차트 디버깅');
+        console.log(items);
         const newLabels: Date[] = [];
         const newData: number[] = [];
         items.map((item) => {
