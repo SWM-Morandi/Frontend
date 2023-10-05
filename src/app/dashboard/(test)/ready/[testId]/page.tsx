@@ -117,9 +117,7 @@ export default function CodingTestBeforePage({
 
           {/* 코딩테스트 회사 이름 */}
           <div className="w-[80%]">
-            <h1 className="text-[1.8rem] font-bold">
-              {data?.testTypename} 코딩테스트
-            </h1>
+            <h1 className="text-[1.8rem] font-bold">{data?.testTypename}</h1>
           </div>
           <Gap hSize="1.5rem" />
 
