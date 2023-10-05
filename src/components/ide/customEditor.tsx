@@ -7,6 +7,7 @@ import Link from 'next/link';
 
 import Lottie from 'react-lottie-player';
 import Loading from '@/assets/lottiefiles/loading.json';
+import Gap from '@/utils/gap';
 
 const languages = [
   { value: 'cpp', label: 'C++' },
@@ -39,6 +40,7 @@ export default function CustomEditor({
   const [userOutput, setUserOutput] = useState<string>('');
   const [flag, setFlag] = useState(false);
   const [defaultValue, setDefualtValue] = useState(defaultValues.cpp);
+  const [executeTime, setExecuteTime] = useState(0);
 
   const options = {
     fontSize: userFontSize,
@@ -64,6 +66,7 @@ export default function CustomEditor({
       .then((res) => {
         console.log(res.data.output);
         setUserOutput(res.data.output);
+        setExecuteTime(res.data.runTime);
         setIsLoading(false);
       })
       .catch((err) => {
@@ -163,7 +166,7 @@ export default function CustomEditor({
           />
         </div>
 
-        <div className="flex flex-row justify-between w-[6.5rem] ml-[0.5rem] mt-[1rem] mb-[0.5rem]">
+        <div className="flex flex-row ml-[0.5rem] mt-[1rem] mb-[0.5rem]">
           <button
             onClick={() => {
               setFlag(false);
@@ -174,6 +177,7 @@ export default function CustomEditor({
           >
             Input
           </button>
+          <Gap wSize="0.5rem" />
           <button
             onClick={() => {
               setFlag(true);
@@ -184,6 +188,8 @@ export default function CustomEditor({
           >
             Output
           </button>
+          <Gap wSize="70%" />
+          <div>실행시간 : {executeTime}s</div>
         </div>
         <div className="h-[24vh] w-full mb-[1rem] bg-[#2E3642] p-[1rem] rounded-xl overflow-y-auto overflow-x-hidden">
           {flag ? (
