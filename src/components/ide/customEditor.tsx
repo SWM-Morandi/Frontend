@@ -89,6 +89,7 @@ export default function CustomEditor({
       },
       { withCredentials: true },
     );
+    console.log(output);
     return output.data;
   };
 
@@ -98,6 +99,20 @@ export default function CustomEditor({
     let samplesCompileOutput: string = '';
 
     const temp = await sampleCompile();
+    console.log(temp);
+    for (let idx = 0; idx < temp.length; idx++) {
+      samplesCompileOutput = samplesCompileOutput.concat(
+        idx +
+          1 +
+          '번 출력 결과\n' +
+          temp[idx].result +
+          ' ' +
+          temp[idx].output +
+          ' ' +
+          temp[idx].executeTime +
+          '\n\n',
+      );
+    }
     // samplesCompileOutput = samplesCompileOutput.concat(
     //   idx + 1 + '번 출력 결과\n' + temp + '\n\n',
     // );
@@ -110,7 +125,7 @@ export default function CustomEditor({
     //   );
     // }
 
-    setUserOutput(temp);
+    setUserOutput(samplesCompileOutput);
     setIsLoading(false);
   };
 
