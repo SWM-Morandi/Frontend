@@ -74,21 +74,22 @@ export default function CustomEditor({
       });
   };
 
-  const sampleCompile = async (input: string) => {
+  const sampleCompile = async () => {
     if (userCode === '') {
       return;
     }
     console.log(userCode);
     const output = await axiosInstance.post(
-      '/tests/output',
+      '/tests/tc-output',
       {
         language: axiosLang,
         code: userCode,
-        input: input,
+        input: problemInfo.input_sample,
+        output: problemInfo.output_sample,
       },
       { withCredentials: true },
     );
-    return output.data.output;
+    return output.data;
   };
 
   const samplesCompile = async () => {
@@ -96,15 +97,20 @@ export default function CustomEditor({
     setIsLoading(true);
     let samplesCompileOutput: string = '';
 
-    for (let idx = 0; idx < problemInfo.input_sample.length; idx++) {
-      const input = problemInfo.input_sample[idx];
-      const temp = await sampleCompile(input);
-      samplesCompileOutput = samplesCompileOutput.concat(
-        idx + 1 + '번 출력 결과\n' + temp + '\n\n',
-      );
-    }
+    const temp = await sampleCompile();
+    // samplesCompileOutput = samplesCompileOutput.concat(
+    //   idx + 1 + '번 출력 결과\n' + temp + '\n\n',
+    // );
 
-    setUserOutput(samplesCompileOutput);
+    // for (let idx = 0; idx < problemInfo.input_sample.length; idx++) {
+    //   const input = problemInfo.input_sample[idx];
+    //   const temp = await sampleCompile(input);
+    //   samplesCompileOutput = samplesCompileOutput.concat(
+    //     idx + 1 + '번 출력 결과\n' + temp + '\n\n',
+    //   );
+    // }
+
+    setUserOutput(temp);
     setIsLoading(false);
   };
 
