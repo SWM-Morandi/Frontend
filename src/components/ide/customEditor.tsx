@@ -102,22 +102,30 @@ export default function CustomEditor({
     console.log(temp);
     for (let idx = 0; idx < temp.length; idx++) {
       samplesCompileOutput = samplesCompileOutput.concat(
-        idx +
-          1 +
-          '번 출력 결과\n' +
-          temp[idx].result +
-          ' ' +
-          temp[idx].output +
-          ' ' +
-          temp[idx].executeTime +
-          '\n\n',
+        `<div style="font-size: 1rem; color: #12AC79; font-weight: 700;">예제 입력 ${
+          idx + 1
+        }</div>` +
+          `<div style="display: flex; flex-direction: row; margin: 0.3rem 0 0 2rem;">
+            <div style="color: #686868;">실행 결과  >  </div>
+            <div>${temp[idx].output}</div>
+          </div>` +
+          `<div style="display: flex; flex-direction: row; margin: 0 0 0 2rem;">
+            <div style="color: #686868;">실행 시간  >  </div>
+            <div>${temp[idx].executeTime}s</div>
+          </div>` +
+          `<div style="display: flex; flex-direction: row; margin: 0 0 1rem 2rem;">
+            <div style="color: #686868;">정답 여부  >  </div>
+            <div style="color: ${
+              temp[idx].result === '실패' ? 'red' : 'green'
+            }">${temp[idx].result}</div>
+          </div>`,
       );
     }
     // samplesCompileOutput = samplesCompileOutput.concat(
     //   idx + 1 + '번 출력 결과\n' + temp + '\n\n',
     // );
 
-    // for (let idx = 0; idx < problemInfo.input_sample.length; idx++) {
+    // for (let idx = 0;  idx < problemInfo.input_sample.length; idx++) {
     //   const input = problemInfo.input_sample[idx];
     //   const temp = await sampleCompile(input);
     //   samplesCompileOutput = samplesCompileOutput.concat(
@@ -224,9 +232,10 @@ export default function CustomEditor({
                 />
               </div>
             ) : (
-              <div className="whitespace-pre-wrap w-full break-all ">
-                {userOutput}
-              </div>
+              <div
+                className="whitespace-pre-wrap w-full break-all"
+                dangerouslySetInnerHTML={{ __html: userOutput }}
+              ></div>
             )
           ) : (
             <textarea
