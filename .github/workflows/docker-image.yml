@@ -31,13 +31,13 @@ jobs:
       - name: SSH into AWS EC2 instance
         uses: appleboy/ssh-action@master
         with:
-          host: 3.35.18.176
+          host: 10.0.102.217
           username: ubuntu
           key: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
+          proxy_jump_host: 43.201.249.75
+          proxy_jump_username: ubuntu
+          proxy_jump_key: ${{ secrets.PROXY_SSH_PRIVATE_KEY }}
 
           # 아래 내용을 실행하여 Docker 이미지를 내려받고 실행
           script: |
-            docker rmi yeobi/morandi-frontend:latest
-            docker pull yeobi/morandi-frontend:latest
-            docker-compose down
-            docker-compose up -d
+            ./deploy-frontend.sh
