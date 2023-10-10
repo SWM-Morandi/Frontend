@@ -121,18 +121,6 @@ export default function CustomEditor({
           </div>`,
       );
     }
-    // samplesCompileOutput = samplesCompileOutput.concat(
-    //   idx + 1 + '번 출력 결과\n' + temp + '\n\n',
-    // );
-
-    // for (let idx = 0;  idx < problemInfo.input_sample.length; idx++) {
-    //   const input = problemInfo.input_sample[idx];
-    //   const temp = await sampleCompile(input);
-    //   samplesCompileOutput = samplesCompileOutput.concat(
-    //     idx + 1 + '번 출력 결과\n' + temp + '\n\n',
-    //   );
-    // }
-
     setUserOutput(samplesCompileOutput);
     setIsLoading(false);
   };
@@ -149,7 +137,7 @@ export default function CustomEditor({
 
   return (
     <>
-      <div className="flex flex-col w-[60vw]">
+      <div className="flex flex-col w-[53vw]">
         <select
           className="w-[5rem] ml-[0.5rem] mb-[0.5rem] bg-gray-900"
           onChange={(e) => {

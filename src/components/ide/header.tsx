@@ -71,7 +71,7 @@ export default function Header({
       )}
       <div className="flex flex-row justify-between items-center h-[4rem] w-[100%] px-[2rem]">
         <div className="flex flex-row">
-          <svg
+          {/* <svg
             xmlns="http://www.w3.org/2000/svg"
             width="30"
             fill="currentColor"
@@ -83,7 +83,7 @@ export default function Header({
               fillRule="evenodd"
               d="M2 12.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"
             />
-          </svg>
+          </svg> */}
           <div className="text-[22px] ml-[0.5rem]">{testName[testId - 1]}</div>
         </div>
         <div className="flex flex-row">

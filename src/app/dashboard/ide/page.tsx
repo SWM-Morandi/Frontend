@@ -7,6 +7,7 @@ import Axios, { AxiosResponse } from 'axios';
 import Header from '@/components/ide/header';
 import ProblemInfo from '@/components/ide/problemInfo';
 import CustomEditor from '@/components/ide/customEditor';
+import SideBar from '@/components/ide/sidebar2';
 
 import { useQuery } from 'react-query';
 
@@ -104,24 +105,32 @@ export default function IDE() {
             <Lottie loop animationData={Loading} play className="w-[25rem]" />
           </div>
         ) : (
-          <div>
-            <Header
+          <div className="flex flex-row">
+            <SideBar
+              // ocSideProblemsBar={ocSideProblemsBar}
               problemId={problemId}
               setProblemId={setProblemId}
               problemInfo={testProblems}
-              time={time}
-              testId={Number(testId)}
-              exitInfo={{ testId: testData!.testId, testTypeId: testId! }}
             />
-            <div className="flex flex-row px-[2rem]">
-              <ProblemInfo
+            <div className="flex flex-col">
+              <Header
                 problemId={problemId}
-                problemInfo={testProblems[problemId - 1]}
+                setProblemId={setProblemId}
+                problemInfo={testProblems}
+                time={time}
+                testId={Number(testId)}
+                exitInfo={{ testId: testData!.testId, testTypeId: testId! }}
               />
-              <CustomEditor
-                problemBojId={testData?.bojProblemIds[problemId - 1]}
-                problemInfo={testProblems[problemId - 1]}
-              />
+              <div className="flex flex-row px-[2rem]">
+                <ProblemInfo
+                  problemId={problemId}
+                  problemInfo={testProblems[problemId - 1]}
+                />
+                <CustomEditor
+                  problemBojId={testData?.bojProblemIds[problemId - 1]}
+                  problemInfo={testProblems[problemId - 1]}
+                />
+              </div>
             </div>
           </div>
         )}

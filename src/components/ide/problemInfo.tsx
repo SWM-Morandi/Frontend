@@ -55,7 +55,7 @@ export default function ProblemInfo({
 
   return (
     <>
-      <div className="flex flex-col w-[40vw] h-[90vh] mr-[1rem] bg-[#2E3642] rounded-2xl overflow-auto">
+      <div className="flex flex-col w-[35vw] h-[90vh] mr-[1rem] bg-[#2E3642] rounded-2xl overflow-auto">
         <div className="p-[1.5rem]">
           <div className="text-[20px] mb-[1rem]">
             {problemId}번. {problemInfo.problem_title}
