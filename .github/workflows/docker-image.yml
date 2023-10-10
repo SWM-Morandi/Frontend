@@ -34,9 +34,9 @@ jobs:
           host: 10.0.102.217
           username: ubuntu
           key: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
-          proxy_jump_host: 43.201.249.75
-          proxy_jump_username: ubuntu
-          proxy_jump_key: ${{ secrets.PROXY_SSH_PRIVATE_KEY }}
+          proxy_host: 43.201.249.75
+          proxy_username: ubuntu
+          proxy_key: ${{ secrets.PROXY_SSH_PRIVATE_KEY }}
 
           # 아래 내용을 실행하여 Docker 이미지를 내려받고 실행
           script: |
