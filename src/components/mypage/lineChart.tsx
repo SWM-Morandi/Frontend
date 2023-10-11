@@ -15,6 +15,7 @@ import Gap from '@/utils/gap';
 import { axiosInstance } from '@/api/axiosSetting';
 import { useQuery } from 'react-query';
 import { useState } from 'react';
+import dayjs from 'dayjs';
 import CurrentRating from './currentRating';
 
 ChartJS.register(
@@ -41,12 +42,29 @@ export default function LineChart() {
       legend: {
         plugins: { legend: { display: false } },
       },
+      tooltip: {
+        titleAlign: 'center',
+        callbacks: {
+          label: (context: any) => {
+            let label = context.dataset.label || '';
+
+            if (label) {
+              label = ' 레이팅: ';
+            }
+            if (context.parsed.y !== null) {
+              label += context.parsed.y;
+            }
+            return label;
+          },
+        },
+      },
     },
     scales: {
       x: {
         grid: { display: false, drawBorder: false },
         position: 'right',
         ticks: { color: '#ADB5BD' },
+        display: false,
       },
       y: {
         grid: { display: false, drawBorder: false },
@@ -97,12 +115,13 @@ export default function LineChart() {
     lineChartDataAxios,
     {
       onSuccess: (items) => {
-        console.log('라인 차트 디버깅');
         console.log(items);
-        const newLabels: Date[] = [];
+
+        const newLabels: string[] = [];
         const newData: number[] = [];
         items.map((item) => {
-          newLabels.push(item.testDate);
+          console.log(dayjs(item.testDate).format('YYYY/MM/DD'));
+          newLabels.push(dayjs(item.testDate).format('YYYY/MM/DD'));
           newData.push(item.testRating);
         });
         setDatas((prevData: any) => ({
