@@ -39,25 +39,24 @@ export default function IDE() {
   const [problemId, setProblemId] = useState(1);
   const [time, setTime] = useState(-1);
 
+  /* 타이머 useEffect */
   useEffect(() => {
     const timer = setInterval(() => {
       setTime((prev) => prev - 1);
     }, 1000);
-
     const clearTimer = () => {
       clearInterval(timer);
     };
-
     if (time === 0) {
       clearTimer();
       alert(
         '테스트 시간이 종료되었습니다. 종료하고 결과를 확인해주세요.\n시간 상관없이 더 풀고 싶으시다면, 더 푸셔도 괜찮습니다!',
       );
     }
-
     return clearTimer;
   }, [time]);
 
+  /* 출제될 시험 문제를 받아오는 Axios */
   const testDataAxios: () => Promise<TestDataType> = async () => {
     const response = await axiosInstance.post<TestDataType>(
       `/tests`,
@@ -68,6 +67,7 @@ export default function IDE() {
     return response.data;
   };
 
+  /* 출제된 시험 문제의 정보를 받아오는 Axios */
   const testProblemsAxios: (
     data: TestDataType,
   ) => Promise<BojProblemInfoType>[] = (data) =>
@@ -78,7 +78,6 @@ export default function IDE() {
       console.log(response);
       return response.data;
     });
-
   const { error, data: testData } = useQuery<TestDataType>(
     'testProblems',
     testDataAxios,
@@ -128,7 +127,8 @@ export default function IDE() {
                 />
                 <CustomEditor
                   problemBojId={testData?.bojProblemIds[problemId - 1]}
-                  problemInfo={testProblems[problemId - 1]}
+                  problemInfo={testProblems}
+                  problemId={problemId}
                 />
               </div>
             </div>

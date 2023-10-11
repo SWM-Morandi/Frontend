@@ -27,28 +27,45 @@ interface ProblemInfoType {
 export default function CustomEditor({
   problemBojId,
   problemInfo,
+  problemId,
 }: {
   problemBojId?: number;
-  problemInfo: ProblemInfoType;
+  problemInfo: ProblemInfoType[];
+  problemId: number;
 }) {
   const [userInput, setUserInput] = useState('');
   const [userFontSize, setUserFontSize] = useState(16); // 추후에 폰트 사이즈 조절 기능 추가
   const [isLoading, setIsLoading] = useState(false);
-  const [userCode, setUserCode] = useState(defaultValues.cpp);
+  // const [userCode, setUserCode] = useState(defaultValues.cpp);
   const [userLang, setUserLang] = useState('cpp');
   const [axiosLang, setAxiosLang] = useState('Cpp'); // axios 요청 시 사용할 언어
   const [userOutput, setUserOutput] = useState<string>('');
   const [flag, setFlag] = useState(false);
-  const [defaultValue, setDefualtValue] = useState(defaultValues.cpp);
+  // const [defaultValue, setDefualtValue] = useState(defaultValues.cpp);
   const [executeTime, setExecuteTime] = useState(0);
+
+  const [userCodeTest, setUserCodeTest] = useState<string[][]>(
+    new Array(problemInfo.length).fill([
+      defaultValues.cpp,
+      defaultValues.python,
+      defaultValues.java,
+    ]),
+  );
 
   const options = {
     fontSize: userFontSize,
   };
 
+  /* 예제 하나 컴파일하는 함수 */
   const compile = () => {
     setFlag(true);
     setIsLoading(true);
+    const userCode =
+      userLang === 'cpp'
+        ? userCodeTest[problemId - 1][0]
+        : userLang === 'python'
+        ? userCodeTest[problemId - 1][1]
+        : userCodeTest[problemId - 1][2];
     if (userCode === '') {
       return;
     }
@@ -74,7 +91,14 @@ export default function CustomEditor({
       });
   };
 
+  /* 한 번에 여러 예제에 대한 테스트 결과를 받아오는 API */
   const sampleCompile = async () => {
+    const userCode =
+      userLang === 'cpp'
+        ? userCodeTest[problemId - 1][0]
+        : userLang === 'python'
+        ? userCodeTest[problemId - 1][1]
+        : userCodeTest[problemId - 1][2];
     if (userCode === '') {
       return;
     }
@@ -84,8 +108,8 @@ export default function CustomEditor({
       {
         language: axiosLang,
         code: userCode,
-        input: problemInfo.input_sample,
-        output: problemInfo.output_sample,
+        input: problemInfo[problemId - 1].input_sample,
+        output: problemInfo[problemId - 1].output_sample,
       },
       { withCredentials: true },
     );
@@ -93,6 +117,7 @@ export default function CustomEditor({
     return output.data;
   };
 
+  /* 한 번에 여러 예제에 대한 테스트 결과를 Output 박스에 작성하는 함수 */
   const samplesCompile = async () => {
     setFlag(true);
     setIsLoading(true);
@@ -129,6 +154,7 @@ export default function CustomEditor({
     setUserOutput('');
   };
 
+  /* 커스텀 에디터 적용하기 */
   useEffect(() => {
     loader.init().then((monaco) => {
       monaco.editor.defineTheme('myTheme', theme);
@@ -141,22 +167,21 @@ export default function CustomEditor({
         <select
           className="w-[5rem] ml-[0.5rem] mb-[0.5rem] bg-gray-900"
           onChange={(e) => {
-            console.log(e.target.value);
             setUserLang(e.target.value);
             if (e.target.value === 'cpp') {
               setAxiosLang('Cpp');
-              setDefualtValue(defaultValues.cpp);
-              setUserCode(defaultValues.cpp);
+              // setDefualtValue(defaultValues.cpp);
+              // setUserCode(defaultValues.cpp);
             }
             if (e.target.value === 'python') {
               setAxiosLang('Python');
-              setDefualtValue(defaultValues.python);
-              setUserCode(defaultValues.python);
+              // setDefualtValue(defaultValues.python);
+              // setUserCode(defaultValues.python);
             }
             if (e.target.value === 'java') {
               setAxiosLang('Java');
-              setDefualtValue(defaultValues.java);
-              setUserCode(defaultValues.java);
+              // setDefualtValue(defaultValues.java);
+              // setUserCode(defaultValues.java);
             }
           }}
         >
@@ -174,10 +199,33 @@ export default function CustomEditor({
             theme="myTheme"
             language={userLang}
             // defaultValue={defaultValue}
-            value={defaultValue}
+            value={
+              userLang === 'cpp'
+                ? userCodeTest[problemId - 1][0]
+                : userLang === 'python'
+                ? userCodeTest[problemId - 1][1]
+                : userCodeTest[problemId - 1][2]
+            }
             onChange={(value) => {
               if (typeof value === 'string') {
-                setUserCode(value);
+                const index = ['cpp', 'python', 'java'].indexOf(userLang);
+                if (index !== -1) {
+                  setUserCodeTest((prev) => {
+                    return prev.map((item, idx) => {
+                      if (idx === problemId - 1) {
+                        return item.map((item2, idx2) => {
+                          if (idx2 === index) {
+                            return value;
+                          } else {
+                            return item2;
+                          }
+                        });
+                      } else {
+                        return item;
+                      }
+                    });
+                  });
+                }
               }
             }}
           />
@@ -205,8 +253,6 @@ export default function CustomEditor({
           >
             Output
           </button>
-          {/* <Gap wSize="70%" />
-          <div>실행시간 : {executeTime}s</div> */}
         </div>
         <div className="h-[24vh] w-full mb-[1rem] bg-[#2E3642] p-[1rem] rounded-xl overflow-y-auto overflow-x-hidden">
           {flag ? (
