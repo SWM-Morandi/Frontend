@@ -157,7 +157,7 @@ export default function CustomEditor({
           `<div style="display: flex; flex-direction: row; margin: 0 0 1rem 2rem;">
             <div style="color: #686868;">정답 여부  >  </div>
             <div style="color: ${
-              temp[idx].result === '실패' ? 'red' : 'green'
+              temp[idx].result === '성공' ? 'green' : 'red'
             }">${temp[idx].result}</div>
           </div>`,
       );
@@ -256,7 +256,7 @@ export default function CustomEditor({
               color: flag ? '#FFFFFF' : '#12AC79',
             }}
           >
-            Input
+            입력하기
           </button>
           <Gap wSize="0.5rem" />
           <button
@@ -267,7 +267,7 @@ export default function CustomEditor({
               color: flag ? '#12AC79' : '#FFFFFF',
             }}
           >
-            Output
+            출력결과
           </button>
         </div>
         <div className="h-[24vh] w-full mb-[1rem] bg-[#2E3642] p-[1rem] rounded-xl overflow-y-auto overflow-x-hidden">
@@ -296,28 +296,28 @@ export default function CustomEditor({
           )}
         </div>
         <div className="flex flex-row justify-end items-center">
+          <button
+            onClick={compile}
+            className="h-[2rem] w-[6rem] border-2 border-white rounded-xl"
+          >
+            실행하기
+          </button>
+          <div className="w-[1rem]" />
+          <button
+            onClick={samplesCompile}
+            className="h-[2rem] w-[6rem] bg-[#F04452] rounded-xl"
+          >
+            예제결과
+          </button>
+          <div className="w-[1rem]" />
           <Link
             href={`https://www.acmicpc.net/submit/${problemBojId}`}
             target="_blank"
           >
             <button className="h-[2rem] w-[6rem] bg-[#12AC79] rounded-xl">
-              Submit
+              제출하기
             </button>
           </Link>
-          <div className="w-[1rem]" />
-          <button
-            onClick={compile}
-            className="h-[2rem] w-[6rem] border-2 border-white rounded-xl"
-          >
-            Run
-          </button>
-          <div className="w-[1rem]" />
-          <button
-            onClick={samplesCompile}
-            className="h-[2rem] w-[6rem] border-2 border-white rounded-xl"
-          >
-            예제 컴파일
-          </button>
         </div>
       </div>
     </>
