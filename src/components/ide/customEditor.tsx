@@ -81,8 +81,24 @@ export default function CustomEditor({
         { withCredentials: true },
       )
       .then((res) => {
-        console.log(res.data.output);
-        setUserOutput(res.data.output);
+        console.log('1234');
+        console.log(res.data);
+        setUserOutput(
+          `<div style="display: flex; flex-direction: row; margin: 0.3rem 0 0 1rem;">
+              <div style="color: #686868;">컴파일 결과 >  </div>
+              <div style="color: ${
+                res.data.result === '성공' ? 'green' : 'red'
+              }">${res.data.result}</div>
+            </div>` +
+            `<div style="display: flex; flex-direction: row; margin: 0 0 0 1rem;">
+              <div style="color: #686868;">실행 결과  >  </div>
+              <div>${res.data.output}</div>
+            </div>` +
+            `<div style="display: flex; flex-direction: row; margin: 0 0 1rem 1rem;">
+              <div style="color: #686868;">실행 시간  >  </div>
+              <div>${res.data.executeTime}s</div>
+            </div>`,
+        );
         setExecuteTime(res.data.runTime);
         setIsLoading(false);
       })
