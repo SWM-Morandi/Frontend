@@ -19,6 +19,14 @@ export default function SignUpBox() {
       console.log(err);
     }
   };
+  const githubSignUp = async () => {
+    try {
+      const res = await axiosInstance.get('/oauths/github');
+      router.push(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -45,7 +53,7 @@ export default function SignUpBox() {
       <Gap hSize="1rem" />
 
       <div
-        onClick={googleSignUp}
+        onClick={githubSignUp}
         className="flex flex-row justify-center items-center h-[4rem] w-[27rem] bg-gray-900 rounded-2xl text-white text-[1.2rem] cursor-pointer"
       >
         <GithubIcon />

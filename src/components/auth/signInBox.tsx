@@ -19,6 +19,14 @@ export default function SingInBox() {
       console.log(err);
     }
   };
+  const githubSignIn = async () => {
+    try {
+      const res = await axiosInstance.get('/oauths/github');
+      router.push(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -48,7 +56,7 @@ export default function SingInBox() {
 
       {/* 깃허브 로그인 버튼 */}
       <div
-        onClick={googleSignIn}
+        onClick={githubSignIn}
         className="flex flex-row justify-center items-center h-[4rem] w-[27rem] bg-gray-900 rounded-2xl text-white text-[1.2rem] cursor-pointer"
       >
         <GithubIcon />
