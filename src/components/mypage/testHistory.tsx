@@ -1,6 +1,7 @@
 'use client';
 
 import Gap from '@/utils/gap';
+import dayjs from 'dayjs';
 import { axiosInstance } from '@/api/axiosSetting';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
@@ -100,7 +101,11 @@ function HistoryComponent({
           <div className="text-[1.5rem] font-bold">
             {testHistoryInfo?.testTypename}
           </div>
-          <div className="text-gray-500">{testHistoryInfo?.testDate}</div>
+          <div className="text-gray-500">
+            {dayjs(testHistoryInfo?.testDate).format('YYYY')}년{' '}
+            {dayjs(testHistoryInfo?.testDate).format('MM')}월{' '}
+            {dayjs(testHistoryInfo?.testDate).format('DD')}일{' '}
+          </div>
         </div>
         <div className="flex flex-row items-center">
           <div className="flex flex-col items-center mr-[1.5rem] bg-white px-[1rem] py-[0.5rem] rounded-xl">
