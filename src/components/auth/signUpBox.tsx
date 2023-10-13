@@ -19,6 +19,14 @@ export default function SignUpBox() {
       console.log(err);
     }
   };
+  const naverSignUp = async () => {
+    try {
+      const res = await axiosInstance.get('/oauths/naver');
+      router.push(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   const githubSignUp = async () => {
     try {
       const res = await axiosInstance.get('/oauths/github');
@@ -42,7 +50,7 @@ export default function SignUpBox() {
       <Gap hSize="1rem" />
 
       <div
-        onClick={googleSignUp}
+        onClick={naverSignUp}
         className="flex flex-row justify-center items-center h-[4rem] w-[27rem] bg-[#03C75A] rounded-2xl text-white text-[1.2rem] cursor-pointer"
       >
         <NaverIcon />

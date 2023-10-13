@@ -19,6 +19,14 @@ export default function SingInBox() {
       console.log(err);
     }
   };
+  const naverSignIn = async () => {
+    try {
+      const res = await axiosInstance.get('/oauths/naver');
+      router.push(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   const githubSignIn = async () => {
     try {
       const res = await axiosInstance.get('/oauths/github');
@@ -44,7 +52,7 @@ export default function SingInBox() {
 
       {/* 네이버 로그인 버튼 */}
       <div
-        onClick={googleSignIn}
+        onClick={naverSignIn}
         className="flex flex-row justify-center items-center h-[4rem] w-[27rem] bg-[#03C75A] rounded-2xl text-white text-[1.2rem] cursor-pointer"
       >
         <NaverIcon />
