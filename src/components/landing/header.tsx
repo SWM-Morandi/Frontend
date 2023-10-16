@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import Image from 'next/image';
+import Logo from '@/assets/whiteMorandiLogo.svg';
 
 export default function Header() {
   return (
@@ -9,7 +11,8 @@ export default function Header() {
             href="/"
             className="flex title-font font-medium justify-center items-center"
           >
-            <span className="ml-3 text-[2rem] font-black">모랜디</span>
+            <Image src={Logo} width={117.6} height={69.6} alt={'로고'} />
+            {/* <span className="ml-3 text-[2rem] font-black">모랜디</span> */}
           </Link>
           <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
             <Link href="/signin" className="mr-[2rem] hover:text-[#FFA935]">
