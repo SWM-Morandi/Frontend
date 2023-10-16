@@ -1,16 +1,20 @@
 interface TestResult {
-  bojProblemId: number;
-  testProblemId: number;
-  executionTime: number;
-  isSolved: boolean;
+  bojProblemId: number | undefined;
+  testProblemId: number | undefined;
+  executionTime: number | undefined;
+  isSolved: boolean | undefined;
 }
 
 export default function TestResultBox({
   testResults,
   bojId,
+  beforeRating,
+  afterRating,
 }: {
-  testResults: TestResult[];
-  bojId: string;
+  testResults: TestResult[] | undefined;
+  bojId: string | undefined;
+  beforeRating: number | undefined;
+  afterRating: number | undefined;
 }) {
   let totalSolved = 0;
   return (
@@ -29,7 +33,7 @@ export default function TestResultBox({
                       >
                         닉네임
                       </th>
-                      {testResults.map((item, index) => (
+                      {testResults?.map((item, index) => (
                         <>
                           <th
                             scope="col"
@@ -43,9 +47,15 @@ export default function TestResultBox({
 
                       <th
                         scope="col"
-                        className="px-4 py-3.5 text-sm font-normal w-[20%]"
+                        className="px-4 py-3.5 text-sm font-normal w-[15%]"
                       >
                         맞은 문제 수
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-4 py-3.5 text-sm font-normal w-[15%]"
+                      >
+                        레이팅 변화
                       </th>
                     </tr>
                   </thead>
@@ -53,7 +63,7 @@ export default function TestResultBox({
                     {/*dark:divide-gray-700 dark:bg-gray-900*/}
                     <tr className="text-[1.2rem] font-bold">
                       <td>{bojId}</td>
-                      {testResults.map((item, index) => {
+                      {testResults?.map((item, index) => {
                         if (item.isSolved) totalSolved++;
                         return (
                           <td key={index}>
@@ -71,6 +81,17 @@ export default function TestResultBox({
                         );
                       })}
                       <td>{totalSolved} Solve</td>
+                      <td>
+                        <div
+                          className={
+                            beforeRating! > afterRating!
+                              ? 'text-[#F04452]'
+                              : 'text-[#12AC79]'
+                          }
+                        >
+                          {beforeRating} {'->'} {afterRating}
+                        </div>
+                      </td>
                     </tr>
                   </tbody>
                 </table>

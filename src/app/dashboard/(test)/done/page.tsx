@@ -30,12 +30,19 @@ interface TestResult {
   isSolved: boolean;
 }
 
+interface TestResultAxiosType {
+  testDate: string | undefined;
+  beforeRating: number | undefined;
+  afterRating: number | undefined;
+  attemptProblemDtos: TestResult[] | undefined;
+}
+
 export default function CodingTestBeforePage() {
   const router = useSearchParams();
   const testId = router.get('testId');
   const testTypeId = router.get('testTypeId');
 
-  const [testResults, setTestResults] = useState<TestResult[]>([]);
+  const [testResults, setTestResults] = useState<TestResultAxiosType>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const getBojIdAxios: () => Promise<{
@@ -51,10 +58,10 @@ export default function CodingTestBeforePage() {
     return response.data;
   };
 
-  const testResultAxios: (bojId: string) => Promise<TestResult[]> = async (
-    bojId,
-  ) => {
-    const res = await axiosInstance.post<TestResult[]>(
+  const testResultAxios: (
+    bojId: string,
+  ) => Promise<TestResultAxiosType> = async (bojId) => {
+    const res = await axiosInstance.post<TestResultAxiosType>(
       '/tests/exit',
       { bojId: bojId, testId: testId, testTypeId: testTypeId },
       {
@@ -89,7 +96,12 @@ export default function CodingTestBeforePage() {
             <Gap hSize="1rem" />
 
             {/* 시험 결과 정보 테이블 */}
-            <TestResultBox bojId={data!.bojId} testResults={testResults} />
+            <TestResultBox
+              bojId={data?.bojId}
+              testResults={testResults?.attemptProblemDtos}
+              beforeRating={testResults?.beforeRating}
+              afterRating={testResults?.afterRating}
+            />
             <Gap hSize="3rem" />
 
             {/* 종료하기 버튼 */}
