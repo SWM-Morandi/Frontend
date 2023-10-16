@@ -6,7 +6,7 @@ interface CodingTestInfoProps {
   startDifficulty: string | undefined;
   endDifficulty: string | undefined;
   averageCorrectAnswerRate: number | undefined;
-  frequencyTypes: string | undefined;
+  frequentTypes: string | undefined;
 }
 
 export default function CodintTestInfo({
@@ -15,7 +15,7 @@ export default function CodintTestInfo({
   startDifficulty,
   endDifficulty,
   averageCorrectAnswerRate,
-  frequencyTypes,
+  frequentTypes,
 }: CodingTestInfoProps) {
   return (
     <>
@@ -41,7 +41,7 @@ export default function CodintTestInfo({
       {/* 코딩테스트 출제 유형 정보 */}
       <div className="flex flex-row justify-between w-[80%]">
         <div className="text-[#8B95A1]">문제 출제 유형</div>
-        <div>{frequencyTypes}</div>
+        <div>{frequentTypes}</div>
       </div>
       <Gap hSize="0.4rem" />
 
