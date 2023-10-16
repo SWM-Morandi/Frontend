@@ -1,11 +1,12 @@
 import Gap from '@/utils/gap';
 
 interface CodingTestInfoProps {
-  testTime: number;
-  problemCount: number;
-  startDifficulty: string;
-  endDifficulty: string;
-  averageCorrectAnswerRate: number;
+  testTime: number | undefined;
+  problemCount: number | undefined;
+  startDifficulty: string | undefined;
+  endDifficulty: string | undefined;
+  averageCorrectAnswerRate: number | undefined;
+  frequencyTypes: string | undefined;
 }
 
 export default function CodintTestInfo({
@@ -14,6 +15,7 @@ export default function CodintTestInfo({
   startDifficulty,
   endDifficulty,
   averageCorrectAnswerRate,
+  frequencyTypes,
 }: CodingTestInfoProps) {
   return (
     <>
@@ -39,7 +41,7 @@ export default function CodintTestInfo({
       {/* 코딩테스트 출제 유형 정보 */}
       <div className="flex flex-row justify-between w-[80%]">
         <div className="text-[#8B95A1]">문제 출제 유형</div>
-        <div>그리디, 다이나믹 프로그래밍, DFS와 BFS</div>
+        <div>{frequencyTypes}</div>
       </div>
       <Gap hSize="0.4rem" />
 

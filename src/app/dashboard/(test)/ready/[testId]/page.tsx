@@ -55,6 +55,7 @@ interface TestType {
   endDifficulty: string;
   averageCorrectAnswerRate: number;
   numberOfTestTrial: number;
+  frequencyTypes: string;
 }
 
 const logo: { [k: string]: StaticImageData } = {
@@ -84,6 +85,8 @@ export default function CodingTestBeforePage({
     'testType',
     testTypeAxios,
   );
+
+  console.log(data);
 
   if (isLoading) return <div>로딩중...</div>;
 
@@ -123,11 +126,12 @@ export default function CodingTestBeforePage({
 
           {/* 코딩테스트 정보*/}
           <CodingTestInfo
-            testTime={data!.testTime}
-            problemCount={data!.problemCount}
-            startDifficulty={data!.startDifficulty}
-            endDifficulty={data!.endDifficulty}
-            averageCorrectAnswerRate={data!.averageCorrectAnswerRate}
+            testTime={data?.testTime}
+            problemCount={data?.problemCount}
+            startDifficulty={data?.startDifficulty}
+            endDifficulty={data?.endDifficulty}
+            averageCorrectAnswerRate={data?.averageCorrectAnswerRate}
+            frequencyTypes={data?.frequencyTypes}
           />
           <Gap hSize="2rem" />
 
