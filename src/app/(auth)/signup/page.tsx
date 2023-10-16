@@ -1,13 +1,14 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import Footer from '@/components/landing/footer';
-import SignUpBox from '@/components/auth/signUpBox';
+import SignUpBox from '@/components/auth/signInBox';
+import Logo from '@/assets/blackMorandiLogo.svg';
 
 export default function SingUp() {
   return (
     <>
       <div className="flex flex-col justify-center items-center h-[80vh]">
-        <div className="text-[5rem] font-black">모랜디</div>
-        <div className="text-[1.5rem] font-bold">모두의 랜덤 디펜스</div>
+        <Image src={Logo} width={220.5} height={130.5} alt={'로고'} />
         <div className="my-[2rem]">
           <SignUpBox />
         </div>
