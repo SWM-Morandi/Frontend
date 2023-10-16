@@ -1,6 +1,7 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
 import QueryCientLayout from './queryClient';
+import SEO from '@/app/seo';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
@@ -15,6 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <SEO />
       <body className={inter.className}>
         <QueryCientLayout>{children}</QueryCientLayout>
         <script
