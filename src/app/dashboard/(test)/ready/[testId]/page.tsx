@@ -55,7 +55,7 @@ interface TestType {
   endDifficulty: string;
   averageCorrectAnswerRate: number;
   numberOfTestTrial: number;
-  frequencyTypes: string;
+  frequentTypes: string;
 }
 
 const logo: { [k: string]: StaticImageData } = {
@@ -131,7 +131,7 @@ export default function CodingTestBeforePage({
             startDifficulty={data?.startDifficulty}
             endDifficulty={data?.endDifficulty}
             averageCorrectAnswerRate={data?.averageCorrectAnswerRate}
-            frequencyTypes={data?.frequencyTypes}
+            frequentTypes={data?.frequentTypes}
           />
           <Gap hSize="2rem" />
 
