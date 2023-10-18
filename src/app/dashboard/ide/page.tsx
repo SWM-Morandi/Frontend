@@ -46,6 +46,7 @@ export default function IDE() {
   const [testProblems, setTestProblems] = useState<BojProblemInfoType[]>([]);
   const [problemId, setProblemId] = useState(1);
   const [time, setTime] = useState(-1);
+  const [axiosTestId, setAxiosTestId] = useState<number>(-1);
 
   /* 타이머 useEffect */
   useEffect(() => {
@@ -99,6 +100,7 @@ export default function IDE() {
           testProblemsAxios(testDataResponse),
         );
         setTestProblems(responses);
+        setAxiosTestId(testDataResponse.testId);
         setIsLoading(false);
       },
       staleTime: 987654321,
@@ -135,7 +137,7 @@ export default function IDE() {
                   problemInfo={testProblems[problemId - 1]}
                 />
                 <CustomEditor
-                  testId={testId}
+                  testId={axiosTestId}
                   testCodeDtos={testData?.testCodeDtos}
                   problemBojId={testData?.bojProblemIds[problemId - 1]}
                   problemInfo={testProblems}
