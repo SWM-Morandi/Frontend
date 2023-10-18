@@ -38,7 +38,7 @@ export default function CustomEditor({
   problemInfo,
   problemId,
 }: {
-  testId: string | null;
+  testId: number | undefined;
   testCodeDtos: TestCodeDto[] | undefined;
   problemBojId: number | undefined;
   problemInfo: ProblemInfoType[];
@@ -131,6 +131,7 @@ export default function CustomEditor({
       return;
     }
     console.log(userCode);
+    console.log('testId: ', testId);
     const output = await axiosInstance.post(
       '/tests/tc-output',
       {
