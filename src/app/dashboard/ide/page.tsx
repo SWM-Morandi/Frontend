@@ -15,10 +15,18 @@ import Lottie from 'react-lottie-player';
 
 import Loading from '@/assets/lottiefiles/loading.json';
 
+interface TestCodeDto {
+  problemNumber: number;
+  pythonCode: string;
+  javaCode: string;
+  cppCode: string;
+}
+
 interface TestDataType {
   testId: number;
   bojProblemIds: number[];
   remainingTime: number;
+  testCodeDtos: TestCodeDto[];
 }
 
 interface BojProblemInfoType {
@@ -78,6 +86,7 @@ export default function IDE() {
       console.log(response);
       return response.data;
     });
+
   const { error, data: testData } = useQuery<TestDataType>(
     'testProblems',
     testDataAxios,
@@ -126,6 +135,7 @@ export default function IDE() {
                   problemInfo={testProblems[problemId - 1]}
                 />
                 <CustomEditor
+                  testCodeDtos={testData?.testCodeDtos}
                   problemBojId={testData?.bojProblemIds[problemId - 1]}
                   problemInfo={testProblems}
                   problemId={problemId}
