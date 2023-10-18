@@ -24,12 +24,21 @@ interface ProblemInfoType {
   output_sample: Array<string>;
 }
 
+interface TestCodeDto {
+  problemNumber: number;
+  pythonCode: string;
+  javaCode: string;
+  cppCode: string;
+}
+
 export default function CustomEditor({
+  testCodeDtos,
   problemBojId,
   problemInfo,
   problemId,
 }: {
-  problemBojId?: number;
+  testCodeDtos: TestCodeDto[] | undefined;
+  problemBojId: number | undefined;
   problemInfo: ProblemInfoType[];
   problemId: number;
 }) {
@@ -44,13 +53,12 @@ export default function CustomEditor({
   // const [defaultValue, setDefualtValue] = useState(defaultValues.cpp);
   const [executeTime, setExecuteTime] = useState(0);
 
-  const [userCodeTest, setUserCodeTest] = useState<string[][]>(
-    new Array(problemInfo.length).fill([
-      defaultValues.cpp,
-      defaultValues.python,
-      defaultValues.java,
-    ]),
-  );
+  const firstCodeTest: string[][] = [];
+  testCodeDtos?.map((item) => {
+    firstCodeTest.push([item.cppCode, item.pythonCode, item.javaCode]);
+  });
+
+  const [userCodeTest, setUserCodeTest] = useState<string[][]>(firstCodeTest);
 
   const options = {
     fontSize: userFontSize,
@@ -137,7 +145,7 @@ export default function CustomEditor({
   const samplesCompile = async () => {
     setFlag(true);
     setIsLoading(true);
-    let samplesCompileOutput: string = '';
+    let samplesCompileOutput = '';
 
     const temp = await sampleCompile();
     console.log(temp);
