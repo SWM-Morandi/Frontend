@@ -181,6 +181,24 @@ export default function CustomEditor({
     setIsLoading(false);
   };
 
+  const bojSubmit = async () => {
+    const res = await axiosInstance.post(
+      '/submit/baekjoon',
+      {
+        language: axiosLang,
+        sourceCode:
+          userLang === 'cpp'
+            ? userCodeTest[problemId - 1][0]
+            : userLang === 'python'
+            ? userCodeTest[problemId - 1][1]
+            : userCodeTest[problemId - 1][2],
+        problemId: problemBojId,
+      },
+      { withCredentials: true },
+    );
+    console.log(res);
+  };
+
   const clearOutput = () => {
     setUserOutput('');
   };
@@ -325,14 +343,17 @@ export default function CustomEditor({
             예제결과
           </button>
           <div className="w-[1rem]" />
-          <Link
+          {/* <Link
             href={`https://www.acmicpc.net/submit/${problemBojId}`}
             target="_blank"
+          > */}
+          <button
+            onClick={bojSubmit}
+            className="h-[2rem] w-[6rem] bg-[#12AC79] rounded-xl"
           >
-            <button className="h-[2rem] w-[6rem] bg-[#12AC79] rounded-xl">
-              제출하기
-            </button>
-          </Link>
+            제출하기
+          </button>
+          {/* </Link> */}
         </div>
       </div>
     </>
