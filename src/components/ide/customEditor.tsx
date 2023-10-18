@@ -197,6 +197,11 @@ export default function CustomEditor({
       { withCredentials: true },
     );
     console.log(res);
+
+    /*
+    위 res가 200으로 반환이 됐다면, 크롬 익스텐션에 다른 이벤트를 발생시키는 코드를 작성해야 함.
+    그 코드 또한 await으로 해서, 코드 성공 또는 실패가 나온다면, 그것을 반환받아서 화면상의 UI/UX 를 보여주는 코드를 작성하기..
+    */
   };
 
   const clearOutput = () => {
