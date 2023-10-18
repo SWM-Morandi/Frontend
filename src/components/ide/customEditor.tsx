@@ -181,6 +181,29 @@ export default function CustomEditor({
     setIsLoading(false);
   };
 
+  const bojSubmit = async () => {
+    const res = await axiosInstance.post(
+      '/submit/baekjoon',
+      {
+        language: axiosLang,
+        sourceCode:
+          userLang === 'cpp'
+            ? userCodeTest[problemId - 1][0]
+            : userLang === 'python'
+            ? userCodeTest[problemId - 1][1]
+            : userCodeTest[problemId - 1][2],
+        problemId: problemBojId,
+      },
+      { withCredentials: true },
+    );
+    console.log(res);
+
+    /*
+    위 res가 200으로 반환이 됐다면, 크롬 익스텐션에 다른 이벤트를 발생시키는 코드를 작성해야 함.
+    그 코드 또한 await으로 해서, 코드 성공 또는 실패가 나온다면, 그것을 반환받아서 화면상의 UI/UX 를 보여주는 코드를 작성하기..
+    */
+  };
+
   const clearOutput = () => {
     setUserOutput('');
   };
@@ -325,14 +348,17 @@ export default function CustomEditor({
             예제결과
           </button>
           <div className="w-[1rem]" />
-          <Link
+          {/* <Link
             href={`https://www.acmicpc.net/submit/${problemBojId}`}
             target="_blank"
+          > */}
+          <button
+            onClick={bojSubmit}
+            className="h-[2rem] w-[6rem] bg-[#12AC79] rounded-xl"
           >
-            <button className="h-[2rem] w-[6rem] bg-[#12AC79] rounded-xl">
-              제출하기
-            </button>
-          </Link>
+            제출하기
+          </button>
+          {/* </Link> */}
         </div>
       </div>
     </>
