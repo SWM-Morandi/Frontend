@@ -135,6 +135,7 @@ export default function IDE() {
                   problemInfo={testProblems[problemId - 1]}
                 />
                 <CustomEditor
+                  testId={testId}
                   testCodeDtos={testData?.testCodeDtos}
                   problemBojId={testData?.bojProblemIds[problemId - 1]}
                   problemInfo={testProblems}

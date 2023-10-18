@@ -32,11 +32,13 @@ interface TestCodeDto {
 }
 
 export default function CustomEditor({
+  testId,
   testCodeDtos,
   problemBojId,
   problemInfo,
   problemId,
 }: {
+  testId: string | null;
   testCodeDtos: TestCodeDto[] | undefined;
   problemBojId: number | undefined;
   problemInfo: ProblemInfoType[];
@@ -85,6 +87,8 @@ export default function CustomEditor({
           language: axiosLang,
           code: userCode,
           input: userInput,
+          testId: testId,
+          problemNumber: problemId,
         },
         { withCredentials: true },
       )
@@ -134,6 +138,8 @@ export default function CustomEditor({
         code: userCode,
         input: problemInfo[problemId - 1].input_sample,
         output: problemInfo[problemId - 1].output_sample,
+        testId: testId,
+        problemNumber: problemId,
       },
       { withCredentials: true },
     );
