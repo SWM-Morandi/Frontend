@@ -1,10 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Gap from '@/utils/gap';
 import CopyIcon from '@/assets/icons/copyIcon';
 import CheckIcon from '@/assets/icons/checkIcon';
+import MathJaxLoader from '@/components/ide/mathJaxLoader';
+
+import './mathJaxStyle.css';
 
 interface ProblemInfoType {
   problem_title: string;
@@ -55,6 +58,7 @@ export default function ProblemInfo({
 
   return (
     <>
+      <MathJaxLoader />
       <div className="flex flex-col w-[35vw] h-[90vh] mr-[1rem] bg-[#2E3642] rounded-2xl overflow-auto">
         <div className="p-[1.5rem]">
           <div className="text-[20px] mb-[1rem]">

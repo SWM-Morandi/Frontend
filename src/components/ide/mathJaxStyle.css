@@ -1,0 +1,7 @@
+[aria-hidden='true'] {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  position: absolute !important;
+}

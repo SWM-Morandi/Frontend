@@ -3,7 +3,6 @@ import { Inter } from 'next/font/google';
 import QueryCientLayout from './queryClient';
 import SEO from '@/app/seo';
 import GA4 from '@/app/ga4';
-import MathJax from '@/app/mathJax';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
@@ -20,7 +19,6 @@ export default function RootLayout({
     <html lang="en">
       <GA4 />
       <SEO />
-      <MathJax />
       <body className={inter.className}>
         <QueryCientLayout>{children}</QueryCientLayout>
       </body>
