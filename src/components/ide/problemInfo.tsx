@@ -6,7 +6,6 @@ import Gap from '@/utils/gap';
 import CopyIcon from '@/assets/icons/copyIcon';
 import CheckIcon from '@/assets/icons/checkIcon';
 import MathJaxLoader from '@/components/ide/mathJaxLoader';
-
 import './mathJaxStyle.css';
 
 interface ProblemInfoType {
@@ -55,9 +54,8 @@ export default function ProblemInfo({
 
     alert(result); // "완료!"
   }
-
   return (
-    <>
+    <div>
       <MathJaxLoader />
       <div className="flex flex-col w-[35vw] h-[90vh] mr-[1rem] bg-[#2E3642] rounded-2xl overflow-auto">
         <div className="p-[1.5rem]">
@@ -146,6 +144,6 @@ export default function ProblemInfo({
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -192,7 +192,7 @@ export default function CustomEditor({
             : userLang === 'python'
             ? userCodeTest[problemId - 1][1]
             : userCodeTest[problemId - 1][2],
-        problemId: problemBojId,
+        bojProblemId: problemBojId,
       },
       { withCredentials: true },
     );
@@ -252,7 +252,7 @@ export default function CustomEditor({
             width="100%"
             theme="myTheme"
             language={userLang}
-            // defaultValue={defaultValue}
+            // defaultValue="1234"
             value={
               userLang === 'cpp'
                 ? userCodeTest[problemId - 1][0]
@@ -348,51 +348,17 @@ export default function CustomEditor({
             예제결과
           </button>
           <div className="w-[1rem]" />
-          {/* <Link
-            href={`https://www.acmicpc.net/submit/${problemBojId}`}
-            target="_blank"
-          > */}
           <button
             onClick={bojSubmit}
             className="h-[2rem] w-[6rem] bg-[#12AC79] rounded-xl"
           >
             제출하기
           </button>
-          {/* </Link> */}
         </div>
       </div>
     </>
   );
 }
-
-const defaultValues = {
-  cpp: `#include <bits/stdc++.h>
-using namespace std;
-
-int main() {
-  ios_base::sync_with_stdio(false);
-  cin.tie(NULL);
-  cout.tie(NULL);
-
-  cout << "Hello World!";
-  
-  return 0;
-}
-`,
-  python: `print("Hello World!")
-`,
-  java: `import java.util.*;
-import java.lang.*;
-import java.io.*;
-
-class Main
-{
-	public static void main (String[] args)
-	{
-		System.out.println("Hello World!");
-	}
-}`,
-};
 
 const theme: any = {
   base: 'vs-dark',
