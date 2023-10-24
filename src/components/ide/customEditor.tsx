@@ -4,6 +4,7 @@ import { axiosInstance } from '@/api/axiosSetting';
 import Editor, { loader } from '@monaco-editor/react';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Pusher from 'pusher-js/with-encryption';
 
 import Lottie from 'react-lottie-player';
 import Loading from '@/assets/lottiefiles/loading.json';
@@ -31,18 +32,22 @@ interface TestCodeDto {
   cppCode: string;
 }
 
+import { Dispatch, SetStateAction } from 'react';
+
 export default function CustomEditor({
   testId,
   testCodeDtos,
   problemBojId,
   problemInfo,
   problemId,
+  setIsSolved,
 }: {
   testId: number | undefined;
   testCodeDtos: TestCodeDto[] | undefined;
   problemBojId: number | undefined;
   problemInfo: ProblemInfoType[];
   problemId: number;
+  setIsSolved: Dispatch<SetStateAction<boolean[]>>;
 }) {
   const [userInput, setUserInput] = useState('');
   const [userFontSize, setUserFontSize] = useState(16); // 추후에 폰트 사이즈 조절 기능 추가
@@ -52,8 +57,12 @@ export default function CustomEditor({
   const [axiosLang, setAxiosLang] = useState('Cpp'); // axios 요청 시 사용할 언어
   const [userOutput, setUserOutput] = useState<string>('');
   const [flag, setFlag] = useState(false);
-  // const [defaultValue, setDefualtValue] = useState(defaultValues.cpp);
+
   const [executeTime, setExecuteTime] = useState(0);
+
+  // 백준 제출시 몇 프로 테스트케이스 맞췄는지 주시하는 state
+  const [solveFlag, setSolveFlag] = useState<boolean>(false);
+  const [solveProgress, setSolveProgress] = useState<string>('0%');
 
   const firstCodeTest: string[][] = [];
   testCodeDtos?.map((item) => {
@@ -182,26 +191,75 @@ export default function CustomEditor({
   };
 
   const bojSubmit = async () => {
-    const res = await axiosInstance.post(
-      '/submit/baekjoon',
-      {
-        language: axiosLang,
-        sourceCode:
-          userLang === 'cpp'
-            ? userCodeTest[problemId - 1][0]
-            : userLang === 'python'
-            ? userCodeTest[problemId - 1][1]
-            : userCodeTest[problemId - 1][2],
-        bojProblemId: problemBojId,
-      },
-      { withCredentials: true },
-    );
-    console.log(res);
+    try {
+      setSolveFlag(true);
+      const res = await axiosInstance.post(
+        '/submit/baekjoon',
+        {
+          language: axiosLang,
+          sourceCode:
+            userLang === 'cpp'
+              ? userCodeTest[problemId - 1][0]
+              : userLang === 'python'
+              ? userCodeTest[problemId - 1][1]
+              : userCodeTest[problemId - 1][2],
+          bojProblemId: problemBojId,
+        },
+        { withCredentials: true },
+      );
 
-    /*
-    위 res가 200으로 반환이 됐다면, 크롬 익스텐션에 다른 이벤트를 발생시키는 코드를 작성해야 함.
-    그 코드 또한 await으로 해서, 코드 성공 또는 실패가 나온다면, 그것을 반환받아서 화면상의 UI/UX 를 보여주는 코드를 작성하기..
-    */
+      if (!res.data.solutionId) {
+        console.log('백준 제출 에러 발생');
+        setSolveFlag(false);
+        return;
+      }
+
+      const pusher = new Pusher('a2cb611847131e062b32', {
+        cluster: 'ap1',
+      });
+
+      const channel = pusher.subscribe(`solution-${res.data.solutionId}`);
+
+      channel.bind('update', function (data: any) {
+        const printResultMessage = async (message: string) => {
+          setSolveProgress(message);
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+          setSolveFlag(false);
+          setSolveProgress('0%');
+        };
+
+        if (data.progress) {
+          setSolveProgress(data.progress + '%');
+        }
+
+        if (data.result == 4) {
+          printResultMessage('정답입니다!');
+          setIsSolved((prev: boolean[]) => {
+            return prev.map((item, idx) => {
+              if (idx === problemId - 1) {
+                return true;
+              } else {
+                return item;
+              }
+            });
+          });
+        }
+        if (data.result == 6) {
+          printResultMessage('오답입니다!');
+        }
+        if (data.result == 10) {
+          printResultMessage('런타임 에러');
+        }
+        if (data.result == 11) {
+          printResultMessage('컴파일 에러');
+        }
+
+        console.log('Received event:', data);
+      });
+    } catch (err) {
+      setSolveFlag(false);
+      console.log(err);
+    }
   };
 
   const clearOutput = () => {
@@ -224,18 +282,12 @@ export default function CustomEditor({
             setUserLang(e.target.value);
             if (e.target.value === 'cpp') {
               setAxiosLang('Cpp');
-              // setDefualtValue(defaultValues.cpp);
-              // setUserCode(defaultValues.cpp);
             }
             if (e.target.value === 'python') {
               setAxiosLang('Python');
-              // setDefualtValue(defaultValues.python);
-              // setUserCode(defaultValues.python);
             }
             if (e.target.value === 'java') {
               setAxiosLang('Java');
-              // setDefualtValue(defaultValues.java);
-              // setUserCode(defaultValues.java);
             }
           }}
         >
@@ -348,12 +400,26 @@ export default function CustomEditor({
             예제결과
           </button>
           <div className="w-[1rem]" />
-          <button
-            onClick={bojSubmit}
-            className="h-[2rem] w-[6rem] bg-[#12AC79] rounded-xl"
-          >
-            제출하기
-          </button>
+          {solveFlag ? (
+            <div
+              className={`flex items-center justify-center h-[2rem] w-[6rem] bg-[#12AC79] rounded-xl ${
+                solveProgress === '정답입니다!' ? 'text-white' : 'text-red-500'
+              } ${
+                solveProgress[solveProgress.length - 1] === '%'
+                  ? 'text-white'
+                  : null
+              }`}
+            >
+              {solveProgress}
+            </div>
+          ) : (
+            <button
+              onClick={bojSubmit}
+              className="h-[2rem] w-[6rem] bg-[#12AC79] rounded-xl"
+            >
+              제출하기
+            </button>
+          )}
         </div>
       </div>
     </>

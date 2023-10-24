@@ -38,10 +38,12 @@ export default function SideBar({
   problemId,
   setProblemId,
   problemInfo,
+  isSolved,
 }: {
   problemId: any;
   setProblemId: any;
   problemInfo: Array<ProblemInfoType>;
+  isSolved: Array<boolean>;
 }) {
   return (
     <div className="flex flex-col items-center w-[12vw] h-[100vh] bg-[#2E3642]">
@@ -67,7 +69,13 @@ export default function SideBar({
           >
             {idx + 1}
           </div>
-          <div className="text-[0.9rem] text-white text-opacity-30">미해결</div>
+          <div
+            className={`text-[0.9rem] ${
+              isSolved[idx] ? 'text-green-500' : 'text-white text-opacity-30'
+            }`}
+          >
+            {isSolved[idx] ? '해결' : '미해결'}
+          </div>
         </div>
       ))}
     </div>

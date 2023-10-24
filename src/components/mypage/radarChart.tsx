@@ -14,6 +14,8 @@ import Gap from '@/utils/gap';
 import { axiosInstance } from '@/api/axiosSetting';
 import { useQuery } from 'react-query';
 import { useState } from 'react';
+import Image from 'next/image';
+import questionIcon from '@/assets/icons/question.svg';
 
 import Lottie from 'react-lottie-player';
 
@@ -129,43 +131,50 @@ export default function RadarChart() {
       <Gap wSize="5rem" />
 
       {/* 레이더 차트 앞쪽 5개 표로 변환  */}
-      <div className="flex flex-row rounded-xl bg-gray-100 p-[2rem]">
-        <div className="flex flex-col justify-center items-center">
-          {datas.algorithms.map(
-            (item, idx) =>
-              idx < 5 && (
-                <>
-                  <div
-                    className="flex flex-row justify-between w-[15rem] text-[1.4rem]"
-                    key={idx}
-                  >
-                    <div className="text-gray-500">{item}</div>
-                    <div>{datas.persents[idx]}%</div>
-                  </div>
-                  <Gap hSize="1rem" />
-                </>
-              ),
-          )}
-        </div>
-        <Gap wSize="3.5rem" />
+      <div className="flex flex-col items-end">
+        <Image
+          src={questionIcon}
+          alt=""
+          className="mr-[1rem] mb-[1rem] cursor-pointer"
+        />
+        <div className="flex flex-row rounded-xl bg-gray-100 p-[2rem]">
+          <div className="flex flex-col justify-center items-center">
+            {datas.algorithms.map(
+              (item, idx) =>
+                idx < 5 && (
+                  <>
+                    <div
+                      className="flex flex-row justify-between w-[15rem] text-[1.4rem]"
+                      key={idx}
+                    >
+                      <div className="text-gray-500">{item}</div>
+                      <div>{datas.persents[idx]}%</div>
+                    </div>
+                    <Gap hSize="1rem" />
+                  </>
+                ),
+            )}
+          </div>
+          <Gap wSize="3.5rem" />
 
-        {/* 레이더 차트 뒷쪽 5개 표로 변환  */}
-        <div className="flex flex-col justify-center items-center">
-          {datas.algorithms.map(
-            (item, idx) =>
-              idx >= 5 && (
-                <>
-                  <div
-                    className="flex flex-row justify-between w-[15rem] text-[1.4rem]"
-                    key={idx}
-                  >
-                    <div className="text-gray-500">{item}</div>
-                    <div>{datas.persents[idx]}%</div>
-                  </div>
-                  <Gap hSize="1rem" />
-                </>
-              ),
-          )}
+          {/* 레이더 차트 뒷쪽 5개 표로 변환  */}
+          <div className="flex flex-col justify-center items-center">
+            {datas.algorithms.map(
+              (item, idx) =>
+                idx >= 5 && (
+                  <>
+                    <div
+                      className="flex flex-row justify-between w-[15rem] text-[1.4rem]"
+                      key={idx}
+                    >
+                      <div className="text-gray-500">{item}</div>
+                      <div>{datas.persents[idx]}%</div>
+                    </div>
+                    <Gap hSize="1rem" />
+                  </>
+                ),
+            )}
+          </div>
         </div>
       </div>
     </div>
