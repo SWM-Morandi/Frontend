@@ -47,6 +47,7 @@ export default function IDE() {
   const [problemId, setProblemId] = useState(1);
   const [time, setTime] = useState(-1);
   const [axiosTestId, setAxiosTestId] = useState<number>(-1);
+  const [isSolved, setIsSolved] = useState<boolean[]>([]);
 
   /* 타이머 useEffect */
   useEffect(() => {
@@ -100,6 +101,7 @@ export default function IDE() {
           testProblemsAxios(testDataResponse),
         );
         setTestProblems(responses);
+        setIsSolved(Array(responses.length).fill(false));
         setAxiosTestId(testDataResponse.testId);
         setIsLoading(false);
       },
@@ -121,6 +123,7 @@ export default function IDE() {
               problemId={problemId}
               setProblemId={setProblemId}
               problemInfo={testProblems}
+              isSolved={isSolved}
             />
             <div className="flex flex-col">
               <Header
@@ -142,6 +145,7 @@ export default function IDE() {
                   problemBojId={testData?.bojProblemIds[problemId - 1]}
                   problemInfo={testProblems}
                   problemId={problemId}
+                  setIsSolved={setIsSolved}
                 />
               </div>
             </div>
