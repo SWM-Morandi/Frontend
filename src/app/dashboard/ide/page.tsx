@@ -119,7 +119,6 @@ export default function IDE() {
         ) : (
           <div className="flex flex-row">
             <SideBar
-              // ocSideProblemsBar={ocSideProblemsBar}
               problemId={problemId}
               setProblemId={setProblemId}
               problemInfo={testProblems}
