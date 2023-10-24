@@ -17,6 +17,8 @@ import { useQuery } from 'react-query';
 import { useState } from 'react';
 import dayjs from 'dayjs';
 import CurrentRating from './currentRating';
+import questionIcon from '@/assets/icons/question.svg';
+import Image from 'next/image';
 
 ChartJS.register(
   CategoryScale,
@@ -155,11 +157,14 @@ export default function LineChart() {
     <>
       <div className="flex flex-col justify-center w-[70rem] p-[3rem] rounded-xl shadow-md">
         {/* 사용자 레이팅 값 */}
-        <div className="flex flex-row items-center">
-          <div className="text-gray-500">현재 레이팅</div>
-          <Gap wSize="1rem" />
-
-          <CurrentRating />
+        <div className="flex flex-row items-center justify-between">
+          <div className="flex flex-row items-center">
+            <Gap wSize="1rem" />
+            <div className="text-gray-500">현재 레이팅</div>
+            <Gap wSize="1rem" />
+            <CurrentRating />
+          </div>
+          <Image className="cursor-pointer" src={questionIcon} alt="" />
         </div>
         <Gap hSize="1rem" />
 
