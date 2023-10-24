@@ -219,7 +219,7 @@ export default function CustomEditor({
 
       const channel = pusher.subscribe(`solution-${res.data.solutionId}`);
 
-      channel.bind('update', (data: any) => {
+      channel.bind('update', async (data: any) => {
         const printResultMessage = async (message: string) => {
           setSolveProgress(message);
           await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -242,6 +242,18 @@ export default function CustomEditor({
               }
             });
           });
+          try {
+            const res = await axiosInstance.post(
+              '/submit/result',
+              {
+                testId: testId,
+                bojProblemId: problemBojId,
+              },
+              { withCredentials: true },
+            );
+          } catch (err) {
+            console.log(err);
+          }
         }
         if (data.result == 6) {
           printResultMessage('오답입니다!');

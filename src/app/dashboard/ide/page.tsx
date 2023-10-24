@@ -22,9 +22,14 @@ interface TestCodeDto {
   cppCode: string;
 }
 
+interface BojProblemType {
+  bojProblemId: number;
+  isSolved: boolean;
+}
+
 interface TestDataType {
   testId: number;
-  bojProblemIds: number[];
+  bojProblems: BojProblemType[];
   remainingTime: number;
   testCodeDtos: TestCodeDto[];
 }
@@ -78,16 +83,23 @@ export default function IDE() {
   };
 
   /* 출제된 시험 문제의 정보를 받아오는 Axios */
-  const testProblemsAxios: (
-    data: TestDataType,
-  ) => Promise<BojProblemInfoType>[] = (data) =>
-    data.bojProblemIds.map(async (bojProblem: number, idx: number) => {
-      const response = await Axios.get<BojProblemInfoType>(
-        `https://t4wkqz0tz2.execute-api.ap-northeast-2.amazonaws.com/prod/problems/${bojProblem}`,
-      );
-      console.log(response);
-      return response.data;
-    });
+  const testProblemsAxios = async (data: TestDataType) => {
+    const results = [];
+    for (const bojProblem of data.bojProblems) {
+      try {
+        const response = await Axios.get<BojProblemInfoType>(
+          `https://t4wkqz0tz2.execute-api.ap-northeast-2.amazonaws.com/prod/problems/${bojProblem.bojProblemId}`,
+        );
+
+        setIsSolved((prev) => [...prev, bojProblem.isSolved]);
+        console.log(response);
+        results.push(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    return results;
+  };
 
   const { error, data: testData } = useQuery<TestDataType>(
     'testProblems',
@@ -97,11 +109,9 @@ export default function IDE() {
         console.log(err);
       },
       onSuccess: async (testDataResponse) => {
-        const responses = await Promise.all(
-          testProblemsAxios(testDataResponse),
-        );
+        const responses = await testProblemsAxios(testDataResponse);
+
         setTestProblems(responses);
-        setIsSolved(Array(responses.length).fill(false));
         setAxiosTestId(testDataResponse.testId);
         setIsLoading(false);
       },
@@ -141,7 +151,9 @@ export default function IDE() {
                 <CustomEditor
                   testId={axiosTestId}
                   testCodeDtos={testData?.testCodeDtos}
-                  problemBojId={testData?.bojProblemIds[problemId - 1]}
+                  problemBojId={
+                    testData?.bojProblems[problemId - 1].bojProblemId
+                  }
                   problemInfo={testProblems}
                   problemId={problemId}
                   setIsSolved={setIsSolved}
