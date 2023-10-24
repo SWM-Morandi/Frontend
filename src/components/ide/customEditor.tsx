@@ -3,8 +3,7 @@
 import { axiosInstance } from '@/api/axiosSetting';
 import Editor, { loader } from '@monaco-editor/react';
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import Pusher from 'pusher-js/with-encryption';
+import Pusher from 'pusher-js';
 
 import Lottie from 'react-lottie-player';
 import Loading from '@/assets/lottiefiles/loading.json';
@@ -220,7 +219,7 @@ export default function CustomEditor({
 
       const channel = pusher.subscribe(`solution-${res.data.solutionId}`);
 
-      channel.bind('update', function (data: any) {
+      channel.bind('update', (data: any) => {
         const printResultMessage = async (message: string) => {
           setSolveProgress(message);
           await new Promise((resolve) => setTimeout(resolve, 1000));
