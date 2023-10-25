@@ -45,15 +45,6 @@ export default function ProblemInfo({
     }
   };
 
-  async function f() {
-    const promise = new Promise((resolve, reject) => {
-      setTimeout(() => resolve('완료!'), 1000);
-    });
-
-    const result = await promise; // 프라미스가 이행될 때까지 기다림 (*)
-
-    alert(result); // "완료!"
-  }
   return (
     <div>
       <MathJaxLoader />
@@ -127,9 +118,7 @@ export default function ProblemInfo({
                     </div>
                   </div>
                   <div className="w-[48%] h-[100%]">
-                    <div className="mb-[1rem]" onClick={f}>
-                      예제 출력 {idx + 1}
-                    </div>
+                    <div className="mb-[1rem]">예제 출력 {idx + 1}</div>
                     <div className="bg-gray-900 w-[100%] p-[1rem] mb-[1rem] rounded-xl">
                       {sample.output.split('\n').map((line, idx) => (
                         <div className="mb-[0.2rem]" key={idx + 500}>
