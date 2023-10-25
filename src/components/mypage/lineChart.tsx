@@ -19,6 +19,7 @@ import dayjs from 'dayjs';
 import CurrentRating from './currentRating';
 import questionIcon from '@/assets/icons/question.svg';
 import Image from 'next/image';
+import LineChartInfo from '@/components/mypage/lineChartInfo';
 
 ChartJS.register(
   CategoryScale,
@@ -37,6 +38,8 @@ interface LineChartDataType {
 }
 
 export default function LineChart() {
+  const [infoToggle, setInfoToggle] = useState<boolean>(false);
+
   const options: any = {
     responsive: true,
     maintainAspectRatio: false,
@@ -155,7 +158,8 @@ export default function LineChart() {
 
   return (
     <>
-      <div className="flex flex-col justify-center w-[70rem] p-[3rem] rounded-xl shadow-md">
+      <div className="relative flex flex-col justify-center w-[70rem] p-[3rem] rounded-xl shadow-md">
+        {infoToggle ? <LineChartInfo /> : null}
         {/* 사용자 레이팅 값 */}
         <div className="flex flex-row items-center justify-between">
           <div className="flex flex-row items-center">
@@ -164,7 +168,14 @@ export default function LineChart() {
             <Gap wSize="1rem" />
             <CurrentRating />
           </div>
-          <Image className="cursor-pointer" src={questionIcon} alt="" />
+          <Image
+            className="cursor-pointer"
+            src={questionIcon}
+            alt=""
+            onClick={() => {
+              setInfoToggle((prev) => !prev);
+            }}
+          />
         </div>
         <Gap hSize="1rem" />
 
