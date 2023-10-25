@@ -16,6 +16,7 @@ import { useQuery } from 'react-query';
 import { useState } from 'react';
 import Image from 'next/image';
 import questionIcon from '@/assets/icons/question.svg';
+import RadarChartInfo from '@/components/mypage/radarChartInfo';
 
 import Lottie from 'react-lottie-player';
 
@@ -69,6 +70,7 @@ export default function RadarChart() {
     algorithms: [],
     persents: [],
   });
+  const [infoToggle, setInfoToggle] = useState<boolean>(false);
 
   const radarChartDataAxios: () => Promise<RadarChartDataType> = async () => {
     const response = await axiosInstance.get<RadarChartDataType>(
@@ -123,7 +125,8 @@ export default function RadarChart() {
   };
 
   return (
-    <div className="flex flex-row items-center justify-center w-[70rem] rounded-xl shadow-md">
+    <div className="relative flex flex-row items-center justify-center w-[70rem] rounded-xl shadow-md">
+      {infoToggle ? <RadarChartInfo /> : null}
       {/* 레이더 차트 */}
       <div className="h-[25rem] w-[25rem]">
         <Radar data={inputData} options={options} />
@@ -136,6 +139,9 @@ export default function RadarChart() {
           src={questionIcon}
           alt=""
           className="mr-[1rem] mb-[1rem] cursor-pointer"
+          onClick={() => {
+            setInfoToggle((prev) => !prev);
+          }}
         />
         <div className="flex flex-row rounded-xl bg-gray-100 p-[2rem]">
           <div className="flex flex-col justify-center items-center">
