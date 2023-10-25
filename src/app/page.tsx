@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 import Header from '@/components/landing/header';
 import Footer from '@/components/landing/footer';
@@ -34,13 +35,19 @@ export default function Page() {
           </div>
         </div>
         <div className="flex flex-row mb-[5rem]">
-          <div className="flex items-center justify-center bg-[#FFFFFF] hover:bg-gray-200 text-black px-[2.5rem] py-[0.6rem] cursor-pointer rounded">
+          <Link
+            href="/signin"
+            className="flex items-center justify-center bg-[#FFFFFF] hover:bg-gray-200 text-black px-[2.5rem] py-[0.6rem] cursor-pointer rounded"
+          >
             경험하기
-          </div>
+          </Link>
           <Gap wSize="1rem" />
-          <div className="flex items-center justify-center bg-[#FF5F84] hover:bg-[#C43C45] px-[2.5rem] py-[0.6rem] cursor-pointer rounded">
+          <Link
+            href="/signin"
+            className="flex items-center justify-center bg-[#FF5F84] hover:bg-[#C43C45] px-[2.5rem] py-[0.6rem] cursor-pointer rounded"
+          >
             더 알아보기
-          </div>
+          </Link>
         </div>
         <div className="invisible h-0 md:visible md:h-[668.8px]">
           <LandingIcon />

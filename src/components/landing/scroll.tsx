@@ -88,7 +88,7 @@ function ParallaxText({ children, baseVelocity = 100 }: ParallaxProps) {
 
 export default function App() {
   return (
-    <section className="w-9/12 overflow-hidden mt-[3rem] md:mt-[5rem]">
+    <section className="w-[65rem] overflow-hidden mt-[3rem] md:mt-[5rem]">
       <ParallaxText baseVelocity={-2}>
         <div className="flex flex-row w-[700px] md:w-[1210px]">
           <Image

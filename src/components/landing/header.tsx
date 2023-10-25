@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import Logo from '@/assets/whiteMorandiLogo.svg';
+import Logo from '@/assets/morandi-logos/whiteMorandiLogo.svg';
 
 export default function Header() {
   return (
     <>
       <header className="relative flex justify-center text-white body-font z-20">
-        <div className="w-[100%] md:w-[65%] flex flex-wrap p-5 flex-row items-center justify-between">
+        <div className="w-[100%] md:w-[75rem] flex flex-wrap p-5 flex-row items-center justify-between">
           <Link
             href="/"
             className="flex title-font font-medium justify-center items-center"
