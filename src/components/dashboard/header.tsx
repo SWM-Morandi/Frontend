@@ -3,7 +3,7 @@ import Link from 'next/link';
 export default function DashboardHeader() {
   return (
     <>
-      <header className="text-gray-600 body-font">
+      <header className="text-gray-600 body-font ">
         <div className=" mx-[3rem] flex flex-wrap p-5 flex-col md:flex-row items-center">
           <Link
             href="/dashboard"
@@ -43,6 +43,7 @@ export default function DashboardHeader() {
           </nav>
         </div>
       </header>
+      <hr />
     </>
   );
 }
