@@ -7,7 +7,7 @@ const SEO = () => {
         content="모두의 랜덤 디펜스: 코딩테스트를 준비하는 최고의 솔루션!"
       />
       <meta property="og:type" content="website" />
-      <meta property="og:title" content="모랜디" />
+      <meta property="og:title" content="모두의 랜덤 디펜스" />
       <meta
         property="og:description"
         content="모두의 랜덤 디펜스: 코딩테스트를 준비하는 최고의 솔루션!"

@@ -6,8 +6,8 @@ import Gap from '@/utils/gap';
 
 export default function Footer() {
   return (
-    <>
-      <footer className="flex flex-row justify-center h-[20vh] px-[5rem] py-[2.5rem] bg-black text-white">
+    <div className="flex items-center justify-center bg-black">
+      <footer className="flex flex-row justify-center h-[20vh] w-[80rem] px-[5rem] py-[2.5rem] text-white overflow-hidden">
         {/* 푸터 회사 로고 */}
         <div className="flex flex-col justify-center w-[18%]">
           <Link href="/">
@@ -53,6 +53,6 @@ export default function Footer() {
           <YoutubeIcon />
         </div>
       </footer>
-    </>
+    </div>
   );
 }
