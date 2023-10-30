@@ -203,6 +203,7 @@ export default function CustomEditor({
               ? userCodeTest[problemId - 1][1]
               : userCodeTest[problemId - 1][2],
           bojProblemId: problemBojId,
+          problemNumber: problemId,
         },
         { withCredentials: true },
       );
