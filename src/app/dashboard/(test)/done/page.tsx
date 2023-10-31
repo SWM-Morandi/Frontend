@@ -58,16 +58,10 @@ export default function CodingTestBeforePage() {
     return response.data;
   };
 
-  const testResultAxios: (
-    bojId: string,
-  ) => Promise<TestResultAxiosType> = async (bojId) => {
-    const res = await axiosInstance.post<TestResultAxiosType>(
-      '/tests/exit',
-      { bojId: bojId, testId: testId, testTypeId: testTypeId },
-      {
-        withCredentials: true,
-      },
-    );
+  const testResultAxios: () => Promise<TestResultAxiosType> = async () => {
+    const res = await axiosInstance.get<TestResultAxiosType>('/tests/result', {
+      withCredentials: true,
+    });
     return res.data;
   };
 
@@ -76,7 +70,7 @@ export default function CodingTestBeforePage() {
       console.log(err);
     },
     onSuccess: async (dataResponse) => {
-      const response = await testResultAxios(dataResponse.bojId);
+      const response = await testResultAxios();
       setTestResults(response);
       setIsLoading(false);
     },
