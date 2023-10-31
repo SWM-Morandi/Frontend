@@ -142,6 +142,7 @@ export default function IDE() {
                 time={time}
                 testId={Number(testId)}
                 exitInfo={{ testId: testData!.testId, testTypeId: testId! }}
+                setIsLoading={setIsLoading}
               />
               <div className="flex flex-row px-[2rem]">
                 <ProblemInfo

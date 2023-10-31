@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import Sidebar from '@/components/ide/sidebar';
 import { useRouter } from 'next/navigation';
+import { axiosInstance } from '@/api/axiosSetting';
 
 interface ProblemInfoType {
   problem_title: string;
@@ -12,6 +13,20 @@ interface ProblemInfoType {
   problem_output: string;
   input_sample: Array<string>;
   output_sample: Array<string>;
+}
+
+interface TestResult {
+  bojProblemId: number;
+  testProblemId: number;
+  executionTime: number;
+  isSolved: boolean;
+}
+
+interface TestResultAxiosType {
+  testDate: string | undefined;
+  beforeRating: number | undefined;
+  afterRating: number | undefined;
+  attemptProblemDtos: TestResult[] | undefined;
 }
 
 const testName = [
@@ -39,6 +54,7 @@ export default function Header({
   time,
   testId,
   exitInfo,
+  setIsLoading,
 }: {
   problemId: any;
   setProblemId: any;
@@ -46,6 +62,7 @@ export default function Header({
   time: number;
   testId: number;
   exitInfo: { testId: number; testTypeId: string };
+  setIsLoading: any;
 }) {
   const router = useRouter();
   const [sideProblemsBar, setSideProblemsBar] = useState(false);
@@ -58,6 +75,37 @@ export default function Header({
     .toString()
     .padStart(2, '0');
   const sec = (time % 60).toString().padStart(2, '0');
+
+  /* 추가하고 있는 부분.. */
+  const getBojIdAxios: () => Promise<{
+    nickname: string;
+    bojId: string;
+  }> = async () => {
+    const response = await axiosInstance.get<{
+      nickname: string;
+      bojId: string;
+    }>('/members/info', {
+      withCredentials: true,
+    });
+    return response.data;
+  };
+
+  const testResultAxios: (
+    bojId: string,
+  ) => Promise<TestResultAxiosType> = async (bojId) => {
+    const res = await axiosInstance.post<TestResultAxiosType>(
+      '/tests/exit',
+      {
+        bojId: bojId,
+        testId: exitInfo.testId,
+        testTypeId: exitInfo.testTypeId,
+      },
+      {
+        withCredentials: true,
+      },
+    );
+    return res.data;
+  };
 
   return (
     <>
@@ -110,11 +158,17 @@ export default function Header({
         </div>
         <button
           className="bg-[#F04452] px-[1rem] py-[0.5rem] rounded-xl"
-          onClick={() => {
+          onClick={async () => {
             if (confirm('테스트를 종료하시면 다시 시작할 수 없습니다.')) {
-              router.push(
-                `/dashboard/done?testId=${exitInfo.testId}&testTypeId=${exitInfo.testTypeId}`,
-              );
+              try {
+                setIsLoading(true);
+                const bojInfo = await getBojIdAxios();
+                const testResult = await testResultAxios(bojInfo.bojId);
+                router.push(`/dashboard/done`);
+              } catch (error) {
+                router.push(`/dashboard/done`);
+                console.log(error);
+              }
             } else {
             }
           }}
