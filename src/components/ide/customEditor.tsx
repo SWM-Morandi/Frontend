@@ -203,6 +203,7 @@ export default function CustomEditor({
               ? userCodeTest[problemId - 1][1]
               : userCodeTest[problemId - 1][2],
           bojProblemId: problemBojId,
+          problemNumber: problemId,
         },
         { withCredentials: true },
       );
@@ -265,7 +266,7 @@ export default function CustomEditor({
           printResultMessage('컴파일 에러');
         }
 
-        console.log('Received event:', data);
+        console.log('Received event: ', data);
       });
     } catch (err) {
       setSolveFlag(false);

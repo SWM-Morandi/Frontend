@@ -5,7 +5,7 @@ import Logo from '@/assets/morandi-logos/whiteMorandiLogo.svg';
 export default function Header() {
   return (
     <>
-      <header className="relative flex justify-center text-white body-font z-20">
+      <header className="fixed top-0 left-0 right-0 flex justify-center text-white body-font bg-black z-50">
         <div className="w-[100%] md:w-[75rem] flex flex-wrap p-5 flex-row items-center justify-between">
           <Link
             href="/"
