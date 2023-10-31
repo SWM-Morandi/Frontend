@@ -45,15 +45,6 @@ export default function ProblemInfo({
     }
   };
 
-  async function f() {
-    const promise = new Promise((resolve, reject) => {
-      setTimeout(() => resolve('완료!'), 1000);
-    });
-
-    const result = await promise; // 프라미스가 이행될 때까지 기다림 (*)
-
-    alert(result); // "완료!"
-  }
   return (
     <div>
       <MathJaxLoader />
@@ -65,39 +56,45 @@ export default function ProblemInfo({
           <hr className="text-gray-700"></hr>
           <div className="text-[18px] my-[1rem]">문제</div>
           <div className="bg-gray-900 px-[1rem] pt-[1rem] pb-[0.5rem] rounded-xl">
-            {problemInfo.problem_description.split('\n').map((line, idx) => {
-              return (
-                <div
-                  dangerouslySetInnerHTML={{ __html: line }}
-                  className="pb-[0.5rem]"
-                  key={idx}
-                ></div>
-              );
-            })}
+            {problemInfo.problem_description
+              .split(/<\/p>|<\/table>|<\/div>/)
+              .map((line, idx) => {
+                return (
+                  <div
+                    dangerouslySetInnerHTML={{ __html: line }}
+                    className="pb-[0.5rem]"
+                    key={idx}
+                  ></div>
+                );
+              })}
           </div>
           <div className="text-[20px] my-[1rem]">입력</div>
           <div className="bg-gray-900 px-[1rem] pt-[1rem] pb-[0.5rem] rounded-xl">
-            {problemInfo.problem_input.split('\n').map((line, idx) => {
-              return (
-                <div
-                  dangerouslySetInnerHTML={{ __html: line }}
-                  className="pb-[0.5rem]"
-                  key={idx + 100}
-                ></div>
-              );
-            })}
+            {problemInfo.problem_input
+              .split(/<\/p>|<\/table>|<\/div>/)
+              .map((line, idx) => {
+                return (
+                  <div
+                    dangerouslySetInnerHTML={{ __html: line }}
+                    className="pb-[0.5rem]"
+                    key={idx + 100}
+                  ></div>
+                );
+              })}
           </div>
           <div className="text-[20px] my-[1rem]">출력</div>
           <div className="bg-gray-900 px-[1rem] pt-[1rem] pb-[0.5rem] rounded-xl">
-            {problemInfo.problem_output.split('\n').map((line, idx) => {
-              return (
-                <div
-                  dangerouslySetInnerHTML={{ __html: line }}
-                  className="pb-[0.5rem]"
-                  key={idx + 200}
-                ></div>
-              );
-            })}
+            {problemInfo.problem_output
+              .split(/<\/p>|<\/table>|<\/div>/)
+              .map((line, idx) => {
+                return (
+                  <div
+                    dangerouslySetInnerHTML={{ __html: line }}
+                    className="pb-[0.5rem]"
+                    key={idx + 200}
+                  ></div>
+                );
+              })}
           </div>
           <div className="flex flex-col my-[1rem]">
             {samples.map((sample, idx) => (
@@ -127,9 +124,7 @@ export default function ProblemInfo({
                     </div>
                   </div>
                   <div className="w-[48%] h-[100%]">
-                    <div className="mb-[1rem]" onClick={f}>
-                      예제 출력 {idx + 1}
-                    </div>
+                    <div className="mb-[1rem]">예제 출력 {idx + 1}</div>
                     <div className="bg-gray-900 w-[100%] p-[1rem] mb-[1rem] rounded-xl">
                       {sample.output.split('\n').map((line, idx) => (
                         <div className="mb-[0.2rem]" key={idx + 500}>
