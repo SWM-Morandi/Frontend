@@ -17,7 +17,7 @@ export default function Page() {
     <main className="relative overflow-hidden bg-black">
       <Header />
 
-      <div className="relative z-20 flex flex-col justify-center items-center text-white py-[4rem]">
+      <div className="relative z-20 flex flex-col justify-center items-center text-white py-[4rem] mt-16">
         <h1 className="text-[1.8rem] md:text-[4.5rem] font-black leading-tighter tracking-tighter">
           IT 기업 코딩테스트 합격을 위한
         </h1>
