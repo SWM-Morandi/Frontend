@@ -266,7 +266,7 @@ export default function CustomEditor({
           printResultMessage('컴파일 에러');
         }
 
-        console.log('Received event:', data);
+        console.log('Received event: ', data);
       });
     } catch (err) {
       setSolveFlag(false);
