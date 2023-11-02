@@ -25,7 +25,7 @@ interface TestHistoryInfoType {
 }
 
 interface TestHistoryInfoAxiosType {
-  totalPage: number;
+  totalElements: number;
   testRecordDtos: TestHistoryInfoType[];
 }
 
