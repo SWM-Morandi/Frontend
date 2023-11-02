@@ -30,7 +30,7 @@ interface TestHistoryInfoType {
 }
 
 interface TestHistoryInfoAxiosType {
-  totalPage: number;
+  totalElements: number;
   testRecordDtos: TestHistoryInfoType[];
 }
 
@@ -69,7 +69,7 @@ export default function TestHistory() {
           <div>테스트 기록</div>
           <Link
             href="/dashboard/mypage/history"
-            className="flex items-center justify-center w-24 h-10 rounded-xl bg-yellow-200 text-[1rem]"
+            className="flex items-center justify-center w-24 h-10 rounded-xl bg-yellow-200 hover:bg-yellow-300 text-[1rem]"
           >
             전체 보기
           </Link>

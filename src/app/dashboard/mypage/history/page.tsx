@@ -32,7 +32,7 @@ interface TestHistoryInfoType {
 }
 
 interface TestHistoryInfoAxiosType {
-  totalPage: number;
+  totalElements: number;
   testRecordDtos: TestHistoryInfoType[];
 }
 
@@ -67,7 +67,7 @@ export default function History() {
         <HistoryTable isLoading={isLoading} testHistoryInfoAxios={data} />
         <Pagination
           current={currentPage}
-          total={data?.totalPage}
+          total={data?.totalElements}
           showSizeChanger={false}
           onChange={async (page) => {
             await setCurrentPage(page);
