@@ -15,7 +15,7 @@ function XIcon() {
         x2="1.70718"
         y2="22.3311"
         stroke="#191F28"
-        stroke-width="2"
+        strokeWidth="2"
       />
       <line
         x1="22.2502"
@@ -23,7 +23,7 @@ function XIcon() {
         x2="1.62622"
         y2="1.70718"
         stroke="#191F28"
-        stroke-width="2"
+        strokeWidth="2"
       />
     </svg>
   );
@@ -42,19 +42,20 @@ function ArrowIcon() {
       <path
         d="M6.79554 3.79082L9.51221 6.50598L6.82888 9.18782"
         stroke="white"
-        stroke-width="1.12821"
-        stroke-linecap="square"
+        strokeWidth="1.12821"
+        strokeLinecap="square"
       />
       <path
         d="M9.15387 6.48926H3.48721"
         stroke="white"
-        stroke-width="1.12821"
-        stroke-linecap="square"
+        strokeWidth="1.12821"
+        strokeLinecap="square"
       />
     </svg>
   );
 }
 
+import Link from 'next/link';
 import Gap from '@/utils/gap';
 import dayjs from 'dayjs';
 import { useState } from 'react';
@@ -170,7 +171,10 @@ export default function TestHistoryDetailModal({
                 }
 
                 return (
-                  <div className="flex flex-row w-full justify-between items-center mb-[0.5rem]">
+                  <div
+                    key={idx}
+                    className="flex flex-row w-full justify-between items-center mb-[0.5rem]"
+                  >
                     <div
                       className={`flex flex-row justify-center items-center w-[9rem] h-[5rem] border rounded-2xl ${
                         item.isSolved ? 'bg-[#12AC79]' : 'bg-[#F04452]'
@@ -187,12 +191,12 @@ export default function TestHistoryDetailModal({
                       )}
                     </div>
                     <Gap wSize="0.5rem" />
-                    <a
+                    <Link
                       href={`https://acmicpc.net/problem/${item.bojProblemId}`}
                       target="_blank"
                     >
                       <ArrowIcon />
-                    </a>
+                    </Link>
                     <Gap wSize="1rem" />
                   </div>
                 );
@@ -202,7 +206,10 @@ export default function TestHistoryDetailModal({
               {testHistoryInfo?.attemptProblemDto.map((item, idx) => {
                 if (idx < testHistoryInfo?.attemptProblemDto.length / 2) return;
                 return (
-                  <div className="flex flex-row w-full justify-between items-center mb-[0.5rem]">
+                  <div
+                    key={idx + 100}
+                    className="flex flex-row w-full justify-between items-center mb-[0.5rem]"
+                  >
                     <div
                       className={`flex flex-row justify-center items-center w-[9rem] h-[5rem] border rounded-2xl ${
                         item.isSolved ? 'bg-[#12AC79]' : 'bg-[#F04452]'
@@ -219,12 +226,12 @@ export default function TestHistoryDetailModal({
                       )}
                     </div>
                     <Gap wSize="0.5rem" />
-                    <a
+                    <Link
                       href={`https://acmicpc.net/problem/${item.bojProblemId}`}
                       target="_blank"
                     >
                       <ArrowIcon />
-                    </a>
+                    </Link>
                     <Gap wSize="1rem" />
                   </div>
                 );
