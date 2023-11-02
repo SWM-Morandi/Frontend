@@ -25,10 +25,10 @@ function LeftArrowTest(height: string) {
     const { isFirstItemVisible, scrollPrev } =
       React.useContext(VisibilityContext);
     return (
-      <button
-        disabled={isFirstItemVisible} // 필요 없는거 같음
-        onClick={() => scrollPrev()}
-        className="opacity-0 hover:opacity-30"
+      <div
+        // disabled={isFirstItemVisible} // 필요 없는거 같음
+
+        className="opacity-30"
         style={{
           cursor: 'pointer',
           display: 'flex',
@@ -41,11 +41,10 @@ function LeftArrowTest(height: string) {
           height: `${height}`,
           width: `50px`,
           zIndex: '999',
-          backgroundColor: 'gray',
         }}
       >
-        ←
-      </button>
+        <LeftArrowIcon onClick={() => scrollPrev()} />
+      </div>
     );
   };
 }
@@ -59,10 +58,20 @@ function RightArrowTest(height: string) {
       React.useContext(VisibilityContext);
 
     return (
-      <button
-        disabled={isLastItemVisible}
-        onClick={() => scrollNext()}
-        className="opacity-0 hover:opacity-30"
+      // <button
+      //   disabled={isLastItemVisible}
+      //   onClick={() => scrollNext()}
+      //   className="opacity-0 hover:opacity-30"
+      //   style={{
+
+      //   }}
+      // >
+      //   →
+      // </button>
+      <div
+        // disabled={isFirstItemVisible} // 필요 없는거 같음
+
+        className="opacity-30"
         style={{
           cursor: 'pointer',
           display: 'flex',
@@ -75,11 +84,10 @@ function RightArrowTest(height: string) {
           height: `${height}`,
           width: '50px',
           zIndex: '999',
-          backgroundColor: 'gray',
         }}
       >
-        →
-      </button>
+        <RightArrowIcon onClick={() => scrollNext()} />
+      </div>
     );
   };
 }
@@ -122,8 +130,8 @@ export function CodingTestCardScroll() {
 
   return (
     <ScrollMenu
-      LeftArrow={LeftArrowTest('16rem')}
-      RightArrow={RightArrowTest('16rem')}
+      LeftArrow={LeftArrowTest('20rem')}
+      RightArrow={RightArrowTest('20rem')}
     >
       {data!.map((item, idx) => {
         return (
@@ -168,8 +176,8 @@ export function LevelCardScroll() {
 
   return (
     <ScrollMenu
-      LeftArrow={LeftArrowTest('27rem')}
-      RightArrow={RightArrowTest('27rem')}
+      LeftArrow={LeftArrowTest('29rem')}
+      RightArrow={RightArrowTest('29rem')}
     >
       {data!.map((item, idx) => {
         return (
@@ -211,8 +219,8 @@ export function RandomDefenseScroll() {
 
   return (
     <ScrollMenu
-      LeftArrow={LeftArrowTest('25.5rem')}
-      RightArrow={RightArrowTest('25.5rem')}
+    // LeftArrow={LeftArrowTest('25.5rem')}
+    // RightArrow={RightArrowTest('25.5rem')}
     >
       {data!.map((item, idx) => {
         return (
@@ -331,5 +339,67 @@ export function AlgorithmCardScroll() {
         })}
       </ScrollMenu>
     </>
+  );
+}
+
+function RightArrowIcon({ onClick }: { onClick: () => void }) {
+  return (
+    <svg
+      width="30"
+      height="30"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="cursor-pointer"
+      onClick={onClick}
+    >
+      <rect width="24" height="24" rx="12" fill="#191F28" />
+      <path
+        d="M12.5456 6.99805L17.561 12.0106L12.6071 16.9617"
+        stroke="white"
+        strokeWidth="1.12821"
+        strokeLinecap="square"
+      />
+      <path
+        d="M16.8995 11.98H6.43793"
+        stroke="white"
+        strokeWidth="1.12821"
+        strokeLinecap="square"
+      />
+    </svg>
+  );
+}
+
+function LeftArrowIcon({ onClick }: { onClick: () => void }) {
+  return (
+    <svg
+      width="30"
+      height="30"
+      viewBox="0 0 13 13"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="cursor-pointer"
+      onClick={onClick}
+    >
+      <rect
+        width="13"
+        height="13"
+        rx="6.5"
+        transform="matrix(-1 0 0 1 13 0)"
+        fill="#191F28"
+      />
+      <path
+        d="M6.20445 3.79083L3.48779 6.50599L6.17112 9.18783"
+        stroke="white"
+        strokeWidth="1.12821"
+        strokeLinecap="square"
+      />
+      <path
+        d="M3.84612 6.48926H9.51279"
+        stroke="white"
+        strokeWidth="1.12821"
+        strokeLinecap="square"
+      />
+    </svg>
   );
 }

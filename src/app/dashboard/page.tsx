@@ -21,27 +21,23 @@ export default function Main() {
       <Header></Header>
       <Gap hSize="2rem" />
       {/* 기업별 코딩테스트 카드 스크롤 */}
-      <div className="px-[3rem]">
-        <Text size="2rem" bold="bold">
-          백준 랜덤 디펜스
-        </Text>
+      <div className="px-[3rem] ">
+        <div className="ml-[2rem] text-[2rem] font-bold">백준 랜덤 디펜스</div>
         <RandomDefenseScroll />
       </div>
       <Gap hSize="3rem" />
       {/* 기업별 코딩테스트 카드 스크롤 */}
       <div className="px-[3rem]">
-        <Text size="2rem" bold="bold">
-          기업별 코딩테스트
-        </Text>
+        <div className="ml-[2rem] text-[2rem] font-bold">기업별 코딩테스트</div>
         <Gap hSize="1rem" />
         <CodingTestCardScroll />
       </div>
       <Gap hSize="3rem" />
       {/* 사용자 분석 후 추천 코딩테스트 카드 스크롤 */}
       <div className="px-[3rem]">
-        <Text size="2rem" bold="bold">
+        <div className="ml-[2rem] text-[2rem] font-bold">
           난이도별 코딩테스트
-        </Text>
+        </div>
         <Gap hSize="1rem" />
         <LevelCardScroll />
       </div>
