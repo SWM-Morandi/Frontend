@@ -2,6 +2,7 @@
 
 import Gap from '@/utils/gap';
 import dayjs from 'dayjs';
+import Link from 'next/link';
 import { axiosInstance } from '@/api/axiosSetting';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
@@ -28,18 +29,22 @@ interface TestHistoryInfoType {
   attemptProblemDto: AttemptProblemDtoType[];
 }
 
-export default function TestHistory() {
-  const testHistoryInfoAxios: () => Promise<
-    TestHistoryInfoType[]
-  > = async () => {
-    const response = await axiosInstance.get<TestHistoryInfoType[]>(
-      `/test-types/latest`,
-      { withCredentials: true },
-    );
-    return response.data;
-  };
+interface TestHistoryInfoAxiosType {
+  totalPage: number;
+  testRecordDtos: TestHistoryInfoType[];
+}
 
-  const { isLoading, error, data } = useQuery<TestHistoryInfoType[]>(
+export default function TestHistory() {
+  const testHistoryInfoAxios: () => Promise<TestHistoryInfoAxiosType> =
+    async () => {
+      const response = await axiosInstance.get<TestHistoryInfoAxiosType>(
+        `/test-types/latest`,
+        { withCredentials: true },
+      );
+      return response.data;
+    };
+
+  const { isLoading, error, data } = useQuery<TestHistoryInfoAxiosType>(
     'testHistoryInfoData',
     testHistoryInfoAxios,
   );
@@ -60,21 +65,23 @@ export default function TestHistory() {
     <>
       <div className="flex flex-col items-center w-[70rem] p-[3rem] rounded-xl shadow-md">
         {/* 테스트 기록 컴포넌트 이름 */}
-        <div className="flex flex-row justify-start text-[2rem] font-bold w-[63rem]">
+        <div className="flex flex-row items-center justify-between text-[2rem] font-bold w-[63rem]">
           <div>테스트 기록</div>
+          <Link
+            href="/dashboard/mypage/history"
+            className="flex items-center justify-center w-24 h-10 rounded-xl bg-yellow-200 text-[1rem]"
+          >
+            전체 보기
+          </Link>
         </div>
         <Gap hSize="1.5rem" />
 
         {/* 테스트 기록 정보 */}
         <div className="grid grid-cols-2 gap-10">
-          {Array.isArray(data) ? (
-            data.map((item) => {
-              console.log(item);
-              return <HistoryComponent testHistoryInfo={item} />;
-            })
-          ) : (
-            <div>에러 발생</div>
-          )}
+          {data?.testRecordDtos.map((item, idx) => {
+            console.log(item);
+            return <HistoryComponent key={idx} testHistoryInfo={item} />;
+          })}
         </div>
       </div>
     </>
