@@ -37,7 +37,7 @@ export default function RandomDefenseCard({
   return (
     <>
       <Link href={`/dashboard/ready/${testTypeId}`}>
-        <div className="w-[23rem] my-[1rem] ml-[3rem]">
+        <div className="w-[23rem] my-[1rem] mx-[1.5rem]">
           <div className="flex flex-col justify-center items-center p-[20px] shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-xl">
             <div className="text-[1.7rem] w-[19rem] font-bold">
               {testTypename}
