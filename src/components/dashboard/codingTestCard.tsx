@@ -46,9 +46,10 @@ export default function CodingTestCard({
   return (
     <>
       <Link href={`/dashboard/ready/${testTypeId}`}>
-        <div className="w-[23rem] my-[1rem] mr-[3rem]">
-          <div className="flex flex-col justify-center items-center h-[15rem] p-[20px] shadow-md rounded-xl">
+        <div className="w-[23rem] my-[1rem] ml-[3rem]">
+          <div className="flex flex-col justify-center items-center h-[18rem] p-[20px] shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-xl">
             {/* 코딩테스트 기업 로고 */}
+            <Gap hSize="3rem" />
             <Image src={companyLogo} alt={testTypename} width={250} />
             <Gap hSize="3rem" />
 
