@@ -33,12 +33,12 @@ export default function Footer() {
               주소 : 서울특별시 강남구 테헤란로 311(역삼동) 아남타워빌딩
               7층(06151)
             </div>
-            <div>기업 또는 이용문의 : edu.tour.2023@gmail.com</div>
+            <div>기업 또는 이용문의 : morandi.swm@gmail.com</div>
           </div>
           <Gap hSize="1rem" />
 
           <div className="text-gray-500">
-            COPYRIGHT 2023 EduTour Co. ALL RIGHTS RESERVED.
+            COPYRIGHT 2023 Morandi Co. ALL RIGHTS RESERVED.
           </div>
         </div>
 
