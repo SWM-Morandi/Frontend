@@ -29,10 +29,10 @@ jobs:
       - name: SSH into AWS EC2 instance
         uses: appleboy/ssh-action@master
         with:
-          host: 10.0.102.217
+          host: 10.0.128.33
           username: ubuntu
           key: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
-          proxy_host: 43.201.249.75
+          proxy_host: 3.35.14.92
           proxy_username: ubuntu
           proxy_key: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
 
