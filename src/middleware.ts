@@ -10,7 +10,7 @@ export async function middleware(request: NextRequest) {
     }
 
     let flag = false;
-    await fetch('http://10.0.102.86:8080/members/check', {
+    await fetch('http://10.0.128.60:8080/members/check', {
       method: 'GET',
       headers: new Headers(request.headers),
     })
