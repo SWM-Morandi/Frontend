@@ -29,12 +29,10 @@ jobs:
       - name: SSH into AWS EC2 instance
         uses: appleboy/ssh-action@master
         with:
-          host: 10.0.128.33
+          host: 3.35.14.92
           username: ubuntu
           key: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
-          proxy_host: 3.35.14.92
-          proxy_username: ubuntu
-
           # 아래 내용을 실행하여 Docker 이미지를 내려받고 실행
           script: |
-            ./deploy-frontend.sh
+            ssh -o StrictHostKeyChecking=no ubuntu@10.0.128.33 'bash /home/ubuntu/deploy-frontend.sh'
+            
